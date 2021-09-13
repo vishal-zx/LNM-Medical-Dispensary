@@ -1,1 +1,1 @@
-# Student Services Management System
+# LNMIIT Medical Dispensary Management System
