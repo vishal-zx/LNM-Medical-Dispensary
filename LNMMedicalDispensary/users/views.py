@@ -12,6 +12,7 @@ def register(request):
     msg = None
     if request.method == 'POST':
         form = SignUpForm(request.POST)
+        
         if form.is_valid():
             user = form.save()
             msg = 'user created'
@@ -31,13 +32,15 @@ def login_view(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
+            print(user.patient)
             if user is not None and user.is_doctor:
                 login(request, user)
                 return redirect('doctor')
             elif user is not None and user.is_chemist:
                 login(request, user)
                 return redirect('chemist')
-            elif user is not None and user.is_patient:
+            elif user is not None and user.patient:
+            
                 login(request, user)
                 return redirect('patient')
             else:

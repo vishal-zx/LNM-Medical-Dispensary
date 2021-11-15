@@ -5,6 +5,6 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    is_doctor= models.BooleanField('Is admin', default=False)
-    is_patient = models.BooleanField('Is customer', default=False)
-    is_chemist = models.BooleanField('Is employee', default=False)
+    is_doctor= models.BooleanField('Is doctor', default=False)
+    patient = models.BooleanField('Is patient', default=False)
+    is_chemist = models.BooleanField('Is chemist', default=False)
