@@ -10,61 +10,82 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/patientStyle.css' %}" type="text/css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
-
+    <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     <title>Patient Homepage</title>
 </head>
 
 <body>
-    <nav class="navbar py-4 fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">The LNM Institute of Information Technology</a>
-
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
-                aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <ul class="nav navbar-nav navbar-right">
-                <li><img class="pull-right"
-                        src="https://cdn.pixabay.com/photo/2017/02/16/10/20/target-2070972_960_720.png" width="10%"
-                        id="eye"></li>
-            </ul>
+            <a class="navbar-brand" href="#" style="font-size: 30px; margin-left: 30px">The LNM Institute of Information Technology</a>
+            <!-- <a class="navbar-brand" href="#">The LNM Institute of Information Technology</a> -->
+            <img src="{% static 'images/LOGO.png' %}" alt="LNMIIT" width="200">
         </div>
     </nav>
-    <br><br>
-    <br><br>
-
+    <br>
     <h2 class="heading">Welcome to LNM Medical Dispensary</h2>
-    <a href="{% url 'logout' %}">
-        <button type="button" class="btn btn-danger logoutclass">
-            <span class="lgticon"><i class="fas fa-sign-out-alt"></i></span></i>Logout
-        </button>
-    </a>
-    <h4> hello {{ user.username }} your role is patient</h4>
+
+    <div class="logoutclass">
+        
+        <span style="padding-right:50px; font-size:24px"><i class='fas fa-user' style='color:green'></i><span style="padding-right:10px; font-size:24px"></span> {{ user.username }} </span>
+        <span></span>
+        <a href="{% url 'logout' %}">
+            <button type="button" class="btn btn-danger logoutclass">
+                <span class="lgticon"><i class="fas fa-sign-out-alt"></i></span></i>Logout
+            </button>
+        </a>
+    </div>
     <br><br>
-    <br><br>
+    <br>
     <div class="pc1 container-fluid">
+        <br><br>
         <div class="pc1lcm">
-            Some Image Slideshow
+            <img src="{% static 'images/img.jpg' %}" alt="Medical Dispensary" style="width: 100%; max-width: 900px; height: auto;">
         </div>
 
-        <div class="pc1rc">
-            <div class="pc1lc">
-                Patient Menu 1
-            </div>
-
+        <div>
             <div class="pc1rc">
-                Patient Menu 2
-            </div>
-            <div class="pc1lc">
-                Patient Menu 3
-            </div>
+                <div class="pc1lc glass">
+                    <div class="xyz">
+                        <img src="{% static 'images/appointment.jpg' %}" alt="Book Appointment"
+                            style="width: 100%; max-width: 100px; height: auto;">
+                        <br>
 
-            <div class="pc1rc">
-                Patient Menu 4
+                        <p>Book Appointment</p>
+                    </div>
+                </div>
+
+                <div class="pc1rc glass">
+                    <div class="xyz">
+                        <img src="{% static 'images/patient.png' %}" alt="Update Profile"
+                            style="width: 100%; max-width: 100px; height: auto;">
+                        <br>
+                        <p>Update Profile</p>
+                    </div>
+                </div>
+                <div class="pc1lc glass">
+                    <div class="xyz">
+                        <img src="{% static 'images/history.jpg' %}" alt="Check History"
+                            style="width: 100%; max-width: 100px; height: auto;">
+                        <br>
+                        <p>Check Your History</p>
+                    </div>
+                </div>
+
+                <div class="pc1rc glass">
+                    <div class="xyz">
+                        <img src="{% static 'images/history.jpg' %}" alt="Book Appointment"
+                            style="width: 100%; max-width: 100px; height: auto;">
+                        <br>
+                        <p>Book An Appointment</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <br><br>
+    <div class="footer">
+        <div class="add"> The LNM Institute of Information Technology, Jaipur</div>
+        <div>Rupa ki Nangal, Post-Sumel, Via, Jamdoli, Jaipur, Rajasthan 302031</div>
+    </div>
 </body>
-
 </html>
