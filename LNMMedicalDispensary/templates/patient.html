@@ -15,15 +15,23 @@
 </head>
 
 <body>
-    <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar py-4 fixed-top navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">The LNM Institute of Information Technology</a>
+
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="true" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            <ul class="nav navbar-nav navbar-right">
+                <li><img class="pull-right"
+                        src="https://cdn.pixabay.com/photo/2017/02/16/10/20/target-2070972_960_720.png" width="10%"
+                        id="eye"></li>
+            </ul>
         </div>
     </nav>
+    <br><br>
+    <br><br>
 
     <h2 class="heading">Welcome to LNM Medical Dispensary</h2>
     <a href="{% url 'logout' %}">
@@ -32,7 +40,31 @@
         </button>
     </a>
     <h4> hello {{ user.username }} your role is patient</h4>
+    <br><br>
+    <br><br>
+    <div class="pc1 container-fluid">
+        <div class="pc1lcm">
+            Some Image Slideshow
+        </div>
 
+        <div class="pc1rc">
+            <div class="pc1lc">
+                Patient Menu 1
+            </div>
+
+            <div class="pc1rc">
+                Patient Menu 2
+            </div>
+            <div class="pc1lc">
+                Patient Menu 3
+            </div>
+
+            <div class="pc1rc">
+                Patient Menu 4
+            </div>
+        </div>
+    </div>
+    <br><br>
 </body>
 
 </html>

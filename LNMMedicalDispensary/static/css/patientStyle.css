@@ -17,3 +17,27 @@ body {
 .lgticon{
     margin-right:10px;
 }
+
+.pc1{
+
+}
+
+.pc1lcm{
+    width: 50%;
+    float:left;
+    height: 250px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 250px; 
+}
+
+.pc1lc,.pc1rc{
+    width: 50%;
+    float:left;
+    height: 250px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 250px; 
+    background-color: red;
+    border: 1px solid black;
+}
