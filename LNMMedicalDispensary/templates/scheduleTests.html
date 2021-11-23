@@ -17,7 +17,8 @@
 <body>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#" style="font-size: 30px; margin-left: 30px">The LNM Institute of Information Technology</a>
+            <a class="navbar-brand" href="#" style="font-size: 30px; margin-left: 30px">The LNM Institute of Information
+                Technology</a>
             <!-- <a class="navbar-brand" href="#">The LNM Institute of Information Technology</a> -->
             <img src="{% static 'images/LOGO.png' %}" alt="LNMIIT" width="200">
         </div>
@@ -26,8 +27,9 @@
     <h2 class="heading">Welcome to LNM Medical Dispensary</h2>
 
     <div class="logoutclass">
-        
-        <span style="padding-right:50px; font-size:24px"><i class='fas fa-user' style='color:green'></i><span style="padding-right:10px; font-size:24px"></span> {{ user.username }} </span>
+
+        <span style="padding-right:50px; font-size:24px"><i class='fas fa-user' style='color:green'></i><span
+                style="padding-right:10px; font-size:24px"></span> {{ user.username }} </span>
         <span></span>
         <a href="{% url 'logout' %}">
             <button type="button" class="btn btn-danger logoutclass">
@@ -40,46 +42,13 @@
     <div class="pc1 container-fluid">
         <br><br>
         <div class="pc1lcm">
-            <img src="{% static 'images/img.jpg' %}" alt="Medical Dispensary" style="width: 100%; max-width: 900px; height: auto;">
+            <img src="{% static 'images/img.jpg' %}" alt="Medical Dispensary"
+                style="width: 100%; max-width: 900px; height: auto;">
         </div>
 
         <div>
-            <div class="pc1rc">
-                <div class="pc1lc glass">
-                    <div class="xyz">
-                        <img src="{% static 'images/appointment.jpg' %}" alt="Book Appointment"
-                            style="width: 100%; max-width: 100px; height: auto;">
-                        <br>
-
-                        <p>Book Appointment</p>
-                    </div>
-                </div>
-
-                <div class="pc1rc glass">
-                    <div class="xyz">
-                        <img src="{% static 'images/patient.png' %}" alt="Update Profile"
-                            style="width: 100%; max-width: 100px; height: auto;">
-                        <br>
-                        <p>Update Profile</p>
-                    </div>
-                </div>
-                <div class="pc1lc glass">
-                    <div class="xyz">
-                        <img src="{% static 'images/history.jpg' %}" alt="Check History"
-                            style="width: 100%; max-width: 100px; height: auto;">
-                        <br>
-                        <p>Check Your History</p>
-                    </div>
-                </div>
-
-                <div class="pc1rc glass">
-                    <div class="xyz">
-                        <img src="{% static 'images/tests.png' %}" alt="Schedule Test"
-                            style="width: 100%; max-width: 100px; height: auto;">
-                        <br>
-                        <p>Schedule a test</p>
-                    </div>
-                </div>
+            <div class="pc1rc glass">
+                
             </div>
         </div>
     </div>
@@ -96,4 +65,5 @@
         </div>
     </div>
 </body>
+
 </html>
