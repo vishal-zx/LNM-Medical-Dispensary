@@ -5,6 +5,16 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
+    GENDERCHOICE = (
+        ('M', 'Male'),
+        ('F', 'Female'),
+    )
+    age = models.IntegerField(null=False, default=20)
+    gender = models.CharField(
+        max_length=1,
+        choices=GENDERCHOICE,
+        default='M',
+    )
     is_doctor = models.BooleanField('Is doctor', default=False)
     patient = models.BooleanField('Is patient', default=False)
     is_chemist = models.BooleanField('Is chemist', default=False)
