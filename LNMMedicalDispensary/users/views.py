@@ -69,5 +69,15 @@ def scheduleTest(request):
 def patientHistory(request):
     return render(request, 'PatientHistory.html')
 
+<<<<<<< HEAD
 def viewPatientHistory(request):
     return render(request, 'viewPatientHistory.html')
+=======
+
+def feedback(request):
+    return render(request, 'feedback.html')
+
+
+def patientProfile(request):
+    return render(request, 'PatientProfile.html')
+>>>>>>> 1bd8fe30dd84a3fe18d284c5d2c9f192e4bd4b21
