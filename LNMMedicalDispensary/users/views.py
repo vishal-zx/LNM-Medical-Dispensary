@@ -12,7 +12,7 @@ def register(request):
     msg = None
     if request.method == 'POST':
         form = SignUpForm(request.POST)
-        
+
         if form.is_valid():
             user = form.save()
             msg = 'user created'
@@ -21,7 +21,7 @@ def register(request):
             msg = 'form is not valid'
     else:
         form = SignUpForm()
-    return render(request,'register.html', {'form': form, 'msg': msg})
+    return render(request, 'register.html', {'form': form, 'msg': msg})
 
 
 def login_view(request):
@@ -40,23 +40,31 @@ def login_view(request):
                 login(request, user)
                 return redirect('chemist')
             elif user is not None and user.patient:
-            
+
                 login(request, user)
                 return redirect('patient')
             else:
-                msg= 'invalid credentials'
+                msg = 'invalid credentials'
         else:
             msg = 'error validating form'
     return render(request, 'login.html', {'form': form, 'msg': msg})
 
 
 def doctor(request):
-    return render(request,'doctor.html')
+    return render(request, 'doctor.html')
 
 
 def chemist(request):
-    return render(request,'chemist.html')
+    return render(request, 'chemist.html')
 
 
 def patient(request):
-    return render(request,'patient.html')
+    return render(request, 'patient.html')
+
+
+def scheduleTest(request):
+    return render(request, 'scheduleTest.html')
+
+
+def patientHistory(request):
+    return render(request, 'PatientHistory.html')
