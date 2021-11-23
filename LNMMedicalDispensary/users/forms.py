@@ -52,4 +52,4 @@ class SignUpForm(UserCreationForm):
     patient=forms.BooleanField(initial=True)
     class Meta:
         model = User
-        fields = ('username', 'email', 'password1', 'password2', 'is_doctor', 'patient', 'is_chemist')
+        fields = ('username', 'email', 'password1', 'password2', 'gender', 'age', 'is_doctor', 'patient', 'is_chemist')
