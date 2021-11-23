@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{% static 'css/patientStyle.css' %}" type="text/css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <title>Patient Homepage</title>
+    <title>Schedule a Test</title>
 </head>
 
 <body>
@@ -25,6 +25,14 @@
     </nav>
     <br>
     <h2 class="heading">Welcome to LNM Medical Dispensary</h2>
+
+    <div style="float: left; margin-left: 40px; font-size: 17px;">
+        <a href="{% url 'patient' %}">
+            <button type="button" class="btn btn-secondary logoutclass">
+                <span class="lgticon"><i class="fas fa-arrow-left"></i></span></i>Go Back
+            </button>
+        </a>
+    </div>
 
     <div class="logoutclass">
 
@@ -47,8 +55,37 @@
         </div>
 
         <div>
-            <div class="pc1rc glass">
-                
+            <div class="pc1rc glass" style="height:510px">
+                <div style="font-size:22px; text-align: left; font-weight: bolder;">
+                    Patient Name: <input type="text" name="PatName" id="ptname">
+                    <br>
+                    <br>
+                    <label for="bloodgroups">Blood Group:&nbsp;</label>
+                    <select id="bloodgroups">
+                        <option value="item-1">A+</option>
+                        <option value="item-2">B+</option>
+                        <option value="item-3">O+</option>
+                        <option value="item-4">AB+</option>
+                        <option value="item-5">A-</option>
+                        <option value="item-6">B-</option>
+                        <option value="item-7">O-</option>
+                        <option value="item-8">AB-</option>
+                    </select>
+                    <br>
+                    <br>
+                    <label for="testItems">Select a test :&nbsp;</label>
+                    
+                    <select id="testItems">
+                        <option value="item-1">Covid-19</option>
+                        <option value="item-2">Dengue</option>
+                        <option value="item-3">Viral Fever</option>
+                        <option value="item-4">Malaria</option>
+                        <option value="item-5">Other</option>
+                    </select>
+                    <br>
+                    <br>
+                    <div style="margin-left: 80px;"><button type="button" class="btn btn-success">Submit</button></div>
+                </div>
             </div>
         </div>
     </div>

@@ -73,12 +73,13 @@
                 </div>
 
                 <div class="pc1rc glass">
-                    <div class="xyz">
-                        <img src="{% static 'images/tests.png' %}" alt="Schedule Test"
-                            style="width: 100%; max-width: 100px; height: auto;">
-                        <br>
-                        <p>Schedule a test</p>
-                    </div>
+                    <a href="{% url 'scheduleTest' %}">
+                        <div class="xyz">
+                            <img src="{% static 'images/tests.png' %}" alt="Schedule Test" style="width: 100%; max-width: 100px; height: auto;">
+                            <br>
+                            <p>Schedule a test</p>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
