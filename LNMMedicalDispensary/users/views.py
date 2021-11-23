@@ -74,6 +74,10 @@ def viewPatientHistory(request):
     return render(request, 'viewPatientHistory.html')
 
 
+def viewPatientHistory(request):
+    return render(request, 'viewPatientHistory.html')
+
+
 def feedback(request):
     return render(request, 'feedback.html')
 
