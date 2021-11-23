@@ -76,3 +76,6 @@ def feedback(request):
 
 def patientProfile(request):
     return render(request, 'PatientProfile.html')
+
+def Treatment(request):
+    return render(request, 'Treatment.html')
