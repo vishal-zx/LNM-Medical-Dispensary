@@ -70,6 +70,14 @@ def patientHistory(request):
     return render(request, 'PatientHistory.html')
 
 
+def viewPatientHistory(request):
+    return render(request, 'viewPatientHistory.html')
+
+
+def viewPatientHistory(request):
+    return render(request, 'viewPatientHistory.html')
+
+
 def feedback(request):
     return render(request, 'feedback.html')
 
@@ -79,3 +87,6 @@ def patientProfile(request):
 
 def checkAppointment(request):
     return render(request, 'checkAppointment.html')
+
+def Treatment(request):
+    return render(request, 'Treatment.html')
