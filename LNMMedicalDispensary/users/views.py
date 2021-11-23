@@ -64,3 +64,7 @@ def patient(request):
 
 def scheduleTest(request):
     return render(request, 'scheduleTest.html')
+
+
+def patientHistory(request):
+    return render(request, 'PatientHistory.html')

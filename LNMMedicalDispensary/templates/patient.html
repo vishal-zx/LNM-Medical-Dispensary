@@ -64,12 +64,14 @@
                     </div>
                 </div>
                 <div class="pc1lc glass">
-                    <div class="xyz">
-                        <img src="{% static 'images/history.jpg' %}" alt="Check History"
-                            style="width: 100%; max-width: 100px; height: auto;">
-                        <br>
-                        <p>Check Your History</p>
-                    </div>
+                    <a href="{% url 'patientHistory' %}">
+                        <div class="xyz">
+                            <img src="{% static 'images/history.jpg' %}" alt="Check History"
+                                style="width: 100%; max-width: 100px; height: auto;">
+                            <br>
+                            <p>Check Your History</p>
+                        </div>
+                    </a>
                 </div>
 
                 <div class="pc1rc glass">
