@@ -1,0 +1,98 @@
+body {
+    padding-top: 65px;
+  }
+  
+  .heading {
+    display: flex;
+    margin-top: 50px;
+    justify-content: center;
+  }
+  
+  .logoutclass {
+    float: right;
+    margin-right: 40px;
+    font-size: 17px;
+  }
+  
+  .lgticon {
+    margin-right: 10px;
+  }
+  
+  .content {
+    overflow: auto;
+    background-image: url("../images/bg.jpg");
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 600px;
+  }
+  
+  .glass {
+    backdrop-filter: blur(7px);
+    display: flex;
+  }
+  
+  .info {
+    flex: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 22px;
+  }
+  .prescr {
+    flex: 60%;
+    padding-right: 80px;
+  }
+  
+  table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td,
+  th {
+    border: 1px solid black;
+    text-align: center;
+    padding: 16px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #b6d0e9;
+  }
+  
+  .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    background-color: black;
+    color: white;
+    letter-spacing: 0.5px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .add {
+    font-size: 22px;
+  }
+  
+  .image {
+    content: url("https://media.istockphoto.com/photos/offering-patientcentred-care-that-proves-effective-and-efficient-picture-id1301555107?b=1&k=20&m=1301555107&s=170667a&w=0&h=urags5L_xQX4tiAVkW8Hws70_Z2EwnFvDoT2gOqgfk8=");
+  }
+  
+  div.picture1 {
+    width: 1000px;
+    height: 500px;
+    background-image: url("https://media.istockphoto.com/photos/offering-patientcentred-care-that-proves-effective-and-efficient-picture-id1301555107?b=1&k=20&m=1301555107&s=170667a&w=0&h=urags5L_xQX4tiAVkW8Hws70_Z2EwnFvDoT2gOqgfk8=");
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+  
+  form{
+      margin-left: 300px;
+      margin-top: 50px;
+  }
