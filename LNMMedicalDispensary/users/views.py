@@ -69,10 +69,14 @@ def scheduleTest(request):
 def patientHistory(request):
     return render(request, 'PatientHistory.html')
 
-<<<<<<< HEAD
+
 def viewPatientHistory(request):
     return render(request, 'viewPatientHistory.html')
-=======
+
+
+def viewPatientHistory(request):
+    return render(request, 'viewPatientHistory.html')
+
 
 def feedback(request):
     return render(request, 'feedback.html')
@@ -80,10 +84,7 @@ def feedback(request):
 
 def patientProfile(request):
     return render(request, 'PatientProfile.html')
-<<<<<<< HEAD
+
 
 def Treatment(request):
     return render(request, 'Treatment.html')
-=======
->>>>>>> 1bd8fe30dd84a3fe18d284c5d2c9f192e4bd4b21
->>>>>>> 34f4c44c8ddae6af6a19876c4bb2dd9a4e58f806
