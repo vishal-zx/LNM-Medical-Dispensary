@@ -26,13 +26,13 @@
   <br>
   <h2 class="heading">LNM Medical Dispensary</h2>
   <div style="float: left; margin-left: 40px; font-size: 17px;">
-    <button type="button" class="btn btn-secondary logoutclass" onClick="javascript:history.go(-1);">
-      <span class="lgticon"><i class="fas fa-arrow-left"></i></span></i>Go Back
-    </button>
+    <!-- <a href="{% url 'patient' %}"> -->
+      <button type="button" class="btn btn-secondary logoutclass" onClick="javascript:history.go(-1);">
+        <span class="lgticon"><i class="fas fa-arrow-left"></i></span></i>Go Back
+      </button>
+    <!-- </a> -->
   </div>
   <div class="logoutclass">
-   <div class="logoutclass">
-  
     <span style="padding-right:50px; font-size:24px"><i class='fas fa-user' style='color:green'></i><span
         style="padding-right:10px; font-size:24px"></span> {{ user.username }} </span>
     <span></span>
