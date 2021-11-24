@@ -51,7 +51,7 @@
                             style="width: 100%; max-width: 100px; height: auto;">
                         <br>
 
-                        <p>Check Appointments</p>
+                        <p><a href="{% url 'checkAppointment' %}"> Check Appointments</a></p>
                     </div>
                 </div>
 
@@ -68,7 +68,7 @@
                         <img src="{% static 'images/history.jpg' %}" alt="Check History"
                             style="width: 100%; max-width: 100px; height: auto;">
                         <br>
-                        <p>Manage Doctor Details</p>
+                         <p><a href="{% url 'DoctorProfile' %}">Manage Doctor Details</a></p>
                     </div>
                 </div>
 
@@ -77,15 +77,23 @@
                         <img src="{% static 'images/history.jpg' %}" alt="Book Appointment"
                             style="width: 100%; max-width: 100px; height: auto;">
                         <br>
-                        <p>Treatment</p>
+                         <p><a href="{% url 'Treatment' %}">Treatment</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <div class="footer">
-        <div class="add"> The LNM Institute of Information Technology, Jaipur</div>
-        <div>Rupa ki Nangal, Post-Sumel, Via, Jamdoli, Jaipur, Rajasthan 302031</div>
+        <div class="feedback">
+            &nbsp;
+        </div>
+        <div>
+            <div class="add"> The LNM Institute of Information Technology, Jaipur</div>
+            <div>Rupa ki Nangal, Post-Sumel, Via, Jamdoli, Jaipur, Rajasthan 302031</div>
+        </div>
+        <div class="feedback">
+            <a href="{% url 'feedback' %}">Feedback</a>
+        </div>
     </div>
 </body>
 </html>
