@@ -18,4 +18,8 @@ urlpatterns = [
     path('checkAppointment/', views.checkAppointment, name='checkAppointment'),
     path('Treatment/', views.Treatment, name='Treatment'),
     path('DoctorProfile/', views.DoctorProfile, name='DoctorProfile'),
+    path('ChemistProfile/', views.ChemistProfile, name='ChemistProfile'),
+    path('checkMedicine/', views.checkMedicine, name='checkMedicine'),
+    path('MedicineRecord/', views.MedicineRecord, name='MedicineRecord'),
+    path('issueMedicine/', views.issueMedicine, name='issueMedicine'),
 ]

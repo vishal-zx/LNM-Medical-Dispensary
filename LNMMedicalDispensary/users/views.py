@@ -100,3 +100,19 @@ def Treatment(request):
 
 def DoctorProfile(request):
     return render(request, 'DoctorProfile.html')
+
+
+def ChemistProfile(request):
+    return render(request, 'chemistProfile.html')
+
+
+def checkMedicine(request):
+    return render(request, 'checkMedicine.html')
+
+
+def MedicineRecord(request):
+    return render(request, 'medicineRecord.html')
+
+
+def issueMedicine(request):
+    return render(request, 'issueMedicine.html')

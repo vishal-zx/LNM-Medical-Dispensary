@@ -46,48 +46,48 @@
         <div>
             <div class="pc1rc">
                 <div class="pc1lc glass">
-                    <div class="xyz">
-                        <img src="{% static 'images/chemist.jpg' %}" alt="Update Profile"
-                            style="width: 100%; max-width: 100px; height: auto;">
-                        <br>
-
-                        <p>Update Profile </p>
-                    </div>
+                    <a href="{% url 'ChemistProfile' %}">
+                        <div class="xyz">
+                            <img src="{% static 'images/chemist.jpg' %}" alt="Update Profile"
+                                style="width: 100%; max-width: 100px; height: auto;">
+                            <br>
+                        
+                            <p>Update Profile </p>
+                        </div>
+                    </a>
                 </div>
 
                 <div class="pc1rc glass">
-                    <div class="xyz">
-                        <img src="{% static 'images/patient.png' %}" alt="Check Medicine"
-                            style="width: 100%; max-width: 100px; height: auto;">
-                        <br>
-                        <p>Check Medicine</p>
-                    </div>
-                </div>
-                <div class="pc1lc glass">
-                    <div class="xyz">
-                        <img src="{% static 'images/appointment.jpg' %}" alt="Update Medicine"
-                            style="width: 100%; max-width: 100px; height: auto;">
-                        <br>
-                        <p>Update Medicine</p>
-                    </div>
+                    <a href="{% url 'checkMedicine' %}">
+                        <div class="xyz">
+                            <img src="{% static 'images/patient.png' %}" alt="Check/Update Medicine"
+                                style="width: 100%; max-width: 100px; height: auto;">
+                            <br>
+                            <p>Check/Update Medicine</p>
+                        </div>
+                    </a>
                 </div>
 
                 <div class="pc1rc glass">
-                    <div class="xyz">
-                        <img src="{% static 'images/history.jpg' %}" alt="Monthly/Annual Medicine Report"
-                            style="width: 100%; max-width: 100px; height: auto;">
-                        <br>
-                        <p>Monthly/Annual Medicine Report</p>
-                    </div>
+                    <a href="{% url 'MedicineRecord' %}">
+                        <div class="xyz">
+                            <img src="{% static 'images/history.jpg' %}" alt="Monthly/Annual Medicine Report"
+                                style="width: 100%; max-width: 100px; height: auto;">
+                            <br>
+                            <p>Monthly/Annual Medicine Report</p>
+                        </div>
+                    </a>
                 </div>
 
                 <div class="pc1lc glass">
-                    <div class="xyz">
-                        <img src="{% static 'images/issueMedicine.jpeg' %}" alt="Issue Medicine"
-                            style="width: 100%; max-width: 100px; height: auto;">
-                        <br>
-                        <p>Issue Medicine</p>
-                    </div>
+                    <a href="{% url 'issueMedicine' %}">
+                        <div class="xyz">
+                            <img src="{% static 'images/issueMedicine.jpeg' %}" alt="Issue Medicine"
+                                style="width: 100%; max-width: 100px; height: auto;">
+                            <br>
+                            <p>Issue Medicine</p>
+                        </div>
+                    </a>
                 </div>
 
             </div>
