@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="{% static 'css/PatientHistory.css' %}" type="text/css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-  <title>check Appointment</title>
+  <title>Medicine Record</title>
 </head>
 
 <body>
@@ -26,14 +26,14 @@
   <br>
   <h2 class="heading">LNM Medical Dispensary</h2>
   <div style="float: left; margin-left: 40px; font-size: 17px;">
-    <a href="{% url 'doctor' %}">
+    <a href="{% url 'patient' %}">
       <button type="button" class="btn btn-secondary logoutclass">
         <span class="lgticon"><i class="fas fa-arrow-left"></i></span></i>Go Back
       </button>
     </a>
   </div>
   <div class="logoutclass">
-  
+
     <span style="padding-right:50px; font-size:24px"><i class='fas fa-user' style='color:green'></i><span
         style="padding-right:10px; font-size:24px"></span> {{ user.username }} </span>
     <span></span>
@@ -48,58 +48,65 @@
  <div class="content">
       <div class="prescr">
         <br>
-        <span  style="font-size:18px; font-weight:bold;margin:0 auto;text-align:center;display:block;">Appointments</span>
+        <span style="font-size:18px; font-weight:bold;margin:0 auto;text-align:center;display:block;">Medicine Record</span>
         <br><br>
         <table style="margin-left:40px;">
           <tr>
-            <th>Sr. No</th>
-            <th>Date-Time</th>
-            <th>Patient</th>
-            <th>ID</th>
-            <th>
-           status
-        </th>
-            </tr>
+            <th>Mid</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Purchase Date</th>
+            <th>Expiry Date</th>
+            <th>Supplier</th>
+            <th>Usage</th>
+            <th>Quantity</th>
+          </tr>
           <tr>
             <td>1</td>
-            <td>24 Nov 2021</td>
-            <td>Naresh </td>
-            <td>19ucs046@lnmmiit.ac.in</td>
-              <td> <button type="button" class="btn btn-success" data-dismiss="modal">Confirm</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button></td>
-         
-            </tr>
+            <td>Paracetamol</td>
+            <td>Tablet </td>
+            <td>21-11-2021</td>
+            <td>16-10-2022</td>
+            <td>Zeelab pharmacy</td>
+            <td>Reduce fever </td>
+            <td>250 </td>
+          </tr>
+
           <tr>
             <td>2</td>
-            <td>24 Nov 2021</td>
-           <td>Naresh </td>
-            <td>19ucs046@lnmmiit.ac.in</td>
-              <td> <button type="button" class="btn btn-success" data-dismiss="modal">Confirm</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button></td>
-         
+            <td>Paracetamol</td>
+            <td>Tablet </td>
+            <td>21-11-2021</td>
+            <td>16-10-2022</td>
+            <td>Zeelab pharmacy</td>
+            <td>Reduce fever </td>
+            <td>250 </td>
           </tr>
           <tr>
             <td>3</td>
-            <td>24 Nov 2021</td>
-            <td>Naresh </td>
-            <td>19ucs046@lnmmiit.ac.in</td>
-              <td> <button type="button" class="btn btn-success" data-dismiss="modal">Confirm</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button></td>
-         
-           </tr>
+            <td>Paracetamol</td>
+            <td>Tablet </td>
+            <td>21-11-2021</td>
+            <td>16-10-2022</td>
+            <td>Zeelab pharmacy</td>
+            <td>Reduce fever </td>
+            <td>250 </td>
+          </tr>
+
           <tr>
             <td>4</td>
-            <td>24 Nov 2021</td>
-            <td>Naresh </td>
-            <td>19ucs046@lnmmiit.ac.in</td>
-              <td> <button type="button" class="btn btn-success" data-dismiss="modal">Confirm</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button></td>
-         
+            <td>Paracetamol</td>
+            <td>Tablet </td>
+            <td>21-11-2021</td>
+            <td>16-10-2022</td>
+            <td>Zeelab pharmacy</td>
+            <td>Reduce fever </td>
+            <td>250 </td>
           </tr>
         </table>
       </div>
     </div>
-    <div style="margin-left: 300px;"><button type="button" class="btn btn-success">Generate Report</button></div>
+    <div style="margin-left: 300px;"><button type="button" class="btn btn-success">Download Report</button></div>
   </div>
 </div>
   <div class="footer">

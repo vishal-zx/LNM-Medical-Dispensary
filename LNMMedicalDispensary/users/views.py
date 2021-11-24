@@ -92,3 +92,5 @@ def checkAppointment(request):
 
 def Treatment(request):
     return render(request, 'Treatment.html')
+def DoctorProfile(request):
+    return render(request, 'DoctorProfile.html')
