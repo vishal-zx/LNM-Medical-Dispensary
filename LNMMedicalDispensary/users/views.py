@@ -85,6 +85,8 @@ def feedback(request):
 def patientProfile(request):
     return render(request, 'PatientProfile.html')
 
+def bookAppointment(request):
+    return render(request, 'bookAppointment.html')
 def checkAppointment(request):
     return render(request, 'checkAppointment.html')
 

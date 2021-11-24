@@ -15,9 +15,10 @@ urlpatterns = [
 
     path('feedback/', views.feedback, name='feedback'),
     path('patientProfile/', views.patientProfile, name='patientProfile'),
+    path('bookAppointment/', views.bookAppointment, name='bookAppointment'),
 
     path('checkAppointment/', views.checkAppointment, name='checkAppointment'),
 
     path('Treatment/', views.Treatment, name='Treatment'),
-     path('DoctorProfile/', views.DoctorProfile, name='DoctorProfile'),
+    path('DoctorProfile/', views.DoctorProfile, name='DoctorProfile'),
 ]

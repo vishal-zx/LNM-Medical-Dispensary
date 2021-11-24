@@ -46,22 +46,26 @@
         <div>
             <div class="pc1rc">
                 <div class="pc1lc glass">
-                    <div class="xyz">
-                        <img src="{% static 'images/appointment.jpg' %}" alt="Book Appointment"
-                            style="width: 100%; max-width: 100px; height: auto;">
-                        <br>
-
-                        <p>Book Appointment</p>
-                    </div>
+                    <a href="{% url 'bookAppointment' %}">
+                        <div class="xyz">
+                            <img src="{% static 'images/appointment.jpg' %}" alt="Book Appointment"
+                                style="width: 100%; max-width: 100px; height: auto;">
+                            <br>
+    
+                            <p>Book Appointment</p>
+                        </div>
+                    </a>
                 </div>
 
                 <div class="pc1rc glass">
-                    <div class="xyz">
-                        <img src="{% static 'images/patient.png' %}" alt="Update Profile"
-                            style="width: 100%; max-width: 100px; height: auto;">
-                        <br>
-                        <p>Update Profile</p>
-                    </div>
+                    <a href="{% url 'patientProfile' %}">
+                        <div class="xyz">
+                            <img src="{% static 'images/patient.png' %}" alt="Update Profile"
+                                style="width: 100%; max-width: 100px; height: auto;">
+                            <br>
+                            <p>Update Profile</p>
+                        </div>
+                    </a>
                 </div>
                 <div class="pc1lc glass">
                     <a href="{% url 'patientHistory' %}">
@@ -95,7 +99,7 @@
             <div>Rupa ki Nangal, Post-Sumel, Via, Jamdoli, Jaipur, Rajasthan 302031</div>
         </div>
         <div class="feedback">
-            <a href="">Feedback</a>
+            <a href="{% url 'feedback' %}">Feedback</a>
         </div>
     </div>
 </body>
