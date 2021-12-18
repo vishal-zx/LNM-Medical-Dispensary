@@ -102,9 +102,15 @@ def bookAppointment(request):
 
 
 def checkAppointment(request):
-    Appointments=Appointment.objects.all()
-    for i in Appointments:
-        print(i)
+    appointment=Appointment.objects.all()
+    Appointments=[{}]
+    sr=1
+    
+    for i in appointment:
+        Appointments.insert(sr-1,{'sr':sr,'Timings':i.Timings,'name':Patient.objects.get(Pid=i.Pid.Pid).name,'mailid':i.mailid})
+        sr=sr+1
+    Appointments.pop()
+    print(len(Appointments))  
     #patient=Patient.objects.get()
     return render(request, 'checkAppointment.html',{'Appointments': Appointments})
 
@@ -150,18 +156,18 @@ def RequestAppointment(request):
     except MultiValueDictKeyError:
         timings = False
     try:
-        mailid=request.GET["mailid"]
+        Mailid=request.GET["mailid"]
     except MultiValueDictKeyError:
-        timings = False
+        Mailid = False
     
-    Pid=Patient.objects.get(name=name)
+    pid=Patient.objects.get(name=name)
     
-    Did=Doctor.objects.get(name=doctor)
-    print(Pid)
-    print(Did)
+    did=Doctor.objects.get(name=doctor)
+    print(pid)
+    print(did)
     print(timings)
     
-    p= Appointment(Pid=Pid,Did=Did,Timings=timings,mailid=mailid)
+    p= Appointment(Pid=pid,Did=did,Timings=timings,mailid=Mailid)
     p.save()
     return render(request,'RequestAppointment.html')
    

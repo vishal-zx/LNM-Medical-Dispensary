@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+
 <html lang="en">
 
 <head>
@@ -58,16 +59,16 @@
             <th>ID</th>
             <th>
            status
-        </th>
-            </tr>
-            {% with j=0 %}
+          </th>
+         </tr>
+          
             {% for i in Appointments%}
             
           <tr>
-            <td>{{j|add:1}} </td>
+            <td>{{i.sr}} </td>
             
             <td>{{i.Timings}}</td>
-            <td>{{i.Pid}} </td>
+            <td>{{i.name}} </td>
             <td>{{i.mailid}}</td>
               <td> <button type="button" class="btn btn-success" data-dismiss="modal">Confirm</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button></td>
@@ -75,7 +76,7 @@
             </tr>
           <tr>
           {% endfor %}
-          {% endwith %}
+          
             
         </table>
       </div>

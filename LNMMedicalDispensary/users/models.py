@@ -74,7 +74,7 @@ class Appointment(models.Model):
     Pid=models.ForeignKey(Patient,on_delete=CASCADE)
     Did=models.ForeignKey(Doctor,on_delete=CASCADE)
     Timings=models.CharField(max_length=20)
-    mailid=models.CharField(max_length=20,default=False)
+    mailid=models.CharField(max_length=20)
     isApproved= models.BooleanField('IsApproved', default=False)
     
     
