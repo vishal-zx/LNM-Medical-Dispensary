@@ -16,6 +16,7 @@ urlpatterns = [
     path('patientProfile/', views.patientProfile, name='patientProfile'),
     path('bookAppointment/', views.bookAppointment, name='bookAppointment'),
     path('RequestAppointment/', views.RequestAppointment, name='RequestAppointment'),
+    path('UpdatepatientProfile/', views.updatepatient, name='UpdatepatientProfile'),
     path('checkAppointment/', views.checkAppointment, name='checkAppointment'),
     path('Treatment/', views.Treatment, name='Treatment'),
     path('DoctorProfile/', views.DoctorProfile, name='DoctorProfile'),

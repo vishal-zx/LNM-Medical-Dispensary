@@ -25,7 +25,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             msg = 'user created'
-            patient=Patient(name=user.username,age=user.age,gender=user.gender)
+            patient=Patient(Pid=request.user.id,name=user.username,age=user.age,gender=user.gender)
             patient.save()
             return redirect('login_view')
         else:
@@ -142,6 +142,9 @@ def issueMedicine(request):
 # appointment booking 
 @login_required(login_url='/login/')
 def RequestAppointment(request):
+    current_user = request.user
+    print (current_user.id)
+
     try:
         name = request.GET["P_name"]
         
@@ -171,4 +174,33 @@ def RequestAppointment(request):
     p.save()
     return render(request,'RequestAppointment.html')
    
+# update patient profile
+def updatepatient(request):
+    current_user = request.user
     
+    pid=current_user.id-2
+    print(current_user)
+    print(pid)
+
+    try:
+        name = request.GET["name"]
+        
+    except MultiValueDictKeyError:
+        name = False
+    try:
+        age = request.GET["age"]
+        
+    except MultiValueDictKeyError:
+        age = False
+    try:
+        gender = request.GET["gender"]
+        
+    except MultiValueDictKeyError:
+        gender = False
+        
+    p=Patient.objects.get(Pid=pid)   
+    p.name=name
+    p.age=age
+    p.gender=gender
+    p.save()
+    return render(request,'UpdatepatientProfile.html')
