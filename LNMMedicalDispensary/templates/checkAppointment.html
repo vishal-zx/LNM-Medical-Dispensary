@@ -60,42 +60,23 @@
            status
         </th>
             </tr>
+            {% with j=0 %}
+            {% for i in Appointments%}
+            
           <tr>
-            <td>1</td>
-            <td>24 Nov 2021</td>
-            <td>Naresh </td>
-            <td>19ucs046@lnmmiit.ac.in</td>
+            <td>{{j|add:1}} </td>
+            
+            <td>{{i.Timings}}</td>
+            <td>{{i.Pid}} </td>
+            <td>{{i.mailid}}</td>
               <td> <button type="button" class="btn btn-success" data-dismiss="modal">Confirm</button>
         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button></td>
          
             </tr>
           <tr>
-            <td>2</td>
-            <td>24 Nov 2021</td>
-           <td>Naresh </td>
-            <td>19ucs046@lnmmiit.ac.in</td>
-              <td> <button type="button" class="btn btn-success" data-dismiss="modal">Confirm</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button></td>
-         
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>24 Nov 2021</td>
-            <td>Naresh </td>
-            <td>19ucs046@lnmmiit.ac.in</td>
-              <td> <button type="button" class="btn btn-success" data-dismiss="modal">Confirm</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button></td>
-         
-           </tr>
-          <tr>
-            <td>4</td>
-            <td>24 Nov 2021</td>
-            <td>Naresh </td>
-            <td>19ucs046@lnmmiit.ac.in</td>
-              <td> <button type="button" class="btn btn-success" data-dismiss="modal">Confirm</button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button></td>
-         
-          </tr>
+          {% endfor %}
+          {% endwith %}
+            
         </table>
       </div>
     </div>

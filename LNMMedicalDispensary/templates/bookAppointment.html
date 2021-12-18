@@ -142,13 +142,14 @@
     
     <h2 style="margin-left: 35%;">Request Appointment</h2>
     <div class="container">
-        <form>
+        <form action = "http://127.0.0.1:8000/RequestAppointment/" method = "get">
+
             <div class="row">
                 <div class="col-25">
                     <label for="fname">Name</label>
                 </div>
                 <div class="col-75">
-                    <input type="text" id="fname" name="name..." placeholder="Your name..">
+                    <input type="text" id="fname" name="P_name" placeholder="Your name..">
                 </div>
             </div>
             <div class="row">

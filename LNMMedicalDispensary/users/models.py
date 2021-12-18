@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
+from django.db.models.deletion import CASCADE
 
 # Create your models here.
 
@@ -67,3 +68,13 @@ class Chemist(models.Model):
         choices=GENDERCHOICE,
         default='M',
     )
+    
+class Appointment(models.Model):
+    Aid =models.IntegerField(primary_key=True)
+    Pid=models.ForeignKey(Patient,on_delete=CASCADE)
+    Did=models.ForeignKey(Doctor,on_delete=CASCADE)
+    Timings=models.CharField(max_length=20)
+    mailid=models.CharField(max_length=20,default=False)
+    isApproved= models.BooleanField('IsApproved', default=False)
+    
+    

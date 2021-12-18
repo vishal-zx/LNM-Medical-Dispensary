@@ -15,6 +15,7 @@ urlpatterns = [
     path('feedback/', views.feedback, name='feedback'),
     path('patientProfile/', views.patientProfile, name='patientProfile'),
     path('bookAppointment/', views.bookAppointment, name='bookAppointment'),
+    path('RequestAppointment/', views.RequestAppointment, name='RequestAppointment'),
     path('checkAppointment/', views.checkAppointment, name='checkAppointment'),
     path('Treatment/', views.Treatment, name='Treatment'),
     path('DoctorProfile/', views.DoctorProfile, name='DoctorProfile'),

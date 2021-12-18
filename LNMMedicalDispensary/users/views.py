@@ -1,6 +1,15 @@
 from django.shortcuts import render, redirect
 from .forms import SignUpForm, LoginForm
 from django.contrib.auth import authenticate, login
+
+from .models import *
+from .forms import *
+from django.views.generic import ListView, CreateView
+from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.datastructures import MultiValueDictKeyError
+#from user_profile.models import UserProfile
 # Create your views here.
 
 
@@ -16,6 +25,8 @@ def register(request):
         if form.is_valid():
             user = form.save()
             msg = 'user created'
+            patient=Patient(name=user.username,age=user.age,gender=user.gender)
+            patient.save()
             return redirect('login_view')
         else:
             msg = 'form is not valid'
@@ -32,7 +43,7 @@ def login_view(request):
             username = form.cleaned_data.get('username')
             password = form.cleaned_data.get('password')
             user = authenticate(username=username, password=password)
-            print(user.patient)
+            
             if user is not None and user.is_doctor:
                 login(request, user)
                 return redirect('doctor')
@@ -91,7 +102,11 @@ def bookAppointment(request):
 
 
 def checkAppointment(request):
-    return render(request, 'checkAppointment.html')
+    Appointments=Appointment.objects.all()
+    for i in Appointments:
+        print(i)
+    #patient=Patient.objects.get()
+    return render(request, 'checkAppointment.html',{'Appointments': Appointments})
 
 
 def Treatment(request):
@@ -116,3 +131,38 @@ def MedicineRecord(request):
 
 def issueMedicine(request):
     return render(request, 'issueMedicine.html')
+
+
+# appointment booking 
+@login_required(login_url='/login/')
+def RequestAppointment(request):
+    try:
+        name = request.GET["P_name"]
+        
+    except MultiValueDictKeyError:
+        name = False
+    try:
+        doctor=request.GET["D_name"]
+    except MultiValueDictKeyError:
+        doctor = False
+    try:
+        timings=request.GET["meeting-time"]
+    except MultiValueDictKeyError:
+        timings = False
+    try:
+        mailid=request.GET["mailid"]
+    except MultiValueDictKeyError:
+        timings = False
+    
+    Pid=Patient.objects.get(name=name)
+    
+    Did=Doctor.objects.get(name=doctor)
+    print(Pid)
+    print(Did)
+    print(timings)
+    
+    p= Appointment(Pid=Pid,Did=Did,Timings=timings,mailid=mailid)
+    p.save()
+    return render(request,'RequestAppointment.html')
+   
+    
