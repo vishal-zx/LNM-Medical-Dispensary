@@ -78,7 +78,9 @@ def scheduleTest(request):
 
 
 def patientHistory(request):
-    return render(request, 'PatientHistory.html')
+    my_history=PatientHistiry.objects.filter(pid=request.session['pid'])
+    context={'my_his':my_history}
+    return render(request, 'PatientHistory.html',context)
 
 
 def viewPatientHistory(request):

@@ -83,13 +83,13 @@ class PatientHistiry(models.Model):
     Pid=models.ForeignKey(Patient,on_delete=CASCADE)
     Description=models.TextField()
 
-class Medicine(models.MOdel):
-    Mid=modles.IntegerField(primary_key=True)
+class Medicine(models.Model):
+    Mid=models.IntegerField(primary_key=True)
     Name=models.CharField(max_length=50, null=False)
     Type=models.CharField(max_length=50, null=False)
     Quantity=models.IntegerField(default=1000)
     Usage=models.IntegerField(default=0)
     Supplier=models.CharField(max_length=30)
-    PurchaseDate=models.DateField(_("Date"),default=datetime.date.today)
+    PurchaseDate=models.DateField(("Date"),default=datetime.date.today)
     ExpiryDate=models.DateField()
     

@@ -62,35 +62,22 @@
         <br><br>
         <table>
           <tr>
-            <th>Sr. No</th>
-            <th>Date-Time</th>
-            <th>Doctor</th>
+            
+            
+            <th>Appoinment ID</th>
             <th>Description</th>
           </tr>
-          <tr>
-            <td>1</td>
-            <td>24 Nov 2021</td>
-            <td>Dr. Chand</td>
-            <td>Take Care</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td>24 Nov 2021</td>
-            <td>Dr. Chand</td>
-            <td>Take Care</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td>24 Nov 2021</td>
-            <td>Dr. Chand</td>
-            <td>Take Care</td>
-          </tr>
-          <tr>
-            <td>4</td>
-            <td>24 Nov 2021</td>
-            <td>Dr. Chand</td>
-            <td>Take Care</td>
-          </tr>
+          {%if my_his %}
+
+              {% for history in my_his %} 
+              <tr>
+                <td>{{history.Aid}}</td>
+                <td>{{history.Description}} </td>
+              </tr>
+              {%endfor %} 
+          {% else %} 
+              NO History
+          {% endif %}
         </table>
       </div>
     </div>
