@@ -57,13 +57,12 @@
     <div>
       <div class="pc1rc glass" style="height:510px">
         <div style="font-size:20px; text-align: left; font-weight: bolder;">
-          Username: <input type="text" name="username" id="username">
+         <!-- Username: <input type="text" name="username" id="username" placeholder={{user.username}}>
           <br>
-          <br>
-          Name: &nbsp;<input type="text" name="name" id="name"> &nbsp;&nbsp;
-          Age: <input type="number" name="age" id="age">
-          <br>
-          <br>
+          <br>-->
+          Name: &nbsp;<input type="text" name="name" id="name" placeholder={{user.username}}> &nbsp;&nbsp;<br><br>
+          Age: <input type="number" name="age" id="age" placeholder={{user.age}}>
+          
           <label for="gender">Gender :&nbsp;</label>
           <select id="gender">
             <option value="item-1">Male</option>
@@ -74,7 +73,7 @@
           Address: <input type="text" name="address" id="address">
           <br>
           <br>
-          Speciality: <input type="text" name="speciality" id="speciality"> &nbsp;&nbsp;
+          Speciality: <input type="text" name="speciality" id="speciality"> &nbsp;&nbsp;<br><br>
           Phone Number: <input type="number" name="phno" id="phno">
           <br>
           <br>

@@ -61,7 +61,7 @@
            status
           </th>
          </tr>
-          
+          {% if Appointments %}
             {% for i in Appointments%}
             
           <tr>
@@ -77,7 +77,11 @@
             </tr>
           <tr>
           {% endfor %}
-          
+        
+          {% else %} 
+        </table>
+          <span  style="font-size:18px; font-weight:bold;margin:0 auto;text-align:center;display:block;">No Appointments</span>
+          {% endif %}
             
         </table>
       </div>
