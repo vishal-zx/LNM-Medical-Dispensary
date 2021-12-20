@@ -103,10 +103,11 @@ def checkAppointment(request):
     appointment=Appointment.objects.all()
     Appointments=[{}]
     sr=1
-    
+    user=request.user
     for i in appointment:
-        Appointments.insert(sr-1,{'sr':sr,'Timings':i.Timings,'name':Patient.objects.get(Pid=i.Pid.Pid).name,'mailid':i.mailid})
-        sr=sr+1
+        if i.Did.Did==user.id:
+            Appointments.insert(sr-1,{'sr':sr,'Timings':i.Timings,'name':Patient.objects.get(Pid=i.Pid.Pid).name,'mailid':i.mailid})
+            sr=sr+1
     Appointments.pop()
     print(len(Appointments))  
     
