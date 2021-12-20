@@ -77,12 +77,10 @@ def scheduleTest(request):
     return render(request, 'scheduleTest.html')
 
 
-def patientHistory(request):
-    return render(request, 'PatientHistory.html')
+#def patientHistory(request):
+ #   return render(request, 'PatientHistory.html')
 
 
-def viewPatientHistory(request):
-    return render(request, 'viewPatientHistory.html')
 
 
 def viewPatientHistory(request):
@@ -111,6 +109,8 @@ def checkAppointment(request):
         sr=sr+1
     Appointments.pop()
     print(len(Appointments))  
+    
+    #print(request.GET['cancel'])
     #patient=Patient.objects.get()
     return render(request, 'checkAppointment.html',{'Appointments': Appointments})
 
@@ -143,13 +143,8 @@ def issueMedicine(request):
 @login_required(login_url='/login/')
 def RequestAppointment(request):
     current_user = request.user
-    print (current_user.id)
+    id=current_user.id-2
 
-    try:
-        name = request.GET["P_name"]
-        
-    except MultiValueDictKeyError:
-        name = False
     try:
         doctor=request.GET["D_name"]
     except MultiValueDictKeyError:
@@ -163,7 +158,7 @@ def RequestAppointment(request):
     except MultiValueDictKeyError:
         Mailid = False
     
-    pid=Patient.objects.get(name=name)
+    pid=Patient.objects.get(Pid=id)
     
     did=Doctor.objects.get(name=doctor)
     print(pid)
@@ -204,3 +199,17 @@ def updatepatient(request):
     p.gender=gender
     p.save()
     return render(request,'UpdatepatientProfile.html')
+
+
+# pateint history
+def patientHistory(request):
+    my_history=PatientHistory.objects.filter(Pid=request.user.id)
+    print(request.user.id)
+        
+    context={'my_his':my_history}
+    return render(request, 'PatientHistory.html',context)
+
+
+# schedule test
+def TestSchedule(request):
+    return render(request,'TestSchedule.html')

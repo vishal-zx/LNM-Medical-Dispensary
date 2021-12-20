@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.deletion import CASCADE
+import datetime
 
 # Create your models here.
 
@@ -75,6 +76,20 @@ class Appointment(models.Model):
     Did=models.ForeignKey(Doctor,on_delete=CASCADE)
     Timings=models.CharField(max_length=20)
     mailid=models.CharField(max_length=20)
-    isApproved= models.BooleanField('IsApproved', default=False)
+    isApproved= models.BooleanField('IsApproved', default=True)
     
+class PatientHistory(models.Model):
+    Aid=models.ForeignKey(Appointment,on_delete=CASCADE)
+    Pid=models.ForeignKey(Patient,on_delete=CASCADE)
+    Description=models.TextField()
+
+class Medicine(models.Model):
+    Mid=models.IntegerField(primary_key=True)
+    Name=models.CharField(max_length=50, null=False)
+    Type=models.CharField(max_length=50, null=False)
+    Quantity=models.IntegerField(default=1000)
+    Usage=models.IntegerField(default=0)
+    Supplier=models.CharField(max_length=30)
+    PurchaseDate=models.DateField(("Date"),default=datetime.date.today)
+    ExpiryDate=models.DateField()
     
