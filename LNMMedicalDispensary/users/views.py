@@ -121,6 +121,17 @@ def Treatment(request):
 
 
 def DoctorProfile(request):
+    # doctor=Doctor.objects.all()
+    # profile={}
+    # sr=1
+    user=request.user
+    # for i in doctor:
+    #     if i.Did==user.id:
+    #         profile[sr]={'sr':sr,'name':i.name,'did':i.Did,'age':i.age,'Gender':i.gender,'address':i.address}
+    #         sr=sr+1
+    #profile.pop()
+    print(user.id)
+    #profile=Doctor.objects.get(Did=user.id)
     return render(request, 'DoctorProfile.html')
 
 
@@ -259,10 +270,21 @@ def updatepatient(request):
 
 # pateint history
 def patientHistory(request):
-    my_history=PatientHistory.objects.filter(Pid=request.user.id-2)
-    print(request.user.id)
+    print(request.user.id-2)
+    my_history=None
+    pat=None
+    if request.user.patient==True:
+        my_history=PatientHistory.objects.filter(Pid=request.user.id-2)
         
-    context={'my_his':my_history}
+        pat=Patient.objects.get(Pid=request.user.id-2)
+    else:
+        id=request.GET['patid']
+        my_history=PatientHistory.objects.filter(Pid=id)
+        pat=Patient.objects.get(Pid=id)
+   
+    #print(request.user.id)
+    
+    context={'my_his':my_history,'my_pat':pat}
     return render(request, 'PatientHistory.html',context)
 
 
