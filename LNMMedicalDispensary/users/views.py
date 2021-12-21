@@ -136,6 +136,7 @@ def DoctorProfile(request):
 
 
 def ChemistProfile(request):
+    
     return render(request, 'chemistProfile.html')
 
 

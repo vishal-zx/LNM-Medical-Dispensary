@@ -72,6 +72,10 @@ class IssueMedicineForm(ModelForm):
         model = MedicineIssued
         fields = '__all__'
 
+# class ChemistForm(ModelForm):
+#     class Meta:
+#         model = Chemist
+#         fileds = '__all__'
 # class IssueMedicineForm(forms.Form):
 #     patientID = forms.IntegerField()
 #     medicineID = forms.IntegerField()
