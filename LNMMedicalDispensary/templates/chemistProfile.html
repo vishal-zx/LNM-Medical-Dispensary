@@ -57,7 +57,7 @@
     <div>
       <div class="pc1rc glass" style="height:510px">
         <div style="font-size:20px; text-align: left; font-weight: bolder;">
-          Username: <input type="text" name="username" id="username">
+          <!-- Username: <input type="text" name="username" id="username">
           <br>
           <br>
           Name: <input type="text" name="name" id="name"> &nbsp;&nbsp;
@@ -70,7 +70,19 @@
             <option value="item-2">Female</option>
           </select>
           <br>
-          <br>
+          <br> -->
+          <form class="form" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}  
+
+            {% for field in form %}
+            <!-- Input:Text -->
+            <div class="form__field">
+                <label for="formInput#text">{{field.label}}</label>
+                {{field}}
+            </div>
+            {% endfor %}
+            <!-- <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" /> -->
+        </form>
           <div style="margin-left: 80px;"><button type="button" class="btn btn-success">Update Profile</button></div>
         </div>
       </div>

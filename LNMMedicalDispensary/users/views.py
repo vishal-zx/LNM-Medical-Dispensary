@@ -137,7 +137,17 @@ def DoctorProfile(request):
 
 
 def ChemistProfile(request):
-    return render(request, 'chemistProfile.html')
+    user = request.user
+    form = ChemistForm(instance = user)
+    if request.method == 'POST':
+        form = ChemistForm(request.POST, request.FILES, instance=user) #The request.POST data will be send to the project instance
+        if form.is_valid():
+            form.save() #IT will modify the project
+            #signal for profile updated to be put
+            return redirect('chemistProfile') #user will be redirected to the projects page
+    
+    context = {'form' : form, 'user' : user}
+    return render(request, 'chemistProfile.html', context)
 
 
 def checkMedicine(request):
