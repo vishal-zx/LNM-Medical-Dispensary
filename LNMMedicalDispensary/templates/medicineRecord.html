@@ -62,48 +62,19 @@
           <th>Usage</th>
           <th>Quantity</th>
         </tr>
-        <tr>
-          <td>1</td>
-          <td>Paracetamol</td>
-          <td>Tablet </td>
-          <td>21-11-2021</td>
-          <td>16-10-2022</td>
-          <td>Zeelab pharmacy</td>
-          <td>Reduce fever </td>
-          <td>250 </td>
-        </tr>
-
-        <tr>
-          <td>2</td>
-          <td>Paracetamol</td>
-          <td>Tablet </td>
-          <td>21-11-2021</td>
-          <td>16-10-2022</td>
-          <td>Zeelab pharmacy</td>
-          <td>Reduce fever </td>
-          <td>250 </td>
-        </tr>
-        <tr>
-          <td>3</td>
-          <td>Paracetamol</td>
-          <td>Tablet </td>
-          <td>21-11-2021</td>
-          <td>16-10-2022</td>
-          <td>Zeelab pharmacy</td>
-          <td>Reduce fever </td>
-          <td>250 </td>
-        </tr>
-
-        <tr>
-          <td>4</td>
-          <td>Paracetamol</td>
-          <td>Tablet </td>
-          <td>21-11-2021</td>
-          <td>16-10-2022</td>
-          <td>Zeelab pharmacy</td>
-          <td>Reduce fever </td>
-          <td>250 </td>
-        </tr>
+        {% for medicine in medicines %}
+          <tr>
+            <td>{{medicine.Mid}}</td>
+            <td>{{medicine.Name}}</td>
+            <td>{{medicine.Type}}</td> </td>
+            <td>{{medicine.PurchaseDate}}</td>
+            <td>{{medicine.ExpiryDate}}</td>
+            <td>{{medicine.Supplier}}</td>
+            <td>{{medicine.Usage}}</td>
+            <td>{{medicine.Quantity}}</td>
+          </tr>
+          {% endfor %}
+        
       </table>
     </div>
     <div style="margin-left: 300px; margin-top:50px"><button type="button" class="btn btn-success">Download Report</button></div>

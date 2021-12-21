@@ -129,15 +129,70 @@ def ChemistProfile(request):
 
 
 def checkMedicine(request):
-    return render(request, 'checkMedicine.html')
+    form = MedicineForm()
+    medicine = Medicine.objects.all()
+    if request.method == 'POST':
+       # print(request.POST)  # So we see its a dictionary of attributes of project and its details
+        form = MedicineForm(request.POST, request.FILES)
+        # if form.is_valid():
+            #form.save()
+        return redirect('updateMedicine', request.POST['Mid']) #user will be redirected to the projects page
+    
+    context = {'form' : form, 'medicines' : medicine}
+    return render(request, 'checkMedicine.html', context)
+
+def updateMedicine(request, pk):
+    current_medicine = Medicine.objects.get(Mid=pk)
+    medicine = Medicine.objects.all()
+    # print(medicine)
+    form = MedicineInstance(instance=current_medicine)
+    if request.method == 'POST':
+        form = MedicineInstance(request.POST, request.FILES, instance=current_medicine) #The request.POST data will be send to the project instance
+        if form.is_valid():
+            form.save() #IT will modify the project
+            return redirect('checkMedicine') #user will be redirected to the projects page
+    context = {'form':form, 'medicines' : medicine}
+    return render(request, "updateMedicine.html", context)
 
 
 def MedicineRecord(request):
-    return render(request, 'medicineRecord.html')
+    medicine = MedicineIssued.objects.all()
+    # for i in medicine:
+    print(medicine)
+    context = {'medicines' : medicine}
+
+    return render(request, 'medicineRecord.html', context)
 
 
 def issueMedicine(request):
-    return render(request, 'issueMedicine.html')
+    form = IssueMedicineForm()
+    if request.method == 'POST':
+       # print(request.POST)  # So we see its a dictionary of attributes of project and its details
+        form = IssueMedicineForm(request.POST, request.FILES)
+        # if form.is_valid():
+        try:
+            med = request.POST['medicine']
+        except MultiValueDictKeyError:
+            med = False
+        medicine = Medicine.objects.get(Mid = med)
+        Qy = int(medicine.Quantity)
+        try:
+            qy = int(request.POST['quantity'])
+        except MultiValueDictKeyError:
+            qy = False
+        
+        if Qy >= qy:
+            medicine.Quantity = Qy - qy
+            medicine.save()
+            form.save()
+            # Signal for medicine issued
+        else:
+            print('Hello')
+            #signal for wrong quantity input
+        redirect('issueMedicine')
+    
+    context = {'form' : form}
+    return render(request, 'issueMedicine.html', context)
 
 
 # appointment booking 
@@ -214,3 +269,70 @@ def patientHistory(request):
 # schedule test
 def TestSchedule(request):
     return render(request,'TestSchedule.html')
+
+
+    # current_medicine = request.Medicine
+    
+    # mid=current_medicine.Mid
+    # name=current_medicine.Name
+    # type=current_medicine.Type
+    # quantity=current_medicine.Quantity
+    # usage=current_medicine.Usage
+    # supplier=current_medicine.Supplier
+    # purchaseDate=current_medicine.PurchaseDate
+    # expiryDate=current_medicine.ExpiryDate
+    
+    # print(current_medicine)
+    # print(mid)
+
+    # try:
+    #     name = request.GET["Name"]
+        
+    # except MultiValueDictKeyError:
+    #     name = False
+    # try:
+    #     type = request.GET["Type"]
+        
+    # except MultiValueDictKeyError:
+    #     type = False
+    # try:
+    #     quantity = request.GET["Quantity"]
+        
+    # except MultiValueDictKeyError:
+    #     quantity = False
+    
+    # try:
+    #     usage = request.GET["Usage"]
+        
+    # except MultiValueDictKeyError:
+    #     usage = False
+
+    # try:
+    #     supplier = request.GET["Supplier"]
+        
+    # except MultiValueDictKeyError:
+    #     supplier = False
+    
+    # try:
+    #     purchaseDate = request.GET["PurchaseDate"]
+        
+    # except MultiValueDictKeyError:
+    #     purchaseDate = False
+    
+    # try:
+    #     expiryDate = request.GET["ExpiryDate"]
+        
+    # except MultiValueDictKeyError:
+    #     expiryDate = False
+        
+    # p=Medicine.objects.get(Mid=mid)   
+    # p.Name=name
+    # p.Type=type
+    # p.Quantity=quantity
+    # p.Usage=usage
+    # p.Supplier=supplier
+    # p.PurchaseDate=purchaseDate
+    # p.ExpiryDate=expiryDate
+    # p.save()
+    # return render(request,'checkMedicine.html')
+

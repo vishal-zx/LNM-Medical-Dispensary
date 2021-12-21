@@ -56,17 +56,32 @@
             &nbsp;&nbsp;
             <label>Medicine ID</label>
             <input type="number" value="" class="input-xlarge">&nbsp;
+            <label>Medicine Name</label>
+            <input type="text" value="" class="input-xlarge">&nbsp;
+            <label>New Quantity</label>
+            <input type="number" value="" class="input-xlarge">&nbsp;
+            <label>Supplier</label>
+            <input type="text" value="" class="input-xlarge">&nbsp;
+            <label>Purchase Date</label>
+            <input type="date" value="" class="input-xlarge">&nbsp;
+            <label>Expiry Date</label>
+            <input type="date" value="" class="input-xlarge">&nbsp;
             <div style="margin-left: 900px; margin-top:50px">
-               <button class="btn btn-primary"><a href="updateMedicine.html" style="color:white; text-decoration: none;">Update</a></button>
-              <button class="btn btn-primary"><a href="% url 'updateMedicine' id %" style="color:white; text-decoration: none;">Update</a></button>
+              <button class="btn btn-primary">Update</button>
             </div>
           </form> -->
-          <form method="POST" action = "">
-            {% csrf_token %}
-              {{form}}
-              <input type = "submit">
-              <!-- return redirect('updateMedicine') -->
-          </form>
+          <form class="form" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}  
+
+            {% for field in form %}
+            <!-- Input:Text -->
+            <div class="form__field">
+                <label for="formInput#text">{{field.label}}</label>
+                {{field}}
+            </div>
+            {% endfor %}
+            <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+        </form>
         </div>
     
       </div>
@@ -75,29 +90,28 @@
       <br>
       <div>
         <table style="margin-left:60px; ">
-          <tr>
-            <th>Mid</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Purchase Date</th>
-            <th>Expiry Date</th>
-            <th>Supplier</th>
-            <th>Usage</th>
-            <th>Quantity</th>
-          </tr>
-          {% for medicine in medicines%}
-          <tr>
-            <td>{{medicine.Mid}}</td>
-            <td>{{medicine.Name}}</td>
-            <td>{{medicine.Type}}</td> </td>
-            <td>{{medicine.PurchaseDate}}</td>
-            <td>{{medicine.ExpiryDate}}</td>
-            <td>{{medicine.Supplier}}</td>
-            <td>{{medicine.Usage}}</td>
-            <td>{{medicine.Quantity}}</td>
-          </tr>
-          {% endfor %}
-          
+            <tr>
+                <th>Mid</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Purchase Date</th>
+                <th>Expiry Date</th>
+                <th>Supplier</th>
+                <th>Usage</th>
+                <th>Quantity</th>
+              </tr>
+              {% for medicine in medicines%}
+              <tr>
+                <td>{{medicine.Mid}}</td>
+                <td>{{medicine.Name}}</td>
+                <td>{{medicine.Type}}</td> </td>
+                <td>{{medicine.PurchaseDate}}</td>
+                <td>{{medicine.ExpiryDate}}</td>
+                <td>{{medicine.Supplier}}</td>
+                <td>{{medicine.Usage}}</td>
+                <td>{{medicine.Quantity}}</td>
+              </tr>
+              {% endfor %}
         </table>
       </div>
   </div>

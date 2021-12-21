@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.db.models.deletion import CASCADE
-import datetime
+import datetime 
 
 # Create your models here.
 
@@ -35,7 +35,10 @@ class Patient(models.Model):
         choices=GENDERCHOICE,
         default='M',
     )
-
+    def __str__(self):
+        # template = '{self}'
+        # return self.name, self.Pid
+        return 'id : {} Name : {}'.format(self.Pid, self.name)
 
 class Doctor(models.Model):
     GENDERCHOICE = (
@@ -82,6 +85,8 @@ class PatientHistory(models.Model):
     Aid=models.ForeignKey(Appointment,on_delete=CASCADE)
     Pid=models.ForeignKey(Patient,on_delete=CASCADE)
     Description=models.TextField()
+    # def __str__(self):
+    #     return str(self.Aid, self.Pid)
 
 class Medicine(models.Model):
     Mid=models.IntegerField(primary_key=True)
@@ -92,4 +97,18 @@ class Medicine(models.Model):
     Supplier=models.CharField(max_length=30)
     PurchaseDate=models.DateField(("Date"),default=datetime.date.today)
     ExpiryDate=models.DateField()
+
+    def __str__(self):
+        return 'id : {} Name : {}'.format(self.Mid, self.Name)
+
+
+
     
+class MedicineIssued(models.Model):
+    patient = models.ForeignKey(Patient, on_delete=models.SET_NULL, null=True)
+    medicine = models.ForeignKey(Medicine, on_delete=models.SET_NULL, null=True)
+    quantity = models.IntegerField()
+    prescription = models.TextField()
+    date = models.DateField(("Date"),default=datetime.date.today)
+
+

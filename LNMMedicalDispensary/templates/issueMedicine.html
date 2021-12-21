@@ -61,7 +61,7 @@
           <br>
           <div id="myTabContent" class="tab-content">
             <div class="tab-pane active in " id="home">
-              <form id="tab">
+              <!-- <form id="tab">
                 <label>Patient Id: &nbsp;</label>
                 <input type="number" value="" class="input-xlarge"> &emsp; &emsp;
                 <label>Medicine Id: &nbsp;</label>
@@ -77,6 +77,12 @@
                 <div>
                   <button class="btn btn-primary" style="margin-left:50px">Issue Medicine</button>
                 </div>
+              </form> -->
+              <form method="POST" action = "">
+                {% csrf_token %}
+                  {{form.as_ul}}
+                  <input type = "submit">
+                  <!-- return redirect('updateMedicine') -->
               </form>
             </div>
           </div>
