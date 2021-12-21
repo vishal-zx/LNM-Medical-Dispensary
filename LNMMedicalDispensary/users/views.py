@@ -204,7 +204,7 @@ def updatepatient(request):
 
 # pateint history
 def patientHistory(request):
-    my_history=PatientHistory.objects.filter(Pid=request.user.id)
+    my_history=PatientHistory.objects.filter(Pid=request.user.id-2)
     print(request.user.id)
         
     context={'my_his':my_history}
