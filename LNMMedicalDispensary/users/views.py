@@ -241,7 +241,7 @@ def RequestAppointment(request):
 def updatepatient(request):
     current_user = request.user
     
-    pid=current_user.id-2
+    pid=current_user.id
     print(current_user)
     print(pid)
 
