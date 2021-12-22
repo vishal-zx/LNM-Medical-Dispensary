@@ -175,10 +175,8 @@
                 </div>
                 <div class="col-75">
                     <select id="doctor" name="doctor">
-                        <option value="chand">chand</option>
-                        <option value="item-2">Doctor2</option>
                         {%for doctor in doctorChoices%}
-                        <option value="{{doctor.Did}}">{{doctor.username}}</option>
+                        <option value={{doctor.Uid}}>{{doctor.name}}</option>
                         {%endfor%}
                       </select>
                 </div>

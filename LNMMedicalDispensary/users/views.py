@@ -105,6 +105,13 @@ def MedicalCertificate(request):
 
 def feedback(request):
 
+    
+
+    print("Feedback page")
+    doctorChoices = Doctor.objects.all()
+    for doctor in doctorChoices:
+        print(doctor)
+
     if request.method == 'POST' :
         try:
             doctorid=request.POST["doctor"]
@@ -115,16 +122,17 @@ def feedback(request):
             feedbackBody = False
         
         print("doctor ID = ", doctorid)
-        #print("mailID = ", mailID)
         print("feedback body = ", feedbackBody)
-        patient = Patient.objects.get(Pid=request.user.uid)
-        doctor = Doctor.objects.get(Did=doctorid)
+        patient = Patient.objects.get(Uid=request.user.Uid)
+        doctor = Doctor.objects.get(Uid=doctorid)
         feedbackInstance = Feedback.objects.create(doctor=doctor,patient=patient, feedback=feedbackBody)
 
         return redirect("patient")
 
     else: 
         doctorChoices = Doctor.objects.all()
+        for doctor in doctorChoices:
+            print(doctor)
         context = {'doctorChoices' : doctorChoices}
         return render(request, 'feedback.html', context)
 
@@ -138,8 +146,6 @@ def viewPatientHistory(request):
     return render(request, 'viewPatientHistory.html')
 
 
-def feedback(request):
-    return render(request, 'feedback.html')
 
 
 def patientProfile(request):
