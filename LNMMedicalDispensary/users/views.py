@@ -95,8 +95,8 @@ def MedicalCertificate(request):
         
         Pt=Patient.objects.get(Uid=id)
         print(Pt)
-        medical=MedicalCertificate(patient=Pt,doctor=dr,fromdate=request.POST["start"],todate=request.POST["end"],reason=Reason)
-        medical.save()
+        medical=Medicalcertificate.objects.create(patient=Pt,doctor=dr,fromdate=request.POST["start"],todate=request.POST["end"],reason=Reason)
+        
         print("success")
         return redirect('patient')
     else:
