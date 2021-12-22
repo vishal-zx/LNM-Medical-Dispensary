@@ -177,9 +177,9 @@ def updateMedicine(request, pk):
 
 
 def MedicineRecord(request):
-    medicine = MedicineIssued.objects.all()
+    medicine = Medicine.objects.all()
     # for i in medicine:
-    print(medicine)
+    # print(medicine)
     context = {'medicines' : medicine}
 
     return render(request, 'medicineRecord.html', context)
