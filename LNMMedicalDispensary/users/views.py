@@ -11,7 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.datastructures import MultiValueDictKeyError
 #from user_profile.models import UserProfile
 # Create your views here.
-
+from django.contrib import messages     #for flash messages
 
 def index(request):
     return render(request, 'index.html')
@@ -205,6 +205,7 @@ def ChemistProfile(request):
         form = ChemistForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()  # IT will modify the project
+            messages.success(request, 'Chemist Profile Updated Successfully')
             # signal for profile updated to be put
             # user will be redirected to the projects page
             return redirect('chemistProfile')
@@ -237,8 +238,9 @@ def addMedicine(request):
             expiryDate = False
         
         medicine = Medicine.objects.create(Name=name, Type=type, Quantity=quantity, Usage=usage, Supplier=supplier, PurchaseDate=purchaseDate, ExpiryDate=expiryDate)
-        # flashg message for medicine added succefully
-        return redirect('addMedicine')
+        # flash message for medicine added succefully
+        messages.success(request, 'Medicine Added Successfully')
+        return redirect('chemist')
     context = {'form': form}
     return render(request, 'addMedicine.html', context)
 
@@ -263,6 +265,7 @@ def checkMedicine(request):
         except Medicine.DoesNotExist:
             trialmed = False
             # Flash message to be added
+            messages.error(request, 'No such medicine found')
             print('no such medicine found')
             return redirect('checkMedicine')
 
@@ -290,6 +293,7 @@ def updateMedicine(request, pk):
             form.save()  # IT will modify the project
             # user will be redirected to the projects page
             #flash message medicine added successfully
+            messages.success(request, 'Updated Successfully')
             return redirect('chemist')
     context = {'form': form, 'medicines': medicine}
     return render(request, "updateMedicine.html", context)
@@ -325,9 +329,11 @@ def issueMedicine(request):
             medicine.Quantity = Qy - qy
             medicine.save()
             form.save()
+            messages.success(request, 'Medicine issued successfully')
             # Signal for medicine issued
         else:
             print('Hello')
+            messages.error(request, 'Invalid Quantity')
             # signal for wrong quantity input
         redirect('issueMedicine')
 
