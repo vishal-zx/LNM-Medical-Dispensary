@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{% static 'css/patientStyle.css' %}" type="text/css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
     <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-    <title>Schedule a Test</title>
+    <title>Medical Certificate</title>
 </head>
 
 <body>
@@ -57,11 +57,12 @@
         <div>
             <div class="pc1rc glass" style="height:510px">
                 <div style="font-size:22px; text-align: left; font-weight: bolder;">
-                    <form action=" http://127.0.0.1:8000/MedicalCerticate/" method='POST'>
+                    <form action="{%url 'MedicalCertificate' %}" method='POST'>
+                        {% csrf_token %}
                     <label for="bloodgroups">Doctor:&nbsp;</label>
                     <select id="doctor" name="doctor">
-                      {% for doctor in doctors: %}                   
-                             <option value={{doctor.username}}>{{doctor.username}}</option>
+                      {% for doctor in doctors %}                   
+                             <option value={{doctor}}>{{doctor.name}}</option>
                         {% endfor %}
                     </select>
                     <br>
@@ -72,6 +73,12 @@
                     <br>
                     <label for="testItems">To :&nbsp;</label>
                     <input type="date" id="meeting-time" name="end" value="2018-08-12">
+                    <br>
+                    <br>
+                    <label for="testItems">Reason :&nbsp;</label>
+                    <input type="text" id="meeting-time" name="reason">
+                    <br>
+                    <br>
                     
                     <div style="margin-left: 80px;"><input type="submit" value="Submit"></div>
                 </form>

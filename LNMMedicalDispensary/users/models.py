@@ -145,8 +145,8 @@ class MedicineIssued(models.Model):
     
     
 class MedicalCertificate(models.Model):
-    Pid=models.ForeignKey(Patient,on_delete=CASCADE)
-    Did=models.ForeignKey(Doctor,on_delete=CASCADE)
+    patient=models.ForeignKey(Patient,on_delete=CASCADE)
+    doctor=models.ForeignKey(Doctor,on_delete=CASCADE)
     
     reason = models.TextField()
     fromdate = models.DateField(("Date"),default=datetime.date.today)

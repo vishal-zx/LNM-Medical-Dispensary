@@ -80,37 +80,34 @@ def patient(request):
 
 
 def MedicalCertificate(request):
-    doctor= Doctor.objects.all()
-    for i in Doctor.objects.all():
-       print(i)
+    
     current_user = request.user
     id=current_user.Uid
-
-    try:
-        doctorid=request.POST["doctor"]
-    except MultiValueDictKeyError:
-        doctorid = False
-    
-    print(id)
-    
-    context = { 'doctors' : doctor}
-    pid=Patient.objects.get(Uid=id)
-    
-    did=Doctor.objects.get(name=doctorid)
-    medical=MedicalCertificate(Pid=pid,Did=did,fromdate=request.POST["start"],todate=request.POST["end"],reason=request.POST["reason"])
-    medical.save()
-    print("success")
-    return render(request, 'MedicalCertificate.html', context)
+    if request.method == 'POST' :
+        try:
+            dr=request.POST["doctor"]
+            Reason=request.POST["reason"]
+        except MultiValueDictKeyError:
+            dr= False
+            Reason=False
+       
+        
+        
+        Pt=Patient.objects.get(Uid=id)
+        print(Pt)
+        medical=MedicalCertificate(patient=Pt,doctor=dr,fromdate=request.POST["start"],todate=request.POST["end"],reason=Reason)
+        medical.save()
+        print("success")
+        return redirect('patient')
+    else:
+        doctor= Doctor.objects.all()
+        
+        context = { 'doctors' : doctor}
+       
+        return render(request, 'MedicalCertificate.html', context)
 
 
 def feedback(request):
-
-    
-
-    print("Feedback page")
-    doctorChoices = Doctor.objects.all()
-    for doctor in doctorChoices:
-        print(doctor)
 
     if request.method == 'POST' :
         try:
@@ -122,17 +119,16 @@ def feedback(request):
             feedbackBody = False
         
         print("doctor ID = ", doctorid)
+        #print("mailID = ", mailID)
         print("feedback body = ", feedbackBody)
-        patient = Patient.objects.get(Uid=request.user.Uid)
-        doctor = Doctor.objects.get(Uid=doctorid)
+        patient = Patient.objects.get(Pid=request.user.uid)
+        doctor = Doctor.objects.get(Did=doctorid)
         feedbackInstance = Feedback.objects.create(doctor=doctor,patient=patient, feedback=feedbackBody)
 
         return redirect("patient")
 
     else: 
         doctorChoices = Doctor.objects.all()
-        for doctor in doctorChoices:
-            print(doctor)
         context = {'doctorChoices' : doctorChoices}
         return render(request, 'feedback.html', context)
 
@@ -146,6 +142,8 @@ def viewPatientHistory(request):
     return render(request, 'viewPatientHistory.html')
 
 
+def feedback(request):
+    return render(request, 'feedback.html')
 
 
 def patientProfile(request):
