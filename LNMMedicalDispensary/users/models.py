@@ -215,9 +215,9 @@ def createDocChem(sender, instance, created, **kwargs):
                 doctor = None
 
             if doctor is not None:
-                doctor.name = user.first_name + ' ' + user.last_name,
-                doctor.age = user.age,
-                doctor.gender = user.gender,
+                doctor.name = user.first_name + ' ' + user.last_name
+                doctor.age = user.age
+                doctor.gender = user.gender
                 doctor.save()
             else:
                 doctor = Doctor.objects.create(
@@ -242,9 +242,9 @@ def createDocChem(sender, instance, created, **kwargs):
             print('BYE')
             print(chemist)
             if chemist is not None:
-                chemist.name = user.first_name + ' ' + user.last_name,
-                chemist.age = user.age,
-                chemist.gender = user.gender,
+                chemist.name = user.first_name + ' ' + user.last_name
+                chemist.age = user.age
+                chemist.gender = user.gender
                 chemist.save()
             else:
                 chemist = Chemist.objects.create(
@@ -265,9 +265,9 @@ def createDocChem(sender, instance, created, **kwargs):
             except Patient.DoesNotExist:
                 patient = None
             if patient is not None:
-                patient.name = user.first_name + ' ' + user.last_name,
-                patient.age = user.age,
-                patient.gender = user.gender,
+                patient.name = user.first_name + ' ' + user.last_name
+                patient.age = user.age
+                patient.gender = user.gender
                 patient.phonenumber = user.phonenumber
                 patient.save()
             else:
