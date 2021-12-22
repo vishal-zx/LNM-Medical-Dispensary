@@ -32,7 +32,7 @@ class User(AbstractUser):
         default='M',
     )
     Uid = models.UUIDField(default=uuid.uuid4, unique=True, editable = False)
-    phonenumber = models.BigIntegerField(null=True)
+    phonenumber = models.BigIntegerField(null=True, blank = True)
     is_doctor = models.BooleanField('Is doctor', default=False)
     patient = models.BooleanField('Is patient', default=False)
     is_chemist = models.BooleanField('Is chemist', default=False)
@@ -76,7 +76,7 @@ class Doctor(models.Model):
     address = models.TextField()
     schedule = models.TextField(null=False)
     speciality = models.CharField(max_length=20)
-    phonenumber = models.BigIntegerField(null=True)
+    phonenumber = models.BigIntegerField(null=True, blank = True)
 
     def __str__(self):
         return 'Did : {} Name : {}'.format(self.Did, self.name)
@@ -92,7 +92,7 @@ class Chemist(models.Model):
     Cid = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20, null=False)
     age = models.IntegerField(null=False)
-    phonenumber = models.BigIntegerField(null = True)
+    phonenumber = models.BigIntegerField(null = True, blank = True)
     gender = models.CharField(
         max_length=1,
         choices=GENDERCHOICE,
