@@ -24,11 +24,10 @@ def register(request):
 
         if form.is_valid():
             user = form.save()
-            
-           
+
            # p=patient.objects.get(name=user.name)
-            #p.Pid=user.Uid
-            #p.save()
+            # p.Pid=user.Uid
+            # p.save()
             msg = 'user created'
             # patient = Patient( name=user.username, age=user.age, gender=user.gender)
             # patient.save()
@@ -79,59 +78,64 @@ def patient(request):
     return render(request, 'patient.html')
 
 
-def MedicalCertificate(request):
-    
+def MedicalCertificateFunction(request):
+
     current_user = request.user
-    id=current_user.Uid
-    if request.method == 'POST' :
+    id = current_user.Uid
+    if request.method == 'POST':
         try:
-            dr=request.POST["doctor"]
-            Reason=request.POST["reason"]
+            dr = request.POST["doctor"]
+            Reason = request.POST["reason"]
+            fromdate = request.POST["start"]
+            todate = request.POST["end"]
         except MultiValueDictKeyError:
-            dr= False
-            Reason=False
-       
-        
-        
-        Pt=Patient.objects.get(Uid=id)
+            dr = False
+            Reason = False
+            fromdate = False
+            todate = False
+
+        doctorInstance = Doctor.objects.get(Uid=dr)
+        Pt = Patient.objects.get(Uid=id)
         print(Pt)
-        medical=MedicalCertificate(patient=Pt,doctor=dr,fromdate=request.POST["start"],todate=request.POST["end"],reason=Reason)
-        medical.save()
+        print(doctorInstance)
+        medical = Medicalcertificate.objects.create(
+            patient=Pt, doctor=doctorInstance, fromdate=fromdate, todate=todate, reason=Reason)
         print("success")
         return redirect('patient')
     else:
-        doctor= Doctor.objects.all()
-        
-        context = { 'doctors' : doctor}
-       
+        doctor = Doctor.objects.all()
+        for d in doctor:
+            print(d.Uid)
+        context = {'doctors': doctor}
+
         return render(request, 'MedicalCertificate.html', context)
 
 
 def feedback(request):
 
-    if request.method == 'POST' :
+    if request.method == 'POST':
         try:
-            doctorid=request.POST["doctor"]
+            doctorid = request.POST["doctor"]
             feedbackBody = request.POST["subject"]
         except MultiValueDictKeyError:
             doctorid = False
             mailID = False
             feedbackBody = False
-        
+
         print("doctor ID = ", doctorid)
         #print("mailID = ", mailID)
         print("feedback body = ", feedbackBody)
         patient = Patient.objects.get(Uid=request.user.Uid)
         doctor = Doctor.objects.get(Uid=doctorid)
-        feedbackInstance = Feedback.objects.create(doctor=doctor,patient=patient, feedback=feedbackBody)
+        feedbackInstance = Feedback.objects.create(
+            doctor=doctor, patient=patient, feedback=feedbackBody)
 
         return redirect("patient")
-    
-    else: 
-        doctorChoices = Doctor.objects.all()
-        context = {'doctorChoices' : doctorChoices}
-        return render(request, 'feedback.html', context)
 
+    else:
+        doctorChoices = Doctor.objects.all()
+        context = {'doctorChoices': doctorChoices}
+        return render(request, 'feedback.html', context)
 
 
 # def patientHistory(request):
@@ -174,16 +178,16 @@ def Treatment(request):
 
 def DoctorProfile(request):
     user = request.user
-    print(user)
+    print(user.username)
     doctor = Doctor.objects.all()
     # sr = 1
     profile = [{}]
     for i in doctor:
-        if i.Did == user.Uid:
-            p = dict({'name': i.name, 'did': i.Did,
+        if i.Uid == user.Uid:
+            p = dict({'name': user.username, 'did': i.Did,
                       'age': i.age, 'Gender': i.gender, 'address': i.address, 'speciality': i.speciality, 'ph': i.phonenumber})
             profile.insert(0, p)
-            break
+            # break
     # profile.pop()
     # print(profile)
     # profile=Doctor.objects.get(Did=user.id)
@@ -381,9 +385,6 @@ def patientHistory(request):
 
     context = {'my_his': my_history, 'my_pat': pat}
     return render(request, 'PatientHistory.html', context)
-
-
-
 
 
 # schedule test
