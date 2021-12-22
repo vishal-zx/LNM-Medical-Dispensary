@@ -122,18 +122,21 @@ def Treatment(request):
 
 
 def DoctorProfile(request):
-    # doctor=Doctor.objects.all()
-    # profile={}
-    # sr=1
     user = request.user
-    # for i in doctor:
-    #     if i.Did==user.id:
-    #         profile[sr]={'sr':sr,'name':i.name,'did':i.Did,'age':i.age,'Gender':i.gender,'address':i.address}
-    #         sr=sr+1
+    print(user)
+    doctor = Doctor.objects.all()
+    # sr = 1
+    profile = [{}]
+    for i in doctor:
+        if i.Did == user.id:
+            p = dict({'name': i.name, 'did': i.Did,
+                      'age': i.age, 'Gender': i.gender, 'address': i.address, 'speciality': i.speciality, 'ph': i.phonenumber})
+            profile.insert(0, p)
+            break
     # profile.pop()
-    print(user.id)
+    # print(profile)
     # profile=Doctor.objects.get(Did=user.id)
-    return render(request, 'DoctorProfile.html')
+    return render(request, 'DoctorProfile.html', {'profile': profile[0]})
 
 
 def ChemistProfile(request):
