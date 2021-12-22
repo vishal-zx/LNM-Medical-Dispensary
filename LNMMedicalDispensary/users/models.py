@@ -144,10 +144,17 @@ class MedicineIssued(models.Model):
     date = models.DateField(("Date"),default=datetime.date.today)
     
     
+<<<<<<< HEAD
 class Medicalcertificate(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.SET_NULL, null=True)
     doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, null=True)
     MedicalID = models.AutoField(primary_key=True)
+=======
+class MedicalCertificate(models.Model):
+    patient=models.ForeignKey(Patient,on_delete=CASCADE)
+    doctor=models.ForeignKey(Doctor,on_delete=CASCADE)
+    medicalID = models.AutoField(primary_key=True)
+>>>>>>> 037c32cce6ab945eaba8e92f38e8f090e416126f
     reason = models.TextField()
     fromdate = models.DateField(("Date"),default=datetime.date.today)
     todate = models.DateField(("Date"),default=datetime.date.today)

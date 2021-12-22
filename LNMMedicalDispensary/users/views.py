@@ -79,7 +79,7 @@ def patient(request):
     return render(request, 'patient.html')
 
 
-def MedicalCertificate(request):
+def MedicalCertificateFunction(request):
     
     current_user = request.user
     id=current_user.Uid
@@ -87,21 +87,26 @@ def MedicalCertificate(request):
         try:
             dr=request.POST["doctor"]
             Reason=request.POST["reason"]
+            fromdate=request.POST["start"]
+            todate=request.POST["end"]
         except MultiValueDictKeyError:
             dr= False
             Reason=False
+            fromdate=False
+            todate=False
        
         
-        
+        doctorInstance = Doctor.objects.get(Uid=dr)
         Pt=Patient.objects.get(Uid=id)
         print(Pt)
-        medical=Medicalcertificate.objects.create(patient=Pt,doctor=dr,fromdate=request.POST["start"],todate=request.POST["end"],reason=Reason)
-        
+        print(doctorInstance)
+        medical=MedicalCertificate.objects.create(patient=Pt,doctor=doctorInstance,fromdate=fromdate,todate=todate,reason=Reason)
         print("success")
         return redirect('patient')
     else:
         doctor= Doctor.objects.all()
-        
+        for d in doctor:
+            print(d.Uid)
         context = { 'doctors' : doctor}
        
         return render(request, 'MedicalCertificate.html', context)
