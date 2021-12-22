@@ -167,16 +167,19 @@
     <br>
     <h2 style="margin-left: 44%;">FEEDBACK FORM</h2>
     <div class="container">
-        <form>
-           
+        <form method="POST" action="{%url 'feedback' %}">
+            {% csrf_token %}
             <div class="row">
                 <div class="col-25">
                     <label for="lname">Doctor's Name</label>
                 </div>
                 <div class="col-75">
-                    <select id="lname" name="D_name">
+                    <select id="doctor" name="doctor">
                         <option value="chand">chand</option>
                         <option value="item-2">Doctor2</option>
+                        {%for doctor in doctorChoices%}
+                        <option value="{{doctor.Did}}">{{doctor.username}}</option>
+                        {%endfor%}
                       </select>
                 </div>
             </div>
