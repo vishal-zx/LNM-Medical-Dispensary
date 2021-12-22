@@ -24,13 +24,11 @@ def register(request):
 
         if form.is_valid():
             user = form.save()
-            print(user.username)
-            o=User.objects.get(username=user.username)
-            o.uid=int(datetime.datetime.now().strftime('%Y%m%d%H%M%S%f'))%10000000000
-            o.save()
-            print(o.uid)
+            
+           
+            
             msg = 'user created'
-            patient = Patient(Pid=o.uid, name=user.username, age=user.age, gender=user.gender)
+            patient = Patient( name=user.username, age=user.age, gender=user.gender)
             patient.save()
             return redirect('login_view')
         else:
