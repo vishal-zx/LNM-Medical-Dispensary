@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> ef3940853de3ccddc26f9df17e986c9c91b36409
 from django.db import migrations
 
 
