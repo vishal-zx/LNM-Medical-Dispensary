@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="{% static 'css/patientStyle.css' %}" type="text/css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-  <title>Patient Homepage</title>
+  <title>Doctor Profile</title>
 </head>
 
 <body>
@@ -60,21 +60,21 @@
          <!-- Username: <input type="text" name="username" id="username" placeholder={{user.username}}>
           <br>
           <br>-->
-          Name: &nbsp;<input type="text" name="name" id="name" placeholder={{profile.name}}> &nbsp;&nbsp;<br><br>
-          Age: <input type="number" name="age" id="age" placeholder={{profile.age}}>
+          Name: &nbsp;<input type="text" name="name" id="name" value={{profile.name}}> &nbsp;&nbsp;<br><br>
+          Age: <input type="number" name="age" id="age" value={{profile.age}}>
           
           <label for="gender">Gender :&nbsp;</label>
-          <select id="gender">
+          <select id="gender" value={{profile.gender}}>
             <option value="item-1">Male</option>
             <option value="item-2">Female</option>
           </select>
           <br>
           <br>
-          Address: <input type="text" name="address" id="address" placeholder={{user.}}>
+          Address: <input type="text" name="address" id="address" value={{profile.address}}>
           <br>
           <br>
-          Speciality: <input type="text" name="speciality" id="speciality"> &nbsp;&nbsp;<br><br>
-          Phone Number: <input type="number" name="phno" id="phno">
+          Speciality: <input type="text" name="speciality" id="speciality" value={{profile.speciality}}> &nbsp;&nbsp;<br><br>
+          Phone Number: <input type="number" name="phno" id="phno" value={{profile.ph}}>
           <br>
           <br>
           <div style="margin-left: 80px;"><button type="button" class="btn btn-success">Update Profile</button></div>
