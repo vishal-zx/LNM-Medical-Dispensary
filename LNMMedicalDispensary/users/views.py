@@ -26,10 +26,12 @@ def register(request):
             user = form.save()
             
            
-            
+            p=patient.objects.get(name=user.name)
+            p.Pid=user.Uid
+            p.save()
             msg = 'user created'
-            patient = Patient( name=user.username, age=user.age, gender=user.gender)
-            patient.save()
+            # patient = Patient( name=user.username, age=user.age, gender=user.gender)
+            # patient.save()
             return redirect('login_view')
         else:
             msg = 'form is not valid'

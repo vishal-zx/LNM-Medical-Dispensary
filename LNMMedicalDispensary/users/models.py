@@ -48,6 +48,8 @@ class Patient(models.Model):
     Pid = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20, null=False)
     age = models.IntegerField(null=False)
+    phonenumber = models.BigIntegerField(null=True, blank = True)
+    Uid = models.UUIDField(null=True)
     gender = models.CharField(
         max_length=1,
         choices=GENDERCHOICE,
@@ -187,6 +189,17 @@ def createDocChem(sender, instance, created, **kwargs):
                 phonenumber = user.phonenumber,
             )
             chemist.save()
+        if user.patient:
+            print('Patient')
+            patient = Patient.objects.create(
+                Uid = user.Uid,
+                name = user.first_name + ' ' + user.last_name,
+                age = user.age,
+                gender = user.gender,
+                phonenumber = user.phonenumber,
+            )
+            patient.save()
+
     else:
         # user = instance
         print('Not created')
@@ -208,6 +221,16 @@ def createDocChem(sender, instance, created, **kwargs):
             chemist.age = user.age,
             chemist.gender = user.gender,
             chemist.save()
+        if user.patient:
+            print('Patient')
+            patient = Patient.objects.get(
+                Pid = user.Pid
+            )
+            patient.name = user.first_name + ' ' + user.last_name,
+            patient.age = user.age,
+            patient.gender = user.gender,
+            patient.phonenumber = user.phonenumber
+            patient.save()
 
 def deleteUser(sender, instance, **kwargs):
     user = User.objects.get(Uid = instance.Uid)
@@ -221,3 +244,4 @@ post_save.connect(createDocChem, sender = User, dispatch_uid="create_DocChem_ins
 
 post_delete.connect(deleteUser, sender = Doctor)
 post_delete.connect(deleteUser, sender = Chemist)
+post_delete.connect(deleteUser, sender = Patient)
