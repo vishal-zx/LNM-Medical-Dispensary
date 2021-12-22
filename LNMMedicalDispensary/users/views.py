@@ -53,7 +53,7 @@ def login_view(request):
                 login(request, user)
                 return redirect('doctor')
             elif user is not None and user.is_chemist:
-                print(user.name)
+                # print(user.name)
                 login(request, user)
                 return redirect('chemist')
             elif user is not None and user.patient:
