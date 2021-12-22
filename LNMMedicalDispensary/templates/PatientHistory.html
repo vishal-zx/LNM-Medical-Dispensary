@@ -48,18 +48,24 @@
   <div class="content">
     <div class="container-fluid glass">
       <div class="info">
-        
-            Name: {{my_pat.name}}
-            <br>
-            <br>
-            Age: {{my_pat.age}}
-            <br>
-            <br>
-            Gender: {{my_pat.gender}}
-              
-        
-
-        
+        {%if my_pat %}
+          Name: {{my_pat.name}}
+          <br>
+          <br>
+          Age: {{my_pat.age}}
+          <br>
+          <br>
+          Gender: 
+          {%if my_pat.gender == 'item-1' %}
+            M
+          {% elif my_pat.gender == 'item'%}
+            F
+          {% else %}
+            {{my_pat.gender}}
+          {% endif %}
+        {% else %}
+            No Patient Found!
+        {% endif %}
       </div>
       <div class="prescr">
         <br>
