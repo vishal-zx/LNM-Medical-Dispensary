@@ -92,7 +92,7 @@ class Chemist(models.Model):
     Uid = models.UUIDField(null=True)
     # Uid = models.ForeignKey(User,on_delete=CASCADE, null=True)
     Cid = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=20, null=False)
+    name = models.CharField(max_length=50, null=False)
     age = models.IntegerField(null=False)
     phonenumber = models.BigIntegerField(null = True, blank = True)
     gender = models.CharField(
@@ -200,37 +200,86 @@ def createDocChem(sender, instance, created, **kwargs):
             )
             patient.save()
 
-    """ else:
+    else:
         # user = instance
         print('Not created')
+        ui = user.Uid
         if user.is_doctor:
             print('Doctor')
-            doctor = Doctor.objects.get(
-                Did = user.Uid
-            )
-            doctor.name = user.first_name + ' ' + user.last_name,
-            doctor.age = user.age,
-            doctor.gender = user.gender,
-            doctor.save()
+            try:
+                doctor = Doctor.objects.get(
+                # Uid = user.Uid
+                Uid = ui
+                )
+            except Doctor.DoesNotExist:
+                doctor = None
+
+            if doctor is not None:
+                doctor.name = user.first_name + ' ' + user.last_name,
+                doctor.age = user.age,
+                doctor.gender = user.gender,
+                doctor.save()
+            else:
+                doctor = Doctor.objects.create(
+                # user = user,
+                # username = user.username,
+                Uid = user.Uid,
+                age=user.age,
+                name = user.first_name + ' ' + user.last_name,
+                gender = user.gender,
+                phonenumber = user.phonenumber,
+                )
+                doctor.save()
         if user.is_chemist:
             print('Chemist')
-            chemist = Chemist.objects.get(
-                Cid = user.Uid
-            )
-            chemist.name = user.first_name + ' ' + user.last_name,
-            chemist.age = user.age,
-            chemist.gender = user.gender,
-            chemist.save()
+            print('HI')
+            try:
+                chemist = Chemist.objects.get(
+                    Uid = user.Uid
+                )
+            except Chemist.DoesNotExist:
+                chemist = None
+            print('BYE')
+            print(chemist)
+            if chemist is not None:
+                chemist.name = user.first_name + ' ' + user.last_name,
+                chemist.age = user.age,
+                chemist.gender = user.gender,
+                chemist.save()
+            else:
+                chemist = Chemist.objects.create(
+                Uid = user.Uid,
+                name = user.first_name + ' ' + user.last_name,
+                age = user.age,
+                gender = user.gender,
+                phonenumber = user.phonenumber,
+                )
+                chemist.save()
+
         if user.patient:
             print('Patient')
-            patient = Patient.objects.get(
-                Pid = user.Pid
-            )
-            patient.name = user.first_name + ' ' + user.last_name,
-            patient.age = user.age,
-            patient.gender = user.gender,
-            patient.phonenumber = user.phonenumber
-            patient.save()  """
+            try:
+                patient = Patient.objects.get(
+                    Uid = user.Uid
+                )
+            except Patient.DoesNotExist:
+                patient = None
+            if patient is not None:
+                patient.name = user.first_name + ' ' + user.last_name,
+                patient.age = user.age,
+                patient.gender = user.gender,
+                patient.phonenumber = user.phonenumber
+                patient.save()
+            else:
+                patient = Patient.objects.create(
+                Uid = user.Uid,
+                name = user.first_name + ' ' + user.last_name,
+                age = user.age,
+                gender = user.gender,
+                phonenumber = user.phonenumber,
+                )
+                patient.save()
+
 
 def deleteUser(sender, instance, **kwargs):
     user = User.objects.get(Uid = instance.Uid)
