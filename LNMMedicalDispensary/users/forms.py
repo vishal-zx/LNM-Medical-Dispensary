@@ -1,8 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models.base import Model
-from .models import MedicineIssued, User
-from .models import Medicine
+from .models import Chemist, MedicineIssued, User, Medicine
 from django.forms import ModelForm  
 
 class LoginForm(forms.Form):
@@ -72,6 +71,10 @@ class IssueMedicineForm(ModelForm):
         model = MedicineIssued
         fields = '__all__'
 
+class ChemistForm(ModelForm):
+    class Meta:
+        model = Chemist
+        fields = '__all__'
 # class ChemistForm(ModelForm):
 #     class Meta:
 #         model = Chemist
