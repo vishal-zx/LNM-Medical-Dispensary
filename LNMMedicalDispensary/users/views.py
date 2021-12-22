@@ -24,9 +24,13 @@ def register(request):
 
         if form.is_valid():
             user = form.save()
+            print(user.username)
+            o=User.objects.get(username=user.username)
+            o.uid=int(datetime.datetime.now().strftime('%Y%m%d%H%M%S%f'))%10000000000
+            o.save()
+            print(o.uid)
             msg = 'user created'
-            patient = Patient(
-                Pid=request.user.id, name=user.username, age=user.age, gender=user.gender)
+            patient = Patient(Pid=o.uid, name=user.username, age=user.age, gender=user.gender)
             patient.save()
             return redirect('login_view')
         else:
@@ -75,8 +79,28 @@ def patient(request):
     return render(request, 'patient.html')
 
 
-def scheduleTest(request):
-    return render(request, 'scheduleTest.html')
+def MedicalCertificate(request):
+    doctor= Doctor.objects.all()
+    for i in Doctor.objects.all():
+       print(i)
+    current_user = request.user
+    id=current_user.uid
+
+    try:
+        doctorid=request.GET["doctor"]
+    except MultiValueDictKeyError:
+        doctorid = False
+    
+    print(doctorid)
+    
+    context = { 'doctors' : doctor}
+    pid=Patient.objects.get(Pid=id)
+    
+    did=Doctor.objects.get(name=doctorid)
+    medical=MedicalCertificate(Pid=pid,Did=did,fromdate=request.GET["start"],todate=request.GET["end"],reason=request.POST["reason"])
+    medical.save()
+    print("success")
+    return render(request, 'MedicalCertificate.html', context)
 
 
 # def patientHistory(request):
@@ -105,7 +129,7 @@ def checkAppointment(request):
     sr = 1
     user = request.user
     for i in appointment:
-        if i.Did.Did == user.id:
+        if i.Did.Did == user.uid:
             Appointments.insert(sr-1, {'sr': sr, 'Timings': i.Timings,
                                        'name': Patient.objects.get(Pid=i.Pid.Pid).name, 'mailid': i.mailid})
             sr = sr+1
@@ -231,7 +255,7 @@ def issueMedicine(request):
 @login_required(login_url='/login/')
 def RequestAppointment(request):
     current_user = request.user
-    id = current_user.id-2
+    id = current_user.uid
 
     try:
         doctor = request.GET["D_name"]
@@ -263,7 +287,7 @@ def RequestAppointment(request):
 def updatepatient(request):
     current_user = request.user
 
-    pid = current_user.id
+    pid = current_user.uid
     print(current_user)
     print(pid)
 
@@ -293,13 +317,13 @@ def updatepatient(request):
 
 # pateint history
 def patientHistory(request):
-    print(request.user.id-2)
+    print(request.user.uid)
     my_history = None
     pat = None
     if request.user.patient == True:
-        my_history = PatientHistory.objects.filter(Pid=request.user.id-2)
+        my_history = PatientHistory.objects.filter(Pid=request.user.uid)
 
-        pat = Patient.objects.get(Pid=request.user.id-2)
+        pat = Patient.objects.get(Pid=request.user.uid)
     else:
         id = request.GET['patid']
         my_history = PatientHistory.objects.filter(Pid=id)
@@ -312,8 +336,6 @@ def patientHistory(request):
 
 
 # schedule test
-def TestSchedule(request):
-    return render(request, 'TestSchedule.html')
 
     # current_medicine = request.Medicine
 
