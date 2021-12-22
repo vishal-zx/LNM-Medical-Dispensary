@@ -27,7 +27,7 @@
 
     <div class="logoutclass">
 
-        <span style="padding-right:50px; font-size:24px"><i class='fas fa-user' style='color:green'></i><span style="padding-right:10px; font-size:24px"></span> {{ user.username }} </span>
+        <a href="{% url 'ChemistProfile' %}"><span style="padding-right:50px; font-size:24px"><i class='fas fa-user' style='color:green'></i><span style="padding-right:10px; font-size:24px"></span> {{ user.username }} </span></a>
         <span></span>
         <a href="{% url 'logout' %}">
             <button type="button" class="btn btn-danger logoutclass">
@@ -46,13 +46,13 @@
         <div>
             <div class="pc1rc">
                 <div class="pc1lc glass">
-                    <a href="{% url 'ChemistProfile' %}">
+                    <a href="{% url 'addMedicine' %}">
                         <div class="xyz">
-                            <img src="{% static 'images/chemist.jpg' %}" alt="Update Profile"
+                            <img src="{% static 'images/chemist.jpg' %}" alt="Add Medicine"
                                 style="width: 100%; max-width: 100px; height: auto;">
                             <br>
                         
-                            <p>Update Profile </p>
+                            <p>Add Medicine </p>
                         </div>
                     </a>
                 </div>

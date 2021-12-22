@@ -212,6 +212,37 @@ def ChemistProfile(request):
     context = {'form': form, 'user': user}
     return render(request, 'chemistProfile.html', context)
 
+def addMedicine(request):
+    form = MedicineInstance()
+    # form = MedicineInstance(request.POST, request.FILES)
+
+    if request.method == 'POST':
+        form = MedicineInstance(request.POST, request.FILES)
+        try:
+            name = request.POST['Name']
+            type=request.POST['Type']
+            quantity=request.POST['Quantity']
+            usage=request.POST['Usage']
+            supplier=request.POST['Supplier']
+            purchaseDate=request.POST['PurchaseDate']
+            expiryDate=request.POST['ExpiryDate']
+
+        except MultiValueDictKeyError:
+            name = False
+            type = False
+            quantity = False
+            usage = False
+            supplier = False
+            purchaseDate = False
+            expiryDate = False
+        
+        medicine = Medicine.objects.create(Name=name, Type=type, Quantity=quantity, Usage=usage, Supplier=supplier, PurchaseDate=purchaseDate, ExpiryDate=expiryDate)
+        # flashg message for medicine added succefully
+        return redirect('addMedicine')
+    context = {'form': form}
+    return render(request, 'addMedicine.html', context)
+
+
 
 def checkMedicine(request):
     form = MedicineForm()
@@ -258,7 +289,8 @@ def updateMedicine(request, pk):
         if form.is_valid():
             form.save()  # IT will modify the project
             # user will be redirected to the projects page
-            return redirect('checkMedicine')
+            #flash message medicine added successfully
+            return redirect('chemist')
     context = {'form': form, 'medicines': medicine}
     return render(request, "updateMedicine.html", context)
 
