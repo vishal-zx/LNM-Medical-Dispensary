@@ -126,7 +126,7 @@ def feedback(request):
         feedbackInstance = Feedback.objects.create(doctor=doctor,patient=patient, feedback=feedbackBody)
 
         return redirect("patient")
-
+    
     else: 
         doctorChoices = Doctor.objects.all()
         context = {'doctorChoices' : doctorChoices}
