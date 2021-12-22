@@ -20,6 +20,8 @@ class User(AbstractUser):
     is_doctor = models.BooleanField('Is doctor', default=False)
     patient = models.BooleanField('Is patient', default=False)
     is_chemist = models.BooleanField('Is chemist', default=False)
+    uid = models.IntegerField(null=False, default=20)
+ 
 
 
 class Patient(models.Model):
