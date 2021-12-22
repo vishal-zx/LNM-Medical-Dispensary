@@ -151,7 +151,11 @@ class MedicalCertificate(models.Model):
     todate = models.DateField(("Date"),default=datetime.date.today)
 
 
-
+class Feedback(models.Model):
+    feedbackID = models.AutoField(primary_key=True)
+    patient = models.ForeignKey(Patient, on_delete=models.SET_NULL, null=True)
+    doctor = models.ForeignKey(Doctor, on_delete=models.SET_NULL, null=True)
+    feedback = models.TextField()
 
 
 

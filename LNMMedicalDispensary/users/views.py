@@ -101,6 +101,33 @@ def MedicalCertificate(request):
     return render(request, 'MedicalCertificate.html', context)
 
 
+def feedback(request):
+
+    if request.method == 'POST' :
+        try:
+            doctorid=request.POST["doctor"]
+            feedbackBody = request.POST["subject"]
+        except MultiValueDictKeyError:
+            doctorid = False
+            mailID = False
+            feedbackBody = False
+        
+        print("doctor ID = ", doctorid)
+        #print("mailID = ", mailID)
+        print("feedback body = ", feedbackBody)
+        patient = Patient.objects.get(Pid=request.user.uid)
+        doctor = Doctor.objects.get(Did=doctorid)
+        feedbackInstance = Feedback.objects.create(doctor=doctor,patient=patient, feedback=feedbackBody)
+
+        return redirect("patient")
+
+    else: 
+        doctorChoices = Doctor.objects.all()
+        context = {'doctorChoices' : doctorChoices}
+        return render(request, 'feedback.html', context)
+
+
+
 # def patientHistory(request):
  #   return render(request, 'PatientHistory.html')
 
@@ -331,6 +358,9 @@ def patientHistory(request):
 
     context = {'my_his': my_history, 'my_pat': pat}
     return render(request, 'PatientHistory.html', context)
+
+
+
 
 
 # schedule test
