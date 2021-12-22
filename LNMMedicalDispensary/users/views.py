@@ -191,8 +191,11 @@ def DoctorProfile(request):
 
 
 def ChemistProfile(request):
+    # user = request.user
+    # form = ChemistForm(instance=user)
     user = request.user
-    form = ChemistForm(instance=user)
+    chemist = Chemist.objects.get(Uid = user.Uid)
+    form = ChemistForm(instance=chemist)
     if request.method == 'POST':
         # The request.POST data will be send to the project instance
         form = ChemistForm(request.POST, request.FILES, instance=user)
@@ -215,14 +218,32 @@ def checkMedicine(request):
         # if form.is_valid():
         # form.save()
         # user will be redirected to the projects page
-        return redirect('updateMedicine', request.POST['Mid'])
+        try:
+            med = request.POST['Name']
+        except MultiValueDictKeyError:
+            med = 'error'   #Random name which cant be medicine name
+        print('Hello')
+        try:
+            trialmed = Medicine.objects.get(Name=med)
+        except Medicine.DoesNotExist:
+            trialmed = False
+            # Flash message to be added
+            print('no such medicine found')
+            return redirect('checkMedicine')
+
+        return redirect('updateMedicine', med)
 
     context = {'form': form, 'medicines': medicine}
     return render(request, 'checkMedicine.html', context)
 
 
 def updateMedicine(request, pk):
-    current_medicine = Medicine.objects.get(Mid=pk)
+    # try:
+    current_medicine = Medicine.objects.get(Name=pk)
+    # except Medicine.DoesNotExist:
+    #     # Flash message to be added
+    #     print('no such medicine found')
+    #     redirect('checkMedicine')
     medicine = Medicine.objects.all()
     # print(medicine)
     form = MedicineInstance(instance=current_medicine)

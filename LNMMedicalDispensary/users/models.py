@@ -49,7 +49,7 @@ class Patient(models.Model):
     name = models.CharField(max_length=20, null=False)
     age = models.IntegerField(null=False)
     phonenumber = models.BigIntegerField(null=True, blank = True)
-    Uid = models.UUIDField(null=True)
+    Uid = models.UUIDField(null=True, editable=False)
     gender = models.CharField(
         max_length=1,
         choices=GENDERCHOICE,
@@ -66,7 +66,7 @@ class Doctor(models.Model):
         ('F', 'Female'),
     )
     # Uid = models.ForeignKey(User,on_delete=CASCADE, null=True)
-    Uid = models.UUIDField(null=True)
+    Uid = models.UUIDField(null=True, editable=False)
     Did = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20, null=False)
     age = models.IntegerField(null=False)
@@ -89,7 +89,7 @@ class Chemist(models.Model):
         ('M', 'Male'),
         ('F', 'Female'),
     )
-    Uid = models.UUIDField(null=True)
+    Uid = models.UUIDField(null=True, editable=False)
     # Uid = models.ForeignKey(User,on_delete=CASCADE, null=True)
     Cid = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, null=False)

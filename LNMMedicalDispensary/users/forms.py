@@ -59,7 +59,7 @@ class SignUpForm(UserCreationForm):
 class MedicineForm(ModelForm):
     class Meta:
         model = Medicine
-        fields = ('Mid',)
+        fields = ('Name',)
 
 class MedicineInstance(ModelForm):
     class Meta:
