@@ -87,17 +87,17 @@ def MedicalCertificate(request):
     id=current_user.Uid
 
     try:
-        doctorid=request.GET["doctor"]
+        doctorid=request.POST["doctor"]
     except MultiValueDictKeyError:
         doctorid = False
     
-    print(doctorid)
+    print(id)
     
     context = { 'doctors' : doctor}
-    pid=Patient.objects.get(Pid=id)
+    pid=Patient.objects.get(Uid=id)
     
     did=Doctor.objects.get(name=doctorid)
-    medical=MedicalCertificate(Pid=pid,Did=did,fromdate=request.GET["start"],todate=request.GET["end"],reason=request.POST["reason"])
+    medical=MedicalCertificate(Pid=pid,Did=did,fromdate=request.POST["start"],todate=request.POST["end"],reason=request.POST["reason"])
     medical.save()
     print("success")
     return render(request, 'MedicalCertificate.html', context)
