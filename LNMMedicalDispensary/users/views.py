@@ -26,9 +26,9 @@ def register(request):
             user = form.save()
             
            
-            p=patient.objects.get(name=user.name)
-            p.Pid=user.Uid
-            p.save()
+           # p=patient.objects.get(name=user.name)
+            #p.Pid=user.Uid
+            #p.save()
             msg = 'user created'
             # patient = Patient( name=user.username, age=user.age, gender=user.gender)
             # patient.save()
@@ -84,7 +84,7 @@ def MedicalCertificate(request):
     for i in Doctor.objects.all():
        print(i)
     current_user = request.user
-    id=current_user.uid
+    id=current_user.Uid
 
     try:
         doctorid=request.GET["doctor"]
@@ -156,7 +156,7 @@ def checkAppointment(request):
     sr = 1
     user = request.user
     for i in appointment:
-        if i.Did.Did == user.uid:
+        if i.Did.Did == user.Uid:
             Appointments.insert(sr-1, {'sr': sr, 'Timings': i.Timings,
                                        'name': Patient.objects.get(Pid=i.Pid.Pid).name, 'mailid': i.mailid})
             sr = sr+1
@@ -179,7 +179,7 @@ def DoctorProfile(request):
     # sr = 1
     profile = [{}]
     for i in doctor:
-        if i.Did == user.id:
+        if i.Did == user.Uid:
             p = dict({'name': i.name, 'did': i.Did,
                       'age': i.age, 'Gender': i.gender, 'address': i.address, 'speciality': i.speciality, 'ph': i.phonenumber})
             profile.insert(0, p)
@@ -282,7 +282,7 @@ def issueMedicine(request):
 @login_required(login_url='/login/')
 def RequestAppointment(request):
     current_user = request.user
-    id = current_user.uid
+    id = current_user.Uid
 
     try:
         doctor = request.GET["D_name"]
@@ -314,7 +314,7 @@ def RequestAppointment(request):
 def updatepatient(request):
     current_user = request.user
 
-    pid = current_user.uid
+    pid = current_user.Uid
     print(current_user)
     print(pid)
 
@@ -344,13 +344,13 @@ def updatepatient(request):
 
 # pateint history
 def patientHistory(request):
-    print(request.user.uid)
+    print(request.user.Uid)
     my_history = None
     pat = None
     if request.user.patient == True:
-        my_history = PatientHistory.objects.filter(Pid=request.user.uid)
+        my_history = PatientHistory.objects.filter(Pid=request.user.Uid)
 
-        pat = Patient.objects.get(Pid=request.user.uid)
+        pat = Patient.objects.get(Pid=request.user.Uid)
     else:
         id = request.GET['patid']
         my_history = PatientHistory.objects.filter(Pid=id)

@@ -200,13 +200,13 @@ def createDocChem(sender, instance, created, **kwargs):
             )
             patient.save()
 
-    else:
+    """ else:
         # user = instance
         print('Not created')
         if user.is_doctor:
             print('Doctor')
             doctor = Doctor.objects.get(
-                Did = user.Did
+                Did = user.Uid
             )
             doctor.name = user.first_name + ' ' + user.last_name,
             doctor.age = user.age,
@@ -215,7 +215,7 @@ def createDocChem(sender, instance, created, **kwargs):
         if user.is_chemist:
             print('Chemist')
             chemist = Chemist.objects.get(
-                Cid = user.Cid
+                Cid = user.Uid
             )
             chemist.name = user.first_name + ' ' + user.last_name,
             chemist.age = user.age,
@@ -230,7 +230,7 @@ def createDocChem(sender, instance, created, **kwargs):
             patient.age = user.age,
             patient.gender = user.gender,
             patient.phonenumber = user.phonenumber
-            patient.save()
+            patient.save()  """
 
 def deleteUser(sender, instance, **kwargs):
     user = User.objects.get(Uid = instance.Uid)
