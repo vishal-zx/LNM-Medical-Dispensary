@@ -8,7 +8,7 @@ urlpatterns = [
     path('doctor/', views.doctor, name='doctor'),
     path('chemist/', views.chemist, name='chemist'),
     path('patient/', views.patient, name='patient'),
-    path('scheduleTest/', views.scheduleTest, name='scheduleTest'),
+    
     path('patientHistory/', views.patientHistory, name='patientHistory'),
     path('viewPatientHistory/', views.viewPatientHistory,
          name='viewPatientHistory'),
@@ -18,7 +18,7 @@ urlpatterns = [
     path('RequestAppointment/', views.RequestAppointment, name='RequestAppointment'),
     path('UpdatepatientProfile/', views.updatepatient, name='UpdatepatientProfile'),
     path('checkAppointment/', views.checkAppointment, name='checkAppointment'),
-    path('TestSchedule/', views.TestSchedule, name='TestSchedule'),
+    path('MedicalCertificate/', views.MedicalCertificate, name='MedicalCertificate'),
     path('Treatment/', views.Treatment, name='Treatment'),
     path('DoctorProfile/', views.DoctorProfile, name='DoctorProfile'),
     path('ChemistProfile/', views.ChemistProfile, name='ChemistProfile'),

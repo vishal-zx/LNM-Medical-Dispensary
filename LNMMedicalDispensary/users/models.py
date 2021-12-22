@@ -112,5 +112,14 @@ class MedicineIssued(models.Model):
     quantity = models.IntegerField()
     prescription = models.TextField()
     date = models.DateField(("Date"),default=datetime.date.today)
+    
+    
+class MedicalCertificate(models.Model):
+    Pid=models.ForeignKey(Patient,on_delete=CASCADE)
+    Did=models.ForeignKey(Doctor,on_delete=CASCADE)
+    
+    reason = models.TextField()
+    fromdate = models.DateField(("Date"),default=datetime.date.today)
+    todate = models.DateField(("Date"),default=datetime.date.today)
 
 

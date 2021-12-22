@@ -79,8 +79,28 @@ def patient(request):
     return render(request, 'patient.html')
 
 
-def scheduleTest(request):
-    return render(request, 'scheduleTest.html')
+def MedicalCertificate(request):
+    doctor= Doctor.objects.all()
+    for i in Doctor.objects.all():
+       print(i)
+    current_user = request.user
+    id=current_user.uid
+
+    try:
+        doctorid=request.GET["doctor"]
+    except MultiValueDictKeyError:
+        doctorid = False
+    
+    print(doctorid)
+    
+    context = { 'doctors' : doctor}
+    pid=Patient.objects.get(Pid=id)
+    
+    did=Doctor.objects.get(name=doctorid)
+    medical=MedicalCertificate(Pid=pid,Did=did,fromdate=request.GET["start"],todate=request.GET["end"],reason=request.POST["reason"])
+    medical.save()
+    print("success")
+    return render(request, 'MedicalCertificate.html', context)
 
 
 # def patientHistory(request):
@@ -313,8 +333,6 @@ def patientHistory(request):
 
 
 # schedule test
-def TestSchedule(request):
-    return render(request, 'TestSchedule.html')
 
     # current_medicine = request.Medicine
 

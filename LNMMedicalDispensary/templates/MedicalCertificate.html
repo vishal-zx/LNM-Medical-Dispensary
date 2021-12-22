@@ -57,34 +57,24 @@
         <div>
             <div class="pc1rc glass" style="height:510px">
                 <div style="font-size:22px; text-align: left; font-weight: bolder;">
-                    Patient Name: <input type="text" name="PatName" id="ptname">
-                    <br>
-                    <br>
-                    <label for="bloodgroups">Blood Group:&nbsp;</label>
-                    <select id="bloodgroups">
-                        <option value="item-1">A+</option>
-                        <option value="item-2">B+</option>
-                        <option value="item-3">O+</option>
-                        <option value="item-4">AB+</option>
-                        <option value="item-5">A-</option>
-                        <option value="item-6">B-</option>
-                        <option value="item-7">O-</option>
-                        <option value="item-8">AB-</option>
+                    <form action=" http://127.0.0.1:8000/MedicalCerticate/" method="get">
+                    <label for="bloodgroups">Doctor:&nbsp;</label>
+                    <select id="doctor" name="doctor">
+                      {% for doctor in doctors: %}                   
+                             <option value={{doctor.username}}>{{doctor.username}}</option>
+                        {% endfor %}
                     </select>
                     <br>
                     <br>
-                    <label for="testItems">Select a test :&nbsp;</label>
+                    <label for="testItems">from :&nbsp;</label>
+                    <input type="date" id="meeting-time" name="start" value="2018-06-12">
+                    <br>
+                    <br>
+                    <label for="testItems">To :&nbsp;</label>
+                    <input type="date" id="meeting-time" name="end" value="2018-08-12">
                     
-                    <select id="testItems">
-                        <option value="item-1">Covid-19</option>
-                        <option value="item-2">Dengue</option>
-                        <option value="item-3">Viral Fever</option>
-                        <option value="item-4">Malaria</option>
-                        <option value="item-5">Other</option>
-                    </select>
-                    <br>
-                    <br>
-                    <div style="margin-left: 80px;"><button type="button" class="btn btn-success">Schedule Test</button></div>
+                    <div style="margin-left: 80px;"><input type="submit" value="Submit"></div>
+                </form>
                 </div>
             </div>
         </div>
