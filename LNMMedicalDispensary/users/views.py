@@ -101,6 +101,8 @@ def MedicalCertificateFunction(request):
         medical = Medicalcertificate.objects.create(
             patient=Pt, doctor=doctorInstance, fromdate=fromdate, todate=todate, reason=Reason)
         print("success")
+          # flash message for medicine added succefully
+        messages.success(request, 'Medicine Added Successfully')
         return redirect('patient')
     else:
         doctor = Doctor.objects.all()
@@ -129,7 +131,8 @@ def feedback(request):
         doctor = Doctor.objects.get(Uid=doctorid)
         feedbackInstance = Feedback.objects.create(
             doctor=doctor, patient=patient, feedback=feedbackBody)
-
+          # flash message for medicine added succefully
+        messages.success(request, 'Medicine Added Successfully')
         return redirect("patient")
 
     else:
@@ -411,13 +414,14 @@ def patientHistory(request):
     my_history = None
     pat = None
     if request.user.patient == True:
-        my_history = PatientHistory.objects.filter(Pid=request.user.Uid)
+        p=Patient.objects.get(Uid=request.user.Uid)
+        my_history = PatientHistory.objects.filter(Pid=p)
 
-        pat = Patient.objects.get(Pid=request.user.Uid)
+        pat = Patient.objects.get(Uid=request.user.Uid)
     else:
         id = request.GET['patid']
-        my_history = PatientHistory.objects.filter(Pid=id)
-        pat = Patient.objects.filter(Pid=id).first()
+        my_history = PatientHistory.objects.filter(Uid=id)
+        pat = Patient.objects.filter(Uid=id).first()
 
     # print(request.user.id)
 

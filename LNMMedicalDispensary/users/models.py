@@ -144,11 +144,7 @@ class MedicineIssued(models.Model):
     date = models.DateField(("Date"),default=datetime.date.today)
     
     
-<<<<<<< HEAD
-class MedicalCertificate(models.Model):
-=======
 class Medicalcertificate(models.Model):
->>>>>>> c0b433ef05003fb32680515e52d3f3d633e09fa2
     patient=models.ForeignKey(Patient,on_delete=CASCADE)
     doctor=models.ForeignKey(Doctor,on_delete=CASCADE)
     medicalID = models.AutoField(primary_key=True)
