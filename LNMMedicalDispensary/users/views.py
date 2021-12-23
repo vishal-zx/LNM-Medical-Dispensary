@@ -178,6 +178,9 @@ def checkAppointment(request):
 def Treatment(request):
     return render(request, 'Treatment.html')
 
+def ViewFeedback(request):
+    return render(request, 'ViewFeedback.html')
+
 
 def DoctorProfile(request):
     user = request.user
