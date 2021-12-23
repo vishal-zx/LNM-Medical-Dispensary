@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.datastructures import MultiValueDictKeyError
-#from user_profile.models import UserProfile
+# from user_profile.models import UserProfile
 # Create your views here.
 from django.contrib import messages  # for flash messages
 
@@ -103,7 +103,7 @@ def MedicalCertificateFunction(request):
             patient=Pt, doctor=doctorInstance, fromdate=fromdate, todate=todate, reason=Reason)
         print("success")
         # flash message for medicine added succefully
-        messages.success(request, 'Medicine Added Successfully')
+        messages.success(request, 'Medical Certificate Requested Successfully')
         return redirect('patient')
     else:
         doctor = Doctor.objects.all()
@@ -112,6 +112,14 @@ def MedicalCertificateFunction(request):
         context = {'doctors': doctor}
 
         return render(request, 'MedicalCertificate.html', context)
+
+
+def viewMedicalCertificateFunction(request):
+    MedCertis = None
+    doc = Doctor.objects.get(Uid=request.user.Uid)
+    MedCertis = Medicalcertificate.objects.filter(doctor=doc)
+    print(MedCertis)
+    return render(request, 'viewMedicalCertificate.html', {'MedCert': MedCertis})
 
 
 def feedback(request):
@@ -126,14 +134,14 @@ def feedback(request):
             feedbackBody = False
 
         print("doctor ID = ", doctorid)
-        #print("mailID = ", mailID)
+        # print("mailID = ", mailID)
         print("feedback body = ", feedbackBody)
         patient = Patient.objects.get(Uid=request.user.Uid)
         doctor = Doctor.objects.get(Uid=doctorid)
         feedbackInstance = Feedback.objects.create(
             doctor=doctor, patient=patient, feedback=feedbackBody)
         # flash message for medicine added succefully
-        messages.success(request, 'Medicine Added Successfully')
+        messages.success(request, 'Feedback Added Successfully')
         return redirect("patient")
 
     else:
@@ -162,11 +170,50 @@ def viewPatientHistory(request):
 
 
 def patientProfile(request):
-    return render(request, 'PatientProfile.html')
+    user = request.user
+    print(user.username)
+    patient = Patient.objects.all()
+    profile = [{}]
+    for i in patient:
+        if i.Uid == user.Uid:
+            p = dict({'name': user.username, 'pid': i.Pid,
+                      'age': i.age, 'ph': i.phonenumber})
+            profile.insert(0, p)
+    return render(request, 'PatientProfile.html', {'profile': profile[0]})
 
 
 def bookAppointment(request):
-    return render(request, 'bookAppointment.html')
+    current_user = request.user
+    id = current_user.Uid
+    if request.method == 'POST':
+        try:
+            doctor = request.POST["doctor"]
+        except MultiValueDictKeyError:
+            doctor = False
+        try:
+            timings = request.POST["meeting-time"]
+        except MultiValueDictKeyError:
+            timings = False
+        try:
+            Mailid = request.POST["mailid"]
+        except MultiValueDictKeyError:
+            Mailid = False
+
+        pid = Patient.objects.get(Uid=id)
+
+        did = Doctor.objects.get(Uid=doctor)
+        print(pid)
+        # print(did)
+        print(timings)
+
+        Appointment.objects.create(
+            Pid=pid, Did=did, Timings=timings, mailid=Mailid)
+        messages.success(request, 'Appointent Booked Successfully')
+        return render(request, 'Patient.html')
+    else:
+        doctor = Doctor.objects.all()
+        context = {'doctors': doctor}
+        return render(request, 'bookAppointment.html', context)
 
 
 def checkAppointment(request):
@@ -226,7 +273,15 @@ def Treatment(request):
 
 
 def ViewFeedback(request):
-    return render(request, 'ViewFeedback.html')
+    Feedbacks = None
+    feedback = Feedback.objects.all()
+
+    sr = 1
+    doc = Doctor.objects.get(Uid=request.user.Uid)
+    # user = request.user
+    Feedbacks = Feedback.objects.filter(doctor=doc)
+    print(Feedbacks)
+    return render(request, 'ViewFeedback.html', {'Feedback': Feedbacks})
 
 
 def DoctorProfile(request):
@@ -238,7 +293,7 @@ def DoctorProfile(request):
     for i in doctor:
         if i.Uid == user.Uid:
             p = dict({'name': user.username, 'did': i.Did,
-                      'age': i.age, 'Gender': i.gender, 'address': i.address, 'speciality': i.speciality, 'ph': i.phonenumber})
+                      'age': i.age, 'gender': i.gender, 'schedule': i.schedule, 'address': i.address, 'speciality': i.speciality, 'ph': i.phonenumber})
             profile.insert(0, p)
             # break
     # profile.pop()
@@ -395,36 +450,6 @@ def issueMedicine(request):
     return render(request, 'issueMedicine.html', context)
 
 
-# appointment booking
-@login_required(login_url='/login/')
-def RequestAppointment(request):
-    current_user = request.user
-    id = current_user.Uid
-
-    try:
-        doctor = request.GET["D_name"]
-    except MultiValueDictKeyError:
-        doctor = False
-    try:
-        timings = request.GET["meeting-time"]
-    except MultiValueDictKeyError:
-        timings = False
-    try:
-        Mailid = request.GET["mailid"]
-    except MultiValueDictKeyError:
-        Mailid = False
-
-    pid = Patient.objects.get(Pid=id)
-
-    did = Doctor.objects.get(name=doctor)
-    print(pid)
-    print(did)
-    print(timings)
-
-    p = Appointment(Pid=pid, Did=did, Timings=timings, mailid=Mailid)
-    p.save()
-    return render(request, 'RequestAppointment.html')
-
 # update patient profile
 
 
@@ -434,29 +459,71 @@ def updatepatient(request):
     pid = current_user.Uid
     print(current_user)
     print(pid)
-
-    try:
-        name = request.GET["name"]
-
-    except MultiValueDictKeyError:
-        name = False
     try:
         age = request.GET["age"]
 
     except MultiValueDictKeyError:
         age = False
+
     try:
-        gender = request.GET["gender"]
+        ph = request.GET["phno"]
 
     except MultiValueDictKeyError:
-        gender = False
+        ph = False
 
-    p = Patient.objects.get(Pid=pid)
-    p.name = name
+    p = Patient.objects.get(Uid=pid)
+    # p.name = name
     p.age = age
-    p.gender = gender
+    p.phonenumber = ph
     p.save()
-    return render(request, 'UpdatepatientProfile.html')
+    messages.success(request, 'Profile updated successfully')
+    return render(request, 'Patient.html')
+
+
+def updatedoctor(request):
+    current_user = request.user
+
+    Did = current_user.Uid
+    print(current_user)
+    print(Did)
+
+    try:
+        age = request.GET["age"]
+
+    except MultiValueDictKeyError:
+        age = False
+
+    try:
+        address = request.GET["address"]
+
+    except MultiValueDictKeyError:
+        address = False
+    try:
+        speciality = request.GET["speciality"]
+
+    except MultiValueDictKeyError:
+        speciality = False
+    try:
+        phno = request.GET["phno"]
+
+    except MultiValueDictKeyError:
+        phno = False
+    try:
+        sc = request.GET["schedule"]
+
+    except MultiValueDictKeyError:
+        sc = False
+    p = Doctor.objects.get(Uid=Did)
+    # p.name = name
+    p.age = age
+    # p.gender = gender
+    p.address = address
+    p.schedule = sc
+    p.speciality = speciality
+    p.phonenumber = phno
+    p.save()
+    messages.success(request, 'Profile updated successfully')
+    return render(request, 'Doctor.html')
 
 
 # pateint history
@@ -476,7 +543,7 @@ def patientHistory(request):
         pat = Patient.objects.filter(Uid=id).first()
 
     # print(request.user.id)
-
+    print(pat.name)
     context = {'my_his': my_history, 'my_pat': pat}
     return render(request, 'PatientHistory.html', context)
 

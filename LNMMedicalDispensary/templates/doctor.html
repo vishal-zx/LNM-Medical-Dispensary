@@ -37,7 +37,7 @@
 
     <div class="logoutclass">
         
-        <span style="padding-right:50px; font-size:24px"><i class='fas fa-user' style='color:green'></i><span style="padding-right:10px; font-size:24px"></span> {{ user.username }} </span>
+        <span style="padding-right:50px; font-size:24px"><i class='fas fa-user' style='color:green'></i><span style="padding-right:10px; font-size:24px"></span> <a href="{% url 'DoctorProfile' %}">{{ user.username }}</a> </span>
         <span></span>
         <a href="{% url 'logout' %}">
             <button type="button" class="btn btn-danger logoutclass">
@@ -78,7 +78,7 @@
                         <img src="{% static 'images/docicon.png' %}" alt="Check History"
                             style="width: 100%; max-width: 100px; height: auto;">
                         <br>
-                         <p><a href="{% url 'DoctorProfile' %}">Manage Doctor Details</a></p>
+                         <p><a href="{% url 'viewMedicalCertificate' %}">View Medical Certificate Requests</a></p>
                     </div>
                 </div>
 
@@ -94,9 +94,15 @@
         </div>
     </div>
     <div class="footer">
+        <div class="feedback">
+            &nbsp;
+        </div>
         <div>
             <div class="add"> The LNM Institute of Information Technology, Jaipur</div>
             <div>Rupa ki Nangal, Post-Sumel, Via, Jamdoli, Jaipur, Rajasthan 302031</div>
+        </div>
+        <div class="feedback">
+            <a href="{% url 'ViewFeedback' %}">View Feedback</a>
         </div>
     </div>
 </body>
