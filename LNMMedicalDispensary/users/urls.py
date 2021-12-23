@@ -20,6 +20,7 @@ urlpatterns = [
     path('checkAppointment/', views.checkAppointment, name='checkAppointment'),
     path('MedicalCertificate/', views.MedicalCertificateFunction, name='MedicalCertificate'),
     path('Treatment/', views.Treatment, name='Treatment'),
+    path('ViewFeedback/', views.ViewFeedback, name='ViewFeedback'),
     path('DoctorProfile/', views.DoctorProfile, name='DoctorProfile'),
     path('ChemistProfile/', views.ChemistProfile, name='ChemistProfile'),
     path('checkMedicine/', views.checkMedicine, name='checkMedicine'),

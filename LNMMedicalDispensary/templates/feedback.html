@@ -144,6 +144,16 @@
             <img src="{% static 'images/LOGO.png' %}" alt="LNMIIT" width="200">
         </div>
     </nav>
+    <br>
+    <br>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
     <br><br><br><br><br>
     
     <br>
@@ -199,6 +209,7 @@
                         style="height:200px"></textarea>
                 </div>
             </div>
+            
             <div class="row">
                 <input type="submit" value="Submit">
             </div>

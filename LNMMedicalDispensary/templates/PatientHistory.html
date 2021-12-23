@@ -24,6 +24,16 @@
     </div>
   </nav>
   <br>
+  <br>
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+
+  <br>
   <h2 class="heading">LNM Medical Dispensary</h2>
   <div style="float: left; margin-left: 40px; font-size: 17px;">
     <!-- <a href="{% url 'patient' %}"> -->
@@ -74,8 +84,8 @@
         <table>
           <tr>
             
-            
             <th>Appoinment ID</th>
+            <th>Appoinment Timing</th>
             <th>Description</th>
           </tr>
           {%if my_his %}
@@ -83,11 +93,16 @@
               {% for history in my_his %} 
               <tr>
                 <td>{{history.Aid.Aid}}</td>
+                <td>{{history.Aid.Timings}}</td>
                 <td>{{history.Description}} </td>
               </tr>
               {%endfor %} 
           {% else %} 
-              NO History
+          </table>
+          <br>
+          <span  style="font-size:18px; font-weight:bold;margin:0 auto;text-align:center;display:block;">No History</span>
+        
+              
           {% endif %}
         </table>
       </div>

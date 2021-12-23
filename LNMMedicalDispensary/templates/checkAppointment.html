@@ -25,6 +25,16 @@
     </div>
   </nav>
   <br>
+  <br>
+  {% if messages %}
+  <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+  </ul>
+  {% endif %}
+
+  <br>
   <h2 class="heading">LNM Medical Dispensary</h2>
   <div style="float: left; margin-left: 40px; font-size: 17px;">
     <a href="{% url 'doctor' %}">
@@ -65,6 +75,7 @@
             {% for i in Appointments%}
             
           <tr>
+            
             <td>{{i.sr}} </td>
             
             <td>{{i.Timings}}</td>
@@ -72,7 +83,14 @@
             <td>{{i.mailid}}</td>
 
               <td> 
-        <button method='get' type="button" class="btn btn-danger" data-dismiss="modal" name="cancel">Cancel</button></td>
+                
+                <form method="POST" action="http://127.0.0.1:8000/checkAppointment/">
+                  {% csrf_token %}
+                  
+                  <button  type="submit" class="btn btn-danger" data-dismiss="modal" name="cancel" value={{i.Aid}} >Cancel</button>
+                 
+                </form>
+         </td>
          
             </tr>
           <tr>
