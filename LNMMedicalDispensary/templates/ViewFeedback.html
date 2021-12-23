@@ -12,6 +12,70 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
   <title>Doctor Feedback</title>
+  <style>
+    body, html {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+
+.bg-img {
+  /* The image used */
+  background-image: url("data:image/jpeg;base64,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");
+
+  /* Control the height of the image */
+  min-height: 380px;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+/* Add styles to the form container */
+.container {
+  position: center;
+  right: 0;
+  margin: 20px;
+  max-width: 300px;
+  padding: 16px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+  input[type=text], input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+input[type=text]:focus, input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit button */
+.btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.btn:hover {
+  opacity: 1;
+}
+}
+  </style>
 </head>
 
 <body>
@@ -23,6 +87,20 @@
           <img src="{% static 'images/LOGO.png' %}" alt="LNMIIT" width="200">
         </div>
       </nav>
+    <div class="bg-img">
+        <form class="container">
+          <h1>Download </h1><h1>Your Feedback</h1>
+      
+          <label for="email"><b>Doctor's Name</b></label>
+          <input type="text" placeholder="Enter Full Name" name="email" required>
+      
+      
+          <button type="submit" class="btn" >Download</button>
+          
+        </form>
+        
+      </div>
+    
     <div class="footer">
       <div>
         <div class="add"> The LNM Institute of Information Technology, Jaipur</div>
