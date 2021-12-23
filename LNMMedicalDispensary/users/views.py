@@ -103,7 +103,7 @@ def MedicalCertificateFunction(request):
             patient=Pt, doctor=doctorInstance, fromdate=fromdate, todate=todate, reason=Reason)
         print("success")
         # flash message for medicine added succefully
-        messages.success(request, 'Medicine Added Successfully')
+        messages.success(request, 'Medical Certificate Requested Successfully')
         return redirect('patient')
     else:
         doctor = Doctor.objects.all()
@@ -209,7 +209,7 @@ def bookAppointment(request):
         Appointment.objects.create(
             Pid=pid, Did=did, Timings=timings, mailid=Mailid)
         messages.success(request, 'Appointent Booked Successfully')
-        return render(request, 'Doctor.html')
+        return render(request, 'Patient.html')
     else:
         doctor = Doctor.objects.all()
         context = {'doctors': doctor}
@@ -459,22 +459,12 @@ def updatepatient(request):
     pid = current_user.Uid
     print(current_user)
     print(pid)
-
-    try:
-        name = request.GET["name"]
-
-    except MultiValueDictKeyError:
-        name = False
     try:
         age = request.GET["age"]
 
     except MultiValueDictKeyError:
         age = False
-    try:
-        gender = request.GET["gender"]
 
-    except MultiValueDictKeyError:
-        gender = False
     try:
         ph = request.GET["phno"]
 
@@ -482,9 +472,8 @@ def updatepatient(request):
         ph = False
 
     p = Patient.objects.get(Uid=pid)
-    p.name = name
+    # p.name = name
     p.age = age
-    p.gender = gender
     p.phonenumber = ph
     p.save()
     messages.success(request, 'Profile updated successfully')
@@ -499,20 +488,11 @@ def updatedoctor(request):
     print(Did)
 
     try:
-        name = request.GET["name"]
-
-    except MultiValueDictKeyError:
-        name = False
-    try:
         age = request.GET["age"]
 
     except MultiValueDictKeyError:
         age = False
-    try:
-        gender = request.GET["gender"]
 
-    except MultiValueDictKeyError:
-        gender = False
     try:
         address = request.GET["address"]
 
@@ -534,13 +514,12 @@ def updatedoctor(request):
     except MultiValueDictKeyError:
         sc = False
     p = Doctor.objects.get(Uid=Did)
-    p.name = name
+    # p.name = name
     p.age = age
-    p.gender = gender
+    # p.gender = gender
     p.address = address
     p.schedule = sc
     p.speciality = speciality
-    print(p.schedule)
     p.phonenumber = phno
     p.save()
     messages.success(request, 'Profile updated successfully')
@@ -564,7 +543,7 @@ def patientHistory(request):
         pat = Patient.objects.filter(Uid=id).first()
 
     # print(request.user.id)
-
+    print(pat.name)
     context = {'my_his': my_history, 'my_pat': pat}
     return render(request, 'PatientHistory.html', context)
 
