@@ -114,6 +114,14 @@ def MedicalCertificateFunction(request):
         return render(request, 'MedicalCertificate.html', context)
 
 
+def viewMedicalCertificateFunction(request):
+    MedCertis = None
+    doc = Doctor.objects.get(Uid=request.user.Uid)
+    MedCertis = Medicalcertificate.objects.filter(doctor=doc)
+    print(MedCertis)
+    return render(request, 'viewMedicalCertificate.html', {'MedCert': MedCertis})
+
+
 def feedback(request):
 
     if request.method == 'POST':
@@ -186,16 +194,17 @@ def bookAppointment(request):
 
         did = Doctor.objects.get(Uid=doctor)
         print(pid)
-        #print(did)
+        # print(did)
         print(timings)
 
-        Appointment.objects.create(Pid=pid, Did=did, Timings=timings, mailid=Mailid)
+        Appointment.objects.create(
+            Pid=pid, Did=did, Timings=timings, mailid=Mailid)
         messages.success(request, 'Appointent Booked Successfully')
         return render(request, 'Doctor.html')
     else:
         doctor = Doctor.objects.all()
         context = {'doctors': doctor}
-        return render(request, 'bookAppointment.html',context)
+        return render(request, 'bookAppointment.html', context)
 
 
 def checkAppointment(request):
@@ -263,13 +272,6 @@ def ViewFeedback(request):
     # user = request.user
     Feedbacks = Feedback.objects.filter(doctor=doc)
     print(Feedbacks)
-    # for i in feedback:
-    #     if i.doctor == doctor:
-    #         # print(Patient.objects.get(Pid=i.patient.Pid).name)
-    #         Feedbacks.insert(sr-1, {'fb': i,
-    #                                 'name': Patient.objects.get(Pid=i.patient.Pid).name, 'fb': i.feedback
-    #                                 })
-    #         sr = sr+1
     return render(request, 'ViewFeedback.html', {'Feedback': Feedbacks})
 
 
@@ -282,7 +284,7 @@ def DoctorProfile(request):
     for i in doctor:
         if i.Uid == user.Uid:
             p = dict({'name': user.username, 'did': i.Did,
-                      'age': i.age, 'gender': i.gender,'schedule':i.schedule, 'address': i.address, 'speciality': i.speciality, 'ph': i.phonenumber})
+                      'age': i.age, 'gender': i.gender, 'schedule': i.schedule, 'address': i.address, 'speciality': i.speciality, 'ph': i.phonenumber})
             profile.insert(0, p)
             # break
     # profile.pop()
@@ -439,8 +441,6 @@ def issueMedicine(request):
     return render(request, 'issueMedicine.html', context)
 
 
-
-
 # update patient profile
 
 
@@ -474,6 +474,7 @@ def updatepatient(request):
     p.save()
     messages.success(request, 'Profile updated successfully')
     return render(request, 'Patient.html')
+
 
 def updatedoctor(request):
     current_user = request.user
@@ -525,7 +526,7 @@ def updatedoctor(request):
     p.schedule = sc
     p.speciality = speciality
     print(p.schedule)
-    p.phonenumber =phno
+    p.phonenumber = phno
     p.save()
     messages.success(request, 'Profile updated successfully')
     return render(request, 'Doctor.html')
