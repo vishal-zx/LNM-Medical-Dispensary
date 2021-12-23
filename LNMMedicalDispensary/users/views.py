@@ -113,6 +113,12 @@ def MedicalCertificateFunction(request):
 
         return render(request, 'MedicalCertificate.html', context)
 
+def checkMedicalCertificateStatus(request):
+    MedCertis = None
+    pat = Patient.objects.get(Uid=request.user.Uid)
+    MedCertis = Medicalcertificate.objects.filter(patient=pat,status='P')
+    print(MedCertis)
+    return render(request, 'checkMedicalCertificateStatus.html', {'MedCert': MedCertis})
 
 def viewMedicalCertificateFunction(request):
     

@@ -37,7 +37,7 @@ class User(AbstractUser):
     is_doctor = models.BooleanField('Is doctor', default=False)
     patient = models.BooleanField('Is patient', default=False)
     is_chemist = models.BooleanField('Is chemist', default=False)
-
+    
 
 class Patient(models.Model):
     GENDERCHOICE = (
