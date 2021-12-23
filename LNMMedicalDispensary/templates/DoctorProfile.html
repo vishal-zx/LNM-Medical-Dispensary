@@ -70,13 +70,19 @@
          <!-- Username: <input type="text" name="username" id="username" placeholder={{user.username}}>
           <br>
           <br>-->
-          Name: &nbsp;<input type="text" name="name" id="name" value={{profile.name}}> &nbsp;&nbsp;<br><br>
+          <form method="GET" action="{%url 'UpdatedoctorProfile' %}">
+            {% csrf_token %}
+          Name: &nbsp;{{profile.name}}
+          <br>
+          <br> 
           Age: <input type="number" name="age" id="age" value={{profile.age}}>
           
           <label for="gender">Gender: &nbsp;</label>
-          <select id="gender" value={{profile.gender}}>
-            <option value="item-1">Male</option>
-            <option value="item-2">Female</option>
+          <select id="gender" value={{profile.gender}} name="gender">
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            
+            
           </select>
           <br>
           <br>
@@ -85,9 +91,12 @@
           <br>
           Speciality: <input type="text" name="speciality" id="speciality" value={{profile.speciality}}> &nbsp;&nbsp;<br><br>
           Phone Number: <input type="number" name="phno" id="phno" value={{profile.ph}}>
+          <br><br>
+          Schedule: <input type="text" name="schedule" id="sc" value={{profile.schedule}} >
           <br>
           <br>
-          <div style="margin-left: 80px;"><button type="button" class="btn btn-success">Update Profile</button></div>
+          <div style="margin-left: 80px;"><input type="submit" value="Submit" class="btn btn-success"></div>
+          </form>
         </div>
       </div>
     </div>

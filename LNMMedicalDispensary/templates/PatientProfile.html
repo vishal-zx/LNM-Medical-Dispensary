@@ -68,6 +68,7 @@
       <div class="pc1rc glass" style="height:510px">
         <div style="font-size:20px; text-align: left; font-weight: bolder;">
           <form action="http://127.0.0.1:8000/UpdatepatientProfile/ " method="get">
+            {% csrf_token %}
           Name: <input type="text" name="name" id="name" placeholder={{user.username}}> &nbsp;&nbsp;
           Age: <input type="number" name="age" id="age" placeholder={{user.age}}>
           <br>

@@ -151,16 +151,17 @@
     
     <h2 style="margin-left: 35%;">Request Appointment</h2>
     <div class="container">
-        <form action = "http://127.0.0.1:8000/RequestAppointment/" method = "get">
-
+        <form action = "http://127.0.0.1:8000/bookAppointment/" method = "POSt">
+            {% csrf_token %}
             <div class="row">
                 <div class="col-25">
                     <label for="lname">Doctor's Name</label>
                 </div>
                 <div class="col-75">
-                    <select id="lname" name="D_name">
-                        <option value="chand">chand</option>
-                        <option value="item-2">Doctor2</option>
+                    <select id="doctor" name="doctor">
+                        {%for doctor in doctors%}
+                        <option value={{doctor.Uid}}>{{doctor.name}}</option>
+                        {%endfor%}
                       </select>
                     
                 </div>
