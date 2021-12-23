@@ -170,7 +170,16 @@ def viewPatientHistory(request):
 
 
 def patientProfile(request):
-    return render(request, 'PatientProfile.html')
+    user = request.user
+    print(user.username)
+    patient = Patient.objects.all()
+    profile = [{}]
+    for i in patient:
+        if i.Uid == user.Uid:
+            p = dict({'name': user.username, 'pid': i.Pid,
+                      'age': i.age, 'ph': i.phonenumber})
+            profile.insert(0, p)
+    return render(request, 'PatientProfile.html', {'profile': profile[0]})
 
 
 def bookAppointment(request):
@@ -466,11 +475,17 @@ def updatepatient(request):
 
     except MultiValueDictKeyError:
         gender = False
+    try:
+        ph = request.GET["phno"]
+
+    except MultiValueDictKeyError:
+        ph = False
 
     p = Patient.objects.get(Uid=pid)
     p.name = name
     p.age = age
     p.gender = gender
+    p.phonenumber = ph
     p.save()
     messages.success(request, 'Profile updated successfully')
     return render(request, 'Patient.html')
