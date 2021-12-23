@@ -166,7 +166,36 @@ def patientProfile(request):
 
 
 def bookAppointment(request):
-    return render(request, 'bookAppointment.html')
+    current_user = request.user
+    id = current_user.Uid
+    if request.method == 'POST':
+        try:
+            doctor = request.POST["doctor"]
+        except MultiValueDictKeyError:
+            doctor = False
+        try:
+            timings = request.POST["meeting-time"]
+        except MultiValueDictKeyError:
+            timings = False
+        try:
+            Mailid = request.POST["mailid"]
+        except MultiValueDictKeyError:
+            Mailid = False
+
+        pid = Patient.objects.get(Uid=id)
+
+        did = Doctor.objects.get(Uid=doctor)
+        print(pid)
+        #print(did)
+        print(timings)
+
+        Appointment.objects.create(Pid=pid, Did=did, Timings=timings, mailid=Mailid)
+        messages.success(request, 'Appointent Booked Successfully')
+        return render(request, 'Doctor.html')
+    else:
+        doctor = Doctor.objects.all()
+        context = {'doctors': doctor}
+        return render(request, 'bookAppointment.html',context)
 
 
 def checkAppointment(request):
@@ -253,7 +282,7 @@ def DoctorProfile(request):
     for i in doctor:
         if i.Uid == user.Uid:
             p = dict({'name': user.username, 'did': i.Did,
-                      'age': i.age, 'Gender': i.gender, 'address': i.address, 'speciality': i.speciality, 'ph': i.phonenumber})
+                      'age': i.age, 'gender': i.gender,'schedule':i.schedule, 'address': i.address, 'speciality': i.speciality, 'ph': i.phonenumber})
             profile.insert(0, p)
             # break
     # profile.pop()
@@ -410,35 +439,7 @@ def issueMedicine(request):
     return render(request, 'issueMedicine.html', context)
 
 
-# appointment booking
-@login_required(login_url='/login/')
-def RequestAppointment(request):
-    current_user = request.user
-    id = current_user.Uid
 
-    try:
-        doctor = request.GET["D_name"]
-    except MultiValueDictKeyError:
-        doctor = False
-    try:
-        timings = request.GET["meeting-time"]
-    except MultiValueDictKeyError:
-        timings = False
-    try:
-        Mailid = request.GET["mailid"]
-    except MultiValueDictKeyError:
-        Mailid = False
-
-    pid = Patient.objects.get(Pid=id)
-
-    did = Doctor.objects.get(name=doctor)
-    print(pid)
-    print(did)
-    print(timings)
-
-    p = Appointment(Pid=pid, Did=did, Timings=timings, mailid=Mailid)
-    p.save()
-    return render(request, 'RequestAppointment.html')
 
 # update patient profile
 
@@ -466,12 +467,68 @@ def updatepatient(request):
     except MultiValueDictKeyError:
         gender = False
 
-    p = Patient.objects.get(Pid=pid)
+    p = Patient.objects.get(Uid=pid)
     p.name = name
     p.age = age
     p.gender = gender
     p.save()
-    return render(request, 'UpdatepatientProfile.html')
+    messages.success(request, 'Profile updated successfully')
+    return render(request, 'Patient.html')
+
+def updatedoctor(request):
+    current_user = request.user
+
+    Did = current_user.Uid
+    print(current_user)
+    print(Did)
+
+    try:
+        name = request.GET["name"]
+
+    except MultiValueDictKeyError:
+        name = False
+    try:
+        age = request.GET["age"]
+
+    except MultiValueDictKeyError:
+        age = False
+    try:
+        gender = request.GET["gender"]
+
+    except MultiValueDictKeyError:
+        gender = False
+    try:
+        address = request.GET["address"]
+
+    except MultiValueDictKeyError:
+        address = False
+    try:
+        speciality = request.GET["speciality"]
+
+    except MultiValueDictKeyError:
+        speciality = False
+    try:
+        phno = request.GET["phno"]
+
+    except MultiValueDictKeyError:
+        phno = False
+    try:
+        sc = request.GET["schedule"]
+
+    except MultiValueDictKeyError:
+        sc = False
+    p = Doctor.objects.get(Uid=Did)
+    p.name = name
+    p.age = age
+    p.gender = gender
+    p.address = address
+    p.schedule = sc
+    p.speciality = speciality
+    print(p.schedule)
+    p.phonenumber =phno
+    p.save()
+    messages.success(request, 'Profile updated successfully')
+    return render(request, 'Doctor.html')
 
 
 # pateint history
