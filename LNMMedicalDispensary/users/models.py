@@ -49,7 +49,7 @@ class Patient(models.Model):
     name = models.CharField(max_length=20, null=False)
     age = models.IntegerField(null=False)
     phonenumber = models.BigIntegerField(null=True, blank = True)
-    Uid = models.UUIDField(null=True)
+    Uid = models.UUIDField(null=True, editable=False)
     gender = models.CharField(
         max_length=1,
         choices=GENDERCHOICE,
@@ -66,7 +66,7 @@ class Doctor(models.Model):
         ('F', 'Female'),
     )
     # Uid = models.ForeignKey(User,on_delete=CASCADE, null=True)
-    Uid = models.UUIDField(null=True)
+    Uid = models.UUIDField(null=True, editable=False)
     Did = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20, null=False)
     age = models.IntegerField(null=False)
@@ -89,7 +89,7 @@ class Chemist(models.Model):
         ('M', 'Male'),
         ('F', 'Female'),
     )
-    Uid = models.UUIDField(null=True)
+    Uid = models.UUIDField(null=True, editable=False)
     # Uid = models.ForeignKey(User,on_delete=CASCADE, null=True)
     Cid = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50, null=False)
@@ -144,7 +144,11 @@ class MedicineIssued(models.Model):
     date = models.DateField(("Date"),default=datetime.date.today)
     
     
+<<<<<<< HEAD
 class MedicalCertificate(models.Model):
+=======
+class Medicalcertificate(models.Model):
+>>>>>>> c0b433ef05003fb32680515e52d3f3d633e09fa2
     patient=models.ForeignKey(Patient,on_delete=CASCADE)
     doctor=models.ForeignKey(Doctor,on_delete=CASCADE)
     medicalID = models.AutoField(primary_key=True)

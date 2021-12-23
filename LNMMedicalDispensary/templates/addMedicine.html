@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="{% static 'css/PatientHistory.css' %}" type="text/css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-  <title>Update/Check Medicine</title>
+  <title>Add Medicine</title>
 </head>
 
 <body>
@@ -23,18 +23,7 @@
       <img src="{% static 'images/LOGO.png' %}" alt="LNMIIT" width="200">
     </div>
   </nav>
-  <br><br>
-
-    {% if messages %}
-    <ul class="messages">
-        {% for message in messages %}
-        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-
-
-
+  <br>
   <h2 class="heading">Welcome to LNM Medical Dispensary</h2>
   <div style="float: left; margin-left: 40px; font-size: 17px;">
     <a href="{% url 'chemist' %}">
@@ -59,7 +48,7 @@
   <br>
   <div class="container-fluid">
     <div class="well" style="margin:10px; width: fit-content;">
-      <h3>Update Medicine</h3>
+      <h3>Add Medicine</h3>
       <br>
       <div id="myTabContent" class="tab-content">
         <div class="tab-pane active in " id="home">
@@ -67,51 +56,65 @@
             &nbsp;&nbsp;
             <label>Medicine ID</label>
             <input type="number" value="" class="input-xlarge">&nbsp;
+            <label>Medicine Name</label>
+            <input type="text" value="" class="input-xlarge">&nbsp;
+            <label>New Quantity</label>
+            <input type="number" value="" class="input-xlarge">&nbsp;
+            <label>Supplier</label>
+            <input type="text" value="" class="input-xlarge">&nbsp;
+            <label>Purchase Date</label>
+            <input type="date" value="" class="input-xlarge">&nbsp;
+            <label>Expiry Date</label>
+            <input type="date" value="" class="input-xlarge">&nbsp;
             <div style="margin-left: 900px; margin-top:50px">
-               <button class="btn btn-primary"><a href="updateMedicine.html" style="color:white; text-decoration: none;">Update</a></button>
-              <button class="btn btn-primary"><a href="% url 'updateMedicine' id %" style="color:white; text-decoration: none;">Update</a></button>
+              <button class="btn btn-primary">Update</button>
             </div>
           </form> -->
-          <form method="POST" action = "">
-            {% csrf_token %}
-              {{form}}
-              <input type = "submit" value = "Update">
-              <!-- return redirect('updateMedicine') -->
-          </form>
+          <form class="form" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}  
+
+            {% for field in form %}
+            <!-- Input:Text -->
+            <div class="form__field">
+                <label for="formInput#text">{{field.label}}</label>
+                {{field}}
+            </div>
+            {% endfor %}
+            <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+        </form>
         </div>
     
       </div>
-      <br><br>
+      <!-- <br><br>
       <span style="font-size:18px; font-weight:bold;margin-left:150px; text-align:center;display:block;">Medicine Record</span>
       <br>
       <div>
         <table style="margin-left:60px; ">
-          <tr>
-            <th>Mid</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Purchase Date</th>
-            <th>Expiry Date</th>
-            <th>Supplier</th>
-            <th>Usage</th>
-            <th>Quantity</th>
-          </tr>
-          {% for medicine in medicines%}
-          <tr>
-            <td>{{medicine.Mid}}</td>
-            <td>{{medicine.Name}}</td>
-            <td>{{medicine.Type}}</td> </td>
-            <td>{{medicine.PurchaseDate}}</td>
-            <td>{{medicine.ExpiryDate}}</td>
-            <td>{{medicine.Supplier}}</td>
-            <td>{{medicine.Usage}}</td>
-            <td>{{medicine.Quantity}}</td>
-          </tr>
-          {% endfor %}
-          
+            <tr>
+                <th>Mid</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Purchase Date</th>
+                <th>Expiry Date</th>
+                <th>Supplier</th>
+                <th>Usage</th>
+                <th>Quantity</th>
+              </tr>
+              {% for medicine in medicines%}
+              <tr>
+                <td>{{medicine.Mid}}</td>
+                <td>{{medicine.Name}}</td>
+                <td>{{medicine.Type}}</td> </td>
+                <td>{{medicine.PurchaseDate}}</td>
+                <td>{{medicine.ExpiryDate}}</td>
+                <td>{{medicine.Supplier}}</td>
+                <td>{{medicine.Usage}}</td>
+                <td>{{medicine.Quantity}}</td>
+              </tr>
+              {% endfor %}
         </table>
       </div>
-  </div>
+  </div> -->
   <br><br>
   <br><br>
   

@@ -23,6 +23,7 @@ urlpatterns = [
     path('DoctorProfile/', views.DoctorProfile, name='DoctorProfile'),
     path('ChemistProfile/', views.ChemistProfile, name='ChemistProfile'),
     path('checkMedicine/', views.checkMedicine, name='checkMedicine'),
+    path('addMedicine/', views.addMedicine, name='addMedicine'),
     path('updateMedicine/<str:pk>/', views.updateMedicine, name='updateMedicine'),
     path('MedicineRecord/', views.MedicineRecord, name='MedicineRecord'),
     path('issueMedicine/', views.issueMedicine, name='issueMedicine'),

@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="{% static 'css/PatientHistory.css' %}" type="text/css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-  <title>Update/Check Medicine</title>
+  <title>Update Medicine</title>
 </head>
 
 <body>
@@ -23,7 +23,19 @@
       <img src="{% static 'images/LOGO.png' %}" alt="LNMIIT" width="200">
     </div>
   </nav>
-  <br>
+  <br><br>
+
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+  {% endif %}
+  
+
+<br>
   <h2 class="heading">Welcome to LNM Medical Dispensary</h2>
   <div style="float: left; margin-left: 40px; font-size: 17px;">
     <a href="{% url 'chemist' %}">

@@ -11,7 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.datastructures import MultiValueDictKeyError
 #from user_profile.models import UserProfile
 # Create your views here.
-
+from django.contrib import messages     #for flash messages
 
 def index(request):
     return render(request, 'index.html')
@@ -24,11 +24,10 @@ def register(request):
 
         if form.is_valid():
             user = form.save()
-            
-           
+
            # p=patient.objects.get(name=user.name)
-            #p.Pid=user.Uid
-            #p.save()
+            # p.Pid=user.Uid
+            # p.save()
             msg = 'user created'
             # patient = Patient( name=user.username, age=user.age, gender=user.gender)
             # patient.save()
@@ -80,63 +79,63 @@ def patient(request):
 
 
 def MedicalCertificateFunction(request):
-    
+
     current_user = request.user
-    id=current_user.Uid
-    if request.method == 'POST' :
+    id = current_user.Uid
+    if request.method == 'POST':
         try:
-            dr=request.POST["doctor"]
-            Reason=request.POST["reason"]
-            fromdate=request.POST["start"]
-            todate=request.POST["end"]
+            dr = request.POST["doctor"]
+            Reason = request.POST["reason"]
+            fromdate = request.POST["start"]
+            todate = request.POST["end"]
         except MultiValueDictKeyError:
-            dr= False
-            Reason=False
-            fromdate=False
-            todate=False
-       
-        
+            dr = False
+            Reason = False
+            fromdate = False
+            todate = False
+
         doctorInstance = Doctor.objects.get(Uid=dr)
-        Pt=Patient.objects.get(Uid=id)
+        Pt = Patient.objects.get(Uid=id)
         print(Pt)
         print(doctorInstance)
-        medical=MedicalCertificate.objects.create(patient=Pt,doctor=doctorInstance,fromdate=fromdate,todate=todate,reason=Reason)
+        medical = Medicalcertificate.objects.create(
+            patient=Pt, doctor=doctorInstance, fromdate=fromdate, todate=todate, reason=Reason)
         print("success")
         return redirect('patient')
     else:
-        doctor= Doctor.objects.all()
+        doctor = Doctor.objects.all()
         for d in doctor:
             print(d.Uid)
-        context = { 'doctors' : doctor}
-       
+        context = {'doctors': doctor}
+
         return render(request, 'MedicalCertificate.html', context)
 
 
 def feedback(request):
 
-    if request.method == 'POST' :
+    if request.method == 'POST':
         try:
-            doctorid=request.POST["doctor"]
+            doctorid = request.POST["doctor"]
             feedbackBody = request.POST["subject"]
         except MultiValueDictKeyError:
             doctorid = False
             mailID = False
             feedbackBody = False
-        
+
         print("doctor ID = ", doctorid)
         #print("mailID = ", mailID)
         print("feedback body = ", feedbackBody)
         patient = Patient.objects.get(Uid=request.user.Uid)
         doctor = Doctor.objects.get(Uid=doctorid)
-        feedbackInstance = Feedback.objects.create(doctor=doctor,patient=patient, feedback=feedbackBody)
+        feedbackInstance = Feedback.objects.create(
+            doctor=doctor, patient=patient, feedback=feedbackBody)
 
         return redirect("patient")
-    
-    else: 
-        doctorChoices = Doctor.objects.all()
-        context = {'doctorChoices' : doctorChoices}
-        return render(request, 'feedback.html', context)
 
+    else:
+        doctorChoices = Doctor.objects.all()
+        context = {'doctorChoices': doctorChoices}
+        return render(request, 'feedback.html', context)
 
 
 # def patientHistory(request):
@@ -179,16 +178,16 @@ def Treatment(request):
 
 def DoctorProfile(request):
     user = request.user
-    print(user)
+    print(user.username)
     doctor = Doctor.objects.all()
     # sr = 1
     profile = [{}]
     for i in doctor:
-        if i.Did == user.Uid:
-            p = dict({'name': i.name, 'did': i.Did,
+        if i.Uid == user.Uid:
+            p = dict({'name': user.username, 'did': i.Did,
                       'age': i.age, 'Gender': i.gender, 'address': i.address, 'speciality': i.speciality, 'ph': i.phonenumber})
             profile.insert(0, p)
-            break
+            # break
     # profile.pop()
     # print(profile)
     # profile=Doctor.objects.get(Did=user.id)
@@ -196,19 +195,55 @@ def DoctorProfile(request):
 
 
 def ChemistProfile(request):
+    # user = request.user
+    # form = ChemistForm(instance=user)
     user = request.user
-    form = ChemistForm(instance=user)
+    chemist = Chemist.objects.get(Uid = user.Uid)
+    form = ChemistForm(instance=chemist)
     if request.method == 'POST':
         # The request.POST data will be send to the project instance
         form = ChemistForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
             form.save()  # IT will modify the project
+            messages.success(request, 'Chemist Profile Updated Successfully')
             # signal for profile updated to be put
             # user will be redirected to the projects page
             return redirect('chemistProfile')
 
     context = {'form': form, 'user': user}
     return render(request, 'chemistProfile.html', context)
+
+def addMedicine(request):
+    form = MedicineInstance()
+    # form = MedicineInstance(request.POST, request.FILES)
+
+    if request.method == 'POST':
+        form = MedicineInstance(request.POST, request.FILES)
+        try:
+            name = request.POST['Name']
+            type=request.POST['Type']
+            quantity=request.POST['Quantity']
+            usage=request.POST['Usage']
+            supplier=request.POST['Supplier']
+            purchaseDate=request.POST['PurchaseDate']
+            expiryDate=request.POST['ExpiryDate']
+
+        except MultiValueDictKeyError:
+            name = False
+            type = False
+            quantity = False
+            usage = False
+            supplier = False
+            purchaseDate = False
+            expiryDate = False
+        
+        medicine = Medicine.objects.create(Name=name, Type=type, Quantity=quantity, Usage=usage, Supplier=supplier, PurchaseDate=purchaseDate, ExpiryDate=expiryDate)
+        # flash message for medicine added succefully
+        messages.success(request, 'Medicine Added Successfully')
+        return redirect('chemist')
+    context = {'form': form}
+    return render(request, 'addMedicine.html', context)
+
 
 
 def checkMedicine(request):
@@ -220,14 +255,33 @@ def checkMedicine(request):
         # if form.is_valid():
         # form.save()
         # user will be redirected to the projects page
-        return redirect('updateMedicine', request.POST['Mid'])
+        try:
+            med = request.POST['Name']
+        except MultiValueDictKeyError:
+            med = 'error'   #Random name which cant be medicine name
+        print('Hello')
+        try:
+            trialmed = Medicine.objects.get(Name=med)
+        except Medicine.DoesNotExist:
+            trialmed = False
+            # Flash message to be added
+            messages.error(request, 'No such medicine found')
+            print('no such medicine found')
+            return redirect('checkMedicine')
+
+        return redirect('updateMedicine', med)
 
     context = {'form': form, 'medicines': medicine}
     return render(request, 'checkMedicine.html', context)
 
 
 def updateMedicine(request, pk):
-    current_medicine = Medicine.objects.get(Mid=pk)
+    # try:
+    current_medicine = Medicine.objects.get(Name=pk)
+    # except Medicine.DoesNotExist:
+    #     # Flash message to be added
+    #     print('no such medicine found')
+    #     redirect('checkMedicine')
     medicine = Medicine.objects.all()
     # print(medicine)
     form = MedicineInstance(instance=current_medicine)
@@ -238,7 +292,9 @@ def updateMedicine(request, pk):
         if form.is_valid():
             form.save()  # IT will modify the project
             # user will be redirected to the projects page
-            return redirect('checkMedicine')
+            #flash message medicine added successfully
+            messages.success(request, 'Updated Successfully')
+            return redirect('chemist')
     context = {'form': form, 'medicines': medicine}
     return render(request, "updateMedicine.html", context)
 
@@ -273,9 +329,11 @@ def issueMedicine(request):
             medicine.Quantity = Qy - qy
             medicine.save()
             form.save()
+            messages.success(request, 'Medicine issued successfully')
             # Signal for medicine issued
         else:
             print('Hello')
+            messages.error(request, 'Invalid Quantity')
             # signal for wrong quantity input
         redirect('issueMedicine')
 
@@ -365,9 +423,6 @@ def patientHistory(request):
 
     context = {'my_his': my_history, 'my_pat': pat}
     return render(request, 'PatientHistory.html', context)
-
-
-
 
 
 # schedule test
