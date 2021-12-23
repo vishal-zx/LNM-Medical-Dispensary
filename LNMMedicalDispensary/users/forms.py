@@ -73,8 +73,9 @@ class IssueMedicineForm(ModelForm):
 
 class ChemistForm(ModelForm):
     class Meta:
-        model = Chemist
-        fields = '__all__'
+        # model = Chemist
+        model = User
+        fields = ('age', 'phonenumber', 'gender',)
 # class ChemistForm(ModelForm):
 #     class Meta:
 #         model = Chemist

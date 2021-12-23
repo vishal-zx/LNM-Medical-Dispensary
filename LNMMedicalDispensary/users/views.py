@@ -305,20 +305,46 @@ def DoctorProfile(request):
 def ChemistProfile(request):
     # user = request.user
     # form = ChemistForm(instance=user)
+    print('Here')
     user = request.user
-    chemist = Chemist.objects.get(Uid=user.Uid)
-    form = ChemistForm(instance=chemist)
+    uuser = User.objects.get(Uid = user.Uid)
+    # chemist = Chemist.objects.get(Uid=user.Uid)
+    # form = ChemistForm(instance=chemist)
+    print(uuser.phonenumber)
+    form = ChemistForm(instance=user)
     if request.method == 'POST':
+        print('POST REQUEST')
         # The request.POST data will be send to the project instance
         form = ChemistForm(request.POST, request.FILES, instance=user)
         if form.is_valid():
-            form.save()  # IT will modify the project
+            try:
+                age = request.POST['age']
+                phonenumber = request.POST['phonenumber']
+                gender = request.POST['gender']
+            except MultiValueDictKeyError:
+                age = False
+                phonenumber = False
+                gender = False
+            uuser.age = age
+            uuser.phonenumber = phonenumber
+            uuser.gender = gender
+            uuser.save()
+            form.save()
+        # if form.is_valid():
+            # form.save()  # IT will modify the project
+        # currrent_user = User.objects.get(Uid = user.Uid) 
+            # gender = False   
+        # currrent_user.age = age
+        # currrent_user.phonenumber = phonenumber
+        # currrent_user.gender = gender
+        # currrent_user.save()
+            print('Chemist user updated')
             messages.success(request, 'Chemist Profile Updated Successfully')
             # signal for profile updated to be put
             # user will be redirected to the projects page
-            return redirect('chemistProfile')
+        return redirect('chemist')
 
-    context = {'form': form, 'user': user}
+    context = {'form': form}
     return render(request, 'chemistProfile.html', context)
 
 
@@ -524,6 +550,47 @@ def updatedoctor(request):
     p.save()
     messages.success(request, 'Profile updated successfully')
     return render(request, 'Doctor.html')
+
+# def updateChemist(request):
+#     current_user = request.user
+
+#     Uid = current_user.Uid
+#     # print(current_user)
+#     # print(Did)
+
+#     # try:
+#     #     name = request.GET["name"]
+
+#     # except MultiValueDictKeyError:
+#     #     name = False
+
+#     try:
+#         age = request.GET["age"]
+
+#     except MultiValueDictKeyError:
+#         age = False
+#     try:
+#         phonenumber = request.GET["phonenumber"]
+#     except MultiValueDictKeyError:
+#         phonenumber = False
+#     try:
+#         gender = request.GET["gender"]
+
+#     except MultiValueDictKeyError:
+#         gender = False
+    
+#     c = Chemist.objects.get(Uid=Uid)
+#     # p.name = name
+#     c.age = age
+#     # p.gender = gender
+#     c.phonenumber = phonenumber
+#     c.gender = gender
+#     # p.speciality = speciality
+#     # p.phonenumber = phno
+#     c.save()
+#     messages.success(request, 'Profile updated successfully')
+#     context = {'form' : form}
+#     return render(request, 'Chemist.html', context)
 
 
 # pateint history
