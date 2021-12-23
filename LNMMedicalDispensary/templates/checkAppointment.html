@@ -75,6 +75,7 @@
             {% for i in Appointments%}
             
           <tr>
+            
             <td>{{i.sr}} </td>
             
             <td>{{i.Timings}}</td>
@@ -82,7 +83,14 @@
             <td>{{i.mailid}}</td>
 
               <td> 
-        <button method='get' type="button" class="btn btn-danger" data-dismiss="modal" name="cancel">Cancel</button></td>
+                
+                <form method="POST" action="http://127.0.0.1:8000/checkAppointment/">
+                  {% csrf_token %}
+                  
+                  <button  type="submit" class="btn btn-danger" data-dismiss="modal" name="cancel" value={{i.Aid}} >Cancel</button>
+                 
+                </form>
+         </td>
          
             </tr>
           <tr>

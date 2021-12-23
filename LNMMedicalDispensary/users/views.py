@@ -158,21 +158,36 @@ def bookAppointment(request):
 
 
 def checkAppointment(request):
-    appointment = Appointment.objects.all()
     Appointments = [{}]
-    sr = 1
-    user = request.user
-    for i in appointment:
-        if i.Did.Did == user.Uid:
-            Appointments.insert(sr-1, {'sr': sr, 'Timings': i.Timings,
-                                       'name': Patient.objects.get(Pid=i.Pid.Pid).name, 'mailid': i.mailid})
-            sr = sr+1
-    Appointments.pop()
-    print(len(Appointments))
-
+    if 'cancel' in request.POST:
+        try:
+            cancel=request.POST['cancel']
+        except MultiValueDictKeyError:
+            cancel = None
+        
+        print(cancel)
+        if cancel:
+            
+            ap= Appointment.objects.get(Aid=cancel)
+            ap.delete()
+        return redirect('checkAppointment')           
+            
+    else:           
+        appointment = Appointment.objects.all()
+        
+        sr = 1
+        doctor=Doctor.objects.get(Uid=request.user.Uid)
+    # user = request.user
+        for i in appointment:
+            if i.Did == doctor:
+                Appointments.insert(sr-1, {'sr': sr, 'Timings': i.Timings,
+                                        'name': Patient.objects.get(Uid=i.Pid.Uid).name, 'mailid': i.mailid,'Aid':i.Aid})
+                sr = sr+1
+        Appointments.pop()        
+        
     # print(request.GET['cancel'])
     # patient=Patient.objects.get()
-    return render(request, 'checkAppointment.html', {'Appointments': Appointments})
+        return render(request, 'checkAppointment.html', {'Appointments': Appointments})
 
 
 def Treatment(request):
