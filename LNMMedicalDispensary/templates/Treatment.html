@@ -14,7 +14,7 @@
     <title>Treatment</title>
 </head>
 
-<body>
+<body class="content" style="background-repeat: no-repeat;background-size: 100% 100%;">
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#" style="font-size: 30px; margin-left: 30px">The LNM Institute of Information
@@ -59,7 +59,7 @@
     <div style="width:800px; margin:0 auto;">
         <h1>Give Treatment</h1>
     </div>
-    <div class="content" style="width:800px; margin:0 auto;">
+    <div class="" style="width:800px; margin:0 auto;">
         <form action="{% url 'Treatment' %}" method="POST">
             {% csrf_token %}
             <div class="row g-3 align-items-center">
