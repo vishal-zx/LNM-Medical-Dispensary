@@ -60,7 +60,7 @@
         <div class="prescr">
             <br>
             <span
-                style="font-size:18px; font-weight:bold;margin:0 auto;text-align:center;display:block;">Feedbacks</span>
+                style="font-size:18px; font-weight:bold;margin:0 auto;text-align:center;display:block;">Medical Certificate Requests</span>
             <br><br>
             <table style="margin-left:40px;">
                 <tr>
@@ -69,6 +69,7 @@
                     <th>Reason</th>
                     <th>From Date</th>
                     <th>To Date</th>
+                    <th>Status</th>
                 </tr>
                 {% if MedCert %}
                 {% for i in MedCert%}
@@ -81,6 +82,15 @@
                     <td>{{i.reason}}</td>
                     <td>{{i.fromdate}}</td>
                     <td>{{i.todate}}</td>
+                    <td>   
+                        <form method="POST" action="http://127.0.0.1:8000/viewMedicalCertificate/">
+                            {% csrf_token %}
+                            
+                            <button  type="submit" class="btn btn-success" data-dismiss="modal" name="Approve" value={{i.medicalID}} >Approve</button>
+                            <button  type="submit" class="btn btn-danger" data-dismiss="modal" name="Reject"  value={{i.medicalID}}>Reject</button>
+                           
+                          </form>    
+                    </td>
 
                 </tr>
                 {% endfor %}

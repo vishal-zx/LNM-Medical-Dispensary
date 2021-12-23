@@ -140,20 +140,29 @@ class Medicine(models.Model):
 class MedicineIssued(models.Model):
     patient = models.ForeignKey(Patient, on_delete=models.SET_NULL, null=True)
     medicine = models.ForeignKey(
-        Medicine, on_delete=models.SET_NULL, null=True)
+    Medicine, on_delete=models.SET_NULL, null=True)
     quantity = models.IntegerField()
     prescription = models.TextField()
     date = models.DateField(("Date"), default=datetime.date.today)
 
 
 class Medicalcertificate(models.Model):
+    STATUSCHOICE = (
+        ('P', 'Pending'),
+        ('A', 'Approve'),
+        ('R', 'Reject'),
+    )
     patient = models.ForeignKey(Patient, on_delete=CASCADE)
     doctor = models.ForeignKey(Doctor, on_delete=CASCADE)
     medicalID = models.AutoField(primary_key=True)
     reason = models.TextField()
     fromdate = models.DateField(("Date"), default=datetime.date.today)
     todate = models.DateField(("Date"), default=datetime.date.today)
-
+    status =models.CharField(
+        max_length=1,
+        choices=STATUSCHOICE,
+        default='P',
+    )
 
 class Feedback(models.Model):
     feedbackID = models.AutoField(primary_key=True)

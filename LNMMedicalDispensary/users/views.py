@@ -115,11 +115,38 @@ def MedicalCertificateFunction(request):
 
 
 def viewMedicalCertificateFunction(request):
-    MedCertis = None
-    doc = Doctor.objects.get(Uid=request.user.Uid)
-    MedCertis = Medicalcertificate.objects.filter(doctor=doc)
-    print(MedCertis)
-    return render(request, 'viewMedicalCertificate.html', {'MedCert': MedCertis})
+    
+    if 'Approve' in request.POST:
+        try:
+            approve = request.POST['Approve']
+        except MultiValueDictKeyError:
+            approve = None
+
+        print(approve)
+        if  approve:
+
+            ap = Medicalcertificate.objects.get(medicalID=approve)
+            ap.status='A'
+            ap.save()
+        return redirect('viewMedicalCertificate')
+    elif 'Reject' in request.POST:
+        try:
+            reject = request.POST['Reject']
+        except MultiValueDictKeyError:
+            reject = None
+
+        print(reject)
+        if  reject:
+
+            ap = Medicalcertificate.objects.get(medicalID=reject)
+            ap.delete()
+        return redirect('viewMedicalCertificate')
+    else:
+        MedCertis = None
+        doc = Doctor.objects.get(Uid=request.user.Uid)
+        MedCertis = Medicalcertificate.objects.filter(doctor=doc,status='P')
+        print(MedCertis)
+        return render(request, 'viewMedicalCertificate.html', {'MedCert': MedCertis})
 
 
 def feedback(request):
