@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.datastructures import MultiValueDictKeyError
-#from user_profile.models import UserProfile
+# from user_profile.models import UserProfile
 # Create your views here.
 from django.contrib import messages  # for flash messages
 
@@ -126,14 +126,14 @@ def feedback(request):
             feedbackBody = False
 
         print("doctor ID = ", doctorid)
-        #print("mailID = ", mailID)
+        # print("mailID = ", mailID)
         print("feedback body = ", feedbackBody)
         patient = Patient.objects.get(Uid=request.user.Uid)
         doctor = Doctor.objects.get(Uid=doctorid)
         feedbackInstance = Feedback.objects.create(
             doctor=doctor, patient=patient, feedback=feedbackBody)
         # flash message for medicine added succefully
-        messages.success(request, 'Medicine Added Successfully')
+        messages.success(request, 'Feedback Added Successfully')
         return redirect("patient")
 
     else:
@@ -226,7 +226,22 @@ def Treatment(request):
 
 
 def ViewFeedback(request):
-    return render(request, 'ViewFeedback.html')
+    Feedbacks = None
+    feedback = Feedback.objects.all()
+
+    sr = 1
+    doc = Doctor.objects.get(Uid=request.user.Uid)
+    # user = request.user
+    Feedbacks = Feedback.objects.filter(doctor=doc)
+    print(Feedbacks)
+    # for i in feedback:
+    #     if i.doctor == doctor:
+    #         # print(Patient.objects.get(Pid=i.patient.Pid).name)
+    #         Feedbacks.insert(sr-1, {'fb': i,
+    #                                 'name': Patient.objects.get(Pid=i.patient.Pid).name, 'fb': i.feedback
+    #                                 })
+    #         sr = sr+1
+    return render(request, 'ViewFeedback.html', {'Feedback': Feedbacks})
 
 
 def DoctorProfile(request):
