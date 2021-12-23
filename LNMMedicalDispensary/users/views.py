@@ -11,7 +11,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.datastructures import MultiValueDictKeyError
 #from user_profile.models import UserProfile
 # Create your views here.
-from django.contrib import messages     #for flash messages
+from django.contrib import messages  # for flash messages
+
 
 def index(request):
     return render(request, 'index.html')
@@ -101,7 +102,7 @@ def MedicalCertificateFunction(request):
         medical = Medicalcertificate.objects.create(
             patient=Pt, doctor=doctorInstance, fromdate=fromdate, todate=todate, reason=Reason)
         print("success")
-          # flash message for medicine added succefully
+        # flash message for medicine added succefully
         messages.success(request, 'Medicine Added Successfully')
         return redirect('patient')
     else:
@@ -131,7 +132,7 @@ def feedback(request):
         doctor = Doctor.objects.get(Uid=doctorid)
         feedbackInstance = Feedback.objects.create(
             doctor=doctor, patient=patient, feedback=feedbackBody)
-          # flash message for medicine added succefully
+        # flash message for medicine added succefully
         messages.success(request, 'Medicine Added Successfully')
         return redirect("patient")
 
@@ -155,9 +156,9 @@ def viewPatientHistory(request):
     #     context = {'my_his': my_history, 'my_pat': pat}
     #     return render(request, 'PatientHistory.html',context)
     # else:
-    patient= Patient.objects.all()
-    context={'patient': patient}
-    return render(request, 'viewPatientHistory.html',context)
+    patient = Patient.objects.all()
+    context = {'patient': patient}
+    return render(request, 'viewPatientHistory.html', context)
 
 
 def patientProfile(request):
@@ -201,37 +202,57 @@ def checkAppointment(request):
     Appointments = [{}]
     if 'cancel' in request.POST:
         try:
-            cancel=request.POST['cancel']
+            cancel = request.POST['cancel']
         except MultiValueDictKeyError:
             cancel = None
-        
+
         print(cancel)
         if cancel:
-            
-            ap= Appointment.objects.get(Aid=cancel)
+
+            ap = Appointment.objects.get(Aid=cancel)
             ap.delete()
-        return redirect('checkAppointment')           
-            
-    else:           
+        return redirect('checkAppointment')
+
+    else:
         appointment = Appointment.objects.all()
-        
+
         sr = 1
-        doctor=Doctor.objects.get(Uid=request.user.Uid)
+        doctor = Doctor.objects.get(Uid=request.user.Uid)
     # user = request.user
         for i in appointment:
             if i.Did == doctor:
                 Appointments.insert(sr-1, {'sr': sr, 'Timings': i.Timings,
-                                        'name': Patient.objects.get(Uid=i.Pid.Uid).name, 'mailid': i.mailid,'Aid':i.Aid})
+                                           'name': Patient.objects.get(Uid=i.Pid.Uid).name, 'mailid': i.mailid, 'Aid': i.Aid})
                 sr = sr+1
-        Appointments.pop()        
-        
+        Appointments.pop()
+
     # print(request.GET['cancel'])
     # patient=Patient.objects.get()
         return render(request, 'checkAppointment.html', {'Appointments': Appointments})
 
 
 def Treatment(request):
-    return render(request, 'Treatment.html')
+    if request.method == 'POST':
+        try:
+            desc = request.POST['descc']
+            app = request.POST['appointment']
+            print(desc, app)
+        except MultiValueDictKeyError:
+            desc = False
+            app = False
+        p = Appointment.objects.get(Aid=app)
+        x = Patient.objects.get(Uid=p.Pid.Uid)
+        PatientHistory.objects.create(
+            Aid=p, Description=desc, Pid=x)
+        # flash message for medicine added succefully
+        messages.success(request, 'Treatment Given Successfully')
+        return render(request, 'Doctor.html')
+    else:
+        appointments = Appointment.objects.all()
+        print(appointments)
+        context = {'appointment': appointments}
+        return render(request, 'Treatment.html', context)
+
 
 def ViewFeedback(request):
     return render(request, 'ViewFeedback.html')
@@ -259,7 +280,7 @@ def ChemistProfile(request):
     # user = request.user
     # form = ChemistForm(instance=user)
     user = request.user
-    chemist = Chemist.objects.get(Uid = user.Uid)
+    chemist = Chemist.objects.get(Uid=user.Uid)
     form = ChemistForm(instance=chemist)
     if request.method == 'POST':
         # The request.POST data will be send to the project instance
@@ -274,6 +295,7 @@ def ChemistProfile(request):
     context = {'form': form, 'user': user}
     return render(request, 'chemistProfile.html', context)
 
+
 def addMedicine(request):
     form = MedicineInstance()
     # form = MedicineInstance(request.POST, request.FILES)
@@ -282,12 +304,12 @@ def addMedicine(request):
         form = MedicineInstance(request.POST, request.FILES)
         try:
             name = request.POST['Name']
-            type=request.POST['Type']
-            quantity=request.POST['Quantity']
-            usage=request.POST['Usage']
-            supplier=request.POST['Supplier']
-            purchaseDate=request.POST['PurchaseDate']
-            expiryDate=request.POST['ExpiryDate']
+            type = request.POST['Type']
+            quantity = request.POST['Quantity']
+            usage = request.POST['Usage']
+            supplier = request.POST['Supplier']
+            purchaseDate = request.POST['PurchaseDate']
+            expiryDate = request.POST['ExpiryDate']
 
         except MultiValueDictKeyError:
             name = False
@@ -297,14 +319,14 @@ def addMedicine(request):
             supplier = False
             purchaseDate = False
             expiryDate = False
-        
-        medicine = Medicine.objects.create(Name=name, Type=type, Quantity=quantity, Usage=usage, Supplier=supplier, PurchaseDate=purchaseDate, ExpiryDate=expiryDate)
+
+        medicine = Medicine.objects.create(Name=name, Type=type, Quantity=quantity,
+                                           Usage=usage, Supplier=supplier, PurchaseDate=purchaseDate, ExpiryDate=expiryDate)
         # flash message for medicine added succefully
         messages.success(request, 'Medicine Added Successfully')
         return redirect('chemist')
     context = {'form': form}
     return render(request, 'addMedicine.html', context)
-
 
 
 def checkMedicine(request):
@@ -319,7 +341,7 @@ def checkMedicine(request):
         try:
             med = request.POST['Name']
         except MultiValueDictKeyError:
-            med = 'error'   #Random name which cant be medicine name
+            med = 'error'  # Random name which cant be medicine name
         print('Hello')
         try:
             trialmed = Medicine.objects.get(Name=med)
@@ -353,7 +375,7 @@ def updateMedicine(request, pk):
         if form.is_valid():
             form.save()  # IT will modify the project
             # user will be redirected to the projects page
-            #flash message medicine added successfully
+            # flash message medicine added successfully
             messages.success(request, 'Updated Successfully')
             return redirect('chemist')
     context = {'form': form, 'medicines': medicine}
@@ -499,20 +521,17 @@ def patientHistory(request):
     my_history = None
     pat = None
     if request.user.patient == True:
-        p=Patient.objects.get(Uid=request.user.Uid)
+        p = Patient.objects.get(Uid=request.user.Uid)
         my_history = PatientHistory.objects.filter(Pid=p)
 
         pat = Patient.objects.get(Uid=request.user.Uid)
     else:
-        id=request.POST["patient"]
+        id = request.POST["patient"]
         print(id)
-        p=Patient.objects.get(Uid=id)
+        p = Patient.objects.get(Uid=id)
         my_history = PatientHistory.objects.filter(Pid=p)
         pat = Patient.objects.filter(Uid=id).first()
-        
-        
-    
-    
+
     # print(request.user.id)
 
     context = {'my_his': my_history, 'my_pat': pat}
