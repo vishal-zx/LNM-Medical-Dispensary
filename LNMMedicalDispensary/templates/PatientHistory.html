@@ -84,20 +84,25 @@
         <table>
           <tr>
             
-            
             <th>Appoinment ID</th>
+            <th>Appoinment Timing</th>
             <th>Description</th>
           </tr>
           {%if my_his %}
 
               {% for history in my_his %} 
               <tr>
-                <td>{{history.Aid}}</td>
+                <td>{{history.Aid.Aid}}</td>
+                <td>{{history.Aid.Timings}}</td>
                 <td>{{history.Description}} </td>
               </tr>
               {%endfor %} 
           {% else %} 
-              NO History
+          </table>
+          <br>
+          <span  style="font-size:18px; font-weight:bold;margin:0 auto;text-align:center;display:block;">No History</span>
+        
+              
           {% endif %}
         </table>
       </div>

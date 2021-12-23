@@ -146,7 +146,18 @@ def feedback(request):
 
 
 def viewPatientHistory(request):
-    return render(request, 'viewPatientHistory.html')
+    # if request.method == 'POST':
+    #     id = request.POST['patid']
+    #     print(id)
+    #     p=Patient.objects.get(Uid=id)
+    #     my_history = PatientHistory.objects.filter(Pid=p)
+    #     pat = Patient.objects.filter(Uid=id).first()
+    #     context = {'my_his': my_history, 'my_pat': pat}
+    #     return render(request, 'PatientHistory.html',context)
+    # else:
+    patient= Patient.objects.all()
+    context={'patient': patient}
+    return render(request, 'viewPatientHistory.html',context)
 
 
 def patientProfile(request):
@@ -428,7 +439,6 @@ def updatepatient(request):
 
 # pateint history
 def patientHistory(request):
-    print(request.user.Uid)
     my_history = None
     pat = None
     if request.user.patient == True:
@@ -437,10 +447,15 @@ def patientHistory(request):
 
         pat = Patient.objects.get(Uid=request.user.Uid)
     else:
-        id = request.GET['patid']
-        my_history = PatientHistory.objects.filter(Uid=id)
+        id=request.POST["patient"]
+        print(id)
+        p=Patient.objects.get(Uid=id)
+        my_history = PatientHistory.objects.filter(Pid=p)
         pat = Patient.objects.filter(Uid=id).first()
-
+        
+        
+    
+    
     # print(request.user.id)
 
     context = {'my_his': my_history, 'my_pat': pat}

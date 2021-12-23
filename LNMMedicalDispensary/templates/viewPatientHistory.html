@@ -57,21 +57,35 @@
   <br>
 
   <div class="content">
-    <form action="{% url 'patientHistory' %}" method="GET" name="form">
+    <form action="{% url 'patientHistory' %}" method="POST">
+      {% csrf_token %}
         <div class="row g-3 align-items-center">
             <div class="col-auto">
             <label for="inputPassword6" class="col-form-label">Enter Patient ID:</label>
             </div>
             <div class="col-auto">
-            <input  name='patid' type="text" id="inputPassword6" class="form-control" aria-describedby="passwordHelpInline">
+              <select id="patient" name="patient">
+                {%for pat in patient%}
+               
+                <option value={{pat.Uid}}>  {{pat}}   </option>
+                {%endfor%}
+              </select>
             </div>
             <div class="col-auto">
             <span id="passwordHelpInline" class="form-text">
                 
             </span>
             </div>
-            <div><button type="submit" class="btn btn-primary">Submit</button></div>
-            
+            <div>
+           
+              <div>
+                <input type="submit" class="btn btn-primary" value="Submit">
+            </div>
+              {% comment %} <button  type="submit" class="btn btn-primary" data-dismiss="modal" >Submit</button> {% endcomment %}
+             
+            </form>
+         
+          </div>
         </div>
     </form>
   </div>
@@ -83,5 +97,5 @@
     </div>
   </div>
 </body>
-
+   
 </html>
