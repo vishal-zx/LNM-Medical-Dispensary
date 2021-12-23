@@ -14,7 +14,7 @@
     <title>Treatment</title>
 </head>
 
-<body class="content" style="background-repeat: no-repeat;background-size: 100% 100%;">
+<body>
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#" style="font-size: 30px; margin-left: 30px">The LNM Institute of Information
@@ -34,6 +34,7 @@
     {% endif %}
 
     <br>
+    
     <h2 class="heading">LNM Medical Dispensary</h2>
     <div style="float: left; margin-left: 40px; font-size: 17px;">
         <a href="{% url 'doctor' %}">
@@ -54,45 +55,47 @@
         </a>
     </div>
     <br><br>
-    <br>
 
-    <div style="width:800px; margin:0 auto;">
-        <h1>Give Treatment</h1>
-    </div>
-    <div class="" style="width:800px; margin:0 auto;">
-        <form action="{% url 'Treatment' %}" method="POST">
-            {% csrf_token %}
-            <div class="row g-3 align-items-center">
-                <div class="col-auto">
-                    <label for="inputPassword6" class="col-form-label">Select Appointment:</label>
-                </div>
-                <div class="col-auto">
-                    <select id="appointment" name="appointment">
-                        {% for app in appointment %}
-                        <option value={{app.Aid}}> Appointment-{{app.Aid}}, Patient-{{app.Pid.name}} </option>
-                        {% endfor %}
-                    </select>
-                </div>
+    <div class="content" style="background-repeat: no-repeat;background-size:cover;">
+        <div style="width:50%; margin:0 auto;">
+            <br>
+            <h1>Give Treatment</h1>
+        </div>
+        <div style="margin-right:50%;">
+            <form action="{% url 'Treatment' %}" method="POST">
+                {% csrf_token %}
+                <div class="row g-3 align-items-center">
+                    <div class="col-auto">
+                        <label for="inputPassword6" class="col-form-label">Select Appointment:</label>
+                    </div>
+                    <div class="col-auto">
+                        <select id="appointment" name="appointment">
+                            {% for app in appointment %}
+                            <option value={{app.Aid}}> Appointment-{{app.Aid}}, Patient-{{app.Pid.name}} </option>
+                            {% endfor %}
+                        </select>
+                    </div>
 
-                <div class="col-auto">
-                </div>
-                <div class="form-group">
-                    <label for="desc">Description</label>
-                    <textarea class="form-control" id="desc" rows="3" name="descc"></textarea>
-                </div>
-                <div>
-                    <input type="submit" class="btn btn-primary" value="Submit">
-                </div>
+                    <div class="col-auto">
+                    </div>
+                    <div class="form-group">
+                        <label for="desc">Description:</label>
+                        <textarea class="form-control" id="desc" rows="3" name="descc"></textarea>
+                    </div>
+                    <div>
+                        <input type="submit" class="btn btn-primary" value="Submit">
+                    </div>
+            </form>
+        </div>
+    
         </form>
-    </div>
-    </div>
-    </form>
-    </div>
+        </div>
 
-    <div class="footer">
-        <div>
-            <div class="add"> The LNM Institute of Information Technology, Jaipur</div>
-            <div>Rupa ki Nangal, Post-Sumel, Via, Jamdoli, Jaipur, Rajasthan 302031</div>
+        <div class="footer">
+            <div>
+                <div class="add"> The LNM Institute of Information Technology, Jaipur</div>
+                <div>Rupa ki Nangal, Post-Sumel, Via, Jamdoli, Jaipur, Rajasthan 302031</div>
+            </div>
         </div>
     </div>
 </body>
