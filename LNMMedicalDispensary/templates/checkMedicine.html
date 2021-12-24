@@ -59,19 +59,10 @@
   <br>
   <div class="container-fluid">
     <div class="well" style="margin:10px; width: fit-content;">
-      <h3>Update Medicine</h3>
+      <h3 style="margin-left: 50px;">Update Medicine</h3>
       <br>
-      <div id="myTabContent" class="tab-content">
+      <div id="myTabContent" class="tab-content" style="margin-left: 50px;">
         <div class="tab-pane active in " id="home">
-          <!-- <form id="tab">
-            &nbsp;&nbsp;
-            <label>Medicine ID</label>
-            <input type="number" value="" class="input-xlarge">&nbsp;
-            <div style="margin-left: 900px; margin-top:50px">
-               <button class="btn btn-primary"><a href="updateMedicine.html" style="color:white; text-decoration: none;">Update</a></button>
-              <button class="btn btn-primary"><a href="% url 'updateMedicine' id %" style="color:white; text-decoration: none;">Update</a></button>
-            </div>
-          </form> -->
           <form method="POST" action = "">
             {% csrf_token %}
               <!-- {{form}}
@@ -79,23 +70,22 @@
                 <-- Input:Text -->
 
                 <div class="form__field";>
-                    <label for="formInput#text"><b>{{field.label}}</b></label>
+                    <label for="formInput#text"><b>{{field.label}}: </b></label>
                     {{field}}
-                    <input class="btn btn-info" type="submit" value="Submit" />
-              
                 </div>
+                <input class="btn btn-info" type="submit" value="Submit" style="margin-top: 20px; margin-left:80px"/>
                 {% endfor %}
               <!-- <input type = "submit" value = "Update"> -->
               <!-- return redirect('updateMedicine') -->
           </form>
         </div>
-    
       </div>
       <br><br>
-      <span style="font-size:18px; font-weight:bold;margin-left:150px; text-align:center;display:block;">Medicine Record</span>
+      <span style="font-size:18px; font-weight:bold; margin-left: 80%; width:100%;">Medicine Record</span>
       <br>
-      <div>
-        <table style="margin-left:60px; ">
+      <br>
+      <div style="width:100%; margin-left: 5.5%;">
+        <table style="margin:auto auto; width: 200%;">
           <tr>
             <th>Mid</th>
             <th>Name</th>

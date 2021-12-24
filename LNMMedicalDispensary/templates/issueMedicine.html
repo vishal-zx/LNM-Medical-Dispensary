@@ -69,28 +69,11 @@
 
     <div>
       <div class="pc1rc glass" style="height:510px">
-        <div class="well" style="margin:10px; width: fit-content; text-align: left; font-weight: bold;">
+        <div class="well" style="margin:10px; width: fit-content; text-align:justify; font-weight: bold;">
           <h3>Issue Medicine</h3>
           <br>
           <div id="myTabContent" class="tab-content">
             <div class="tab-pane active in " id="home">
-              <!-- <form id="tab">
-                <label>Patient Id: &nbsp;</label>
-                <input type="number" value="" class="input-xlarge"> &emsp; &emsp;
-                <label>Medicine Id: &nbsp;</label>
-                <input type="text" value="" class="input-xlarge">
-                <br><br>
-                <label>Quantity: &nbsp;</label>
-                <input type="number" value="" class="input-xlarge"> &emsp; &emsp;
-                <label>Prescription: &nbsp;</label>
-                <input type="text" value="" class="input-xlarge">&emsp; &emsp;
-                <label>Date: &nbsp;</label>
-                <input type="date" value="" class="input-xlarge">
-                <br><br>
-                <div>
-                  <button class="btn btn-primary" style="margin-left:50px">Issue Medicine</button>
-                </div>
-              </form> -->
               <!-- <form method="POST" action = "">
                 {% csrf_token %}
                   {{form.as_ul}}
@@ -102,13 +85,13 @@
                   {% for field in form %}
                     <!-- Input:Text -->
                     <div class="form__field">
-                        <label for="formInput#text">{{field.label}}</label>
+                        <label for="formInput#text">{{field.label}}</label>&nbsp;&nbsp;
                         {{field}}
                         <br>
                 
                     </div>
                   {% endfor %}
-                <input class="btn btn-success" type="submit" value="Issue" />
+                <input class="btn btn-success" type="submit" value="Issue"style="margin-left: 80px; margin-top: 20px" />
               </form>
             </div>
           </div>
