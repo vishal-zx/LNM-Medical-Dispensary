@@ -113,15 +113,17 @@ def MedicalCertificateFunction(request):
 
         return render(request, 'MedicalCertificate.html', context)
 
+
 def checkMedicalCertificateStatus(request):
     MedCertis = None
     pat = Patient.objects.get(Uid=request.user.Uid)
-    MedCertis = Medicalcertificate.objects.filter(patient=pat,status='P')
+    MedCertis = Medicalcertificate.objects.filter(patient=pat)
     print(MedCertis)
     return render(request, 'checkMedicalCertificateStatus.html', {'MedCert': MedCertis})
 
+
 def viewMedicalCertificateFunction(request):
-    
+
     if 'Approve' in request.POST:
         try:
             approve = request.POST['Approve']
@@ -129,10 +131,10 @@ def viewMedicalCertificateFunction(request):
             approve = None
 
         print(approve)
-        if  approve:
+        if approve:
 
             ap = Medicalcertificate.objects.get(medicalID=approve)
-            ap.status='A'
+            ap.status = 'A'
             ap.save()
         return redirect('viewMedicalCertificate')
     elif 'Reject' in request.POST:
@@ -142,15 +144,16 @@ def viewMedicalCertificateFunction(request):
             reject = None
 
         print(reject)
-        if  reject:
+        if reject:
 
             ap = Medicalcertificate.objects.get(medicalID=reject)
-            ap.delete()
+            ap.status = 'R'
+            ap.save()
         return redirect('viewMedicalCertificate')
     else:
         MedCertis = None
         doc = Doctor.objects.get(Uid=request.user.Uid)
-        MedCertis = Medicalcertificate.objects.filter(doctor=doc,status='P')
+        MedCertis = Medicalcertificate.objects.filter(doctor=doc, status='P')
         print(MedCertis)
         return render(request, 'viewMedicalCertificate.html', {'MedCert': MedCertis})
 
@@ -299,7 +302,8 @@ def Treatment(request):
         messages.success(request, 'Treatment Given Successfully')
         return render(request, 'Doctor.html')
     else:
-        appointments = Appointment.objects.all()
+        d = Doctor.objects.get(Uid=request.user.Uid)
+        appointments = Appointment.objects.filter(Did=d)
         print(appointments)
         context = {'appointment': appointments}
         return render(request, 'Treatment.html', context)
@@ -340,7 +344,7 @@ def ChemistProfile(request):
     # form = ChemistForm(instance=user)
     print('Here')
     user = request.user
-    uuser = User.objects.get(Uid = user.Uid)
+    uuser = User.objects.get(Uid=user.Uid)
     # chemist = Chemist.objects.get(Uid=user.Uid)
     # form = ChemistForm(instance=chemist)
     print(uuser.phonenumber)
@@ -365,8 +369,8 @@ def ChemistProfile(request):
             form.save()
         # if form.is_valid():
             # form.save()  # IT will modify the project
-        # currrent_user = User.objects.get(Uid = user.Uid) 
-            # gender = False   
+        # currrent_user = User.objects.get(Uid = user.Uid)
+            # gender = False
         # currrent_user.age = age
         # currrent_user.phonenumber = phonenumber
         # currrent_user.gender = gender
@@ -611,7 +615,7 @@ def updatedoctor(request):
 
 #     except MultiValueDictKeyError:
 #         gender = False
-    
+
 #     c = Chemist.objects.get(Uid=Uid)
 #     # p.name = name
 #     c.age = age

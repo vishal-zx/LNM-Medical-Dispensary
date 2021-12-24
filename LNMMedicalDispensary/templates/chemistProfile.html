@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="{% static 'css/patientStyle.css' %}" type="text/css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" rel="stylesheet">
   <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
-  <title>Patient Homepage</title>
+  <title>Chemist Profile</title>
 </head>
 
 <body>
@@ -70,35 +70,28 @@
 
     <div>
       <div class="pc1rc glass" style="height:510px">
-        <div style="font-size:20px; text-align: left; font-weight: bolder;">
-          <!-- Username: <input type="text" name="username" id="username">
-          <br>
-          <br>
-          Name: <input type="text" name="name" id="name"> &nbsp;&nbsp;
-          Age: <input type="number" name="age" id="age">
-          <br>
-          <br>
-          <label for="gender">Gender :&nbsp;</label>
-          <select id="gender">
-            <option value="item-1">Male</option>
-            <option value="item-2">Female</option>
-          </select>
-          <br>
-          <br> -->
+        <div style="font-size:20px; text-align: justify; font-weight: bolder;">
           <form class="form" method="POST" enctype="multipart/form-data">
             {% csrf_token %}  
-
+            Name: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ user.username }}
+            <br><br>
             {% for field in form %}
             <!-- Input:Text -->
             <div class="form__field">
                 <label for="formInput#text">{{field.label}}</label>
+                {% if field.label == 'Age' %}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {% endif %}
+                {% if field.label == 'Gender' %}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                {% endif %}
                 {{field}}
+                <br>
+                <br>
             </div>
             {% endfor %}
-            <input type = "submit" value = "Update Profile">
-            <!-- <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" /> -->
+            <input type = "submit" class="btn btn-success" value = "Update Profile" style = "margin-left: 130px;">
         </form>
-          <!-- <div style="margin-left: 80px;"><button type="button" class="btn btn-success">Update Profile</button></div> -->
         </div>
       </div>
     </div>

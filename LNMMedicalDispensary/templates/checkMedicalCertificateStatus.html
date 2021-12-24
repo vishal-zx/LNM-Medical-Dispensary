@@ -60,12 +60,12 @@
         <div class="prescr">
             <br>
             <span
-                style="font-size:18px; font-weight:bold;margin:0 auto;text-align:center;display:block;">Medical Certificate Status</span>
+                style="font-size:18px; font-weight:bold;margin:0px, auto;text-align:center;display:block;">Medical Certificate Status</span>
             <br><br>
-            <table style="margin-left:40px;">
+            <table style="margin-left:40px;margin-bottom:40px;">
                 <tr>
                     <th>Sr. No</th>
-                    <th>Patient</th>
+                    <th>Doctor</th>
                     <th>Reason</th>
                     <th>From Date</th>
                     <th>To Date</th>
@@ -77,13 +77,19 @@
                 <tr>
 
                     <td>{{ forloop.counter }} </td>
-
-                    <td>{{i.patient.name}}</td>
+                    <td>{{i.doctor.name}}</td>
                     <td>{{i.reason}}</td>
                     <td>{{i.fromdate}}</td>
                     <td>{{i.todate}}</td>
-                     
-                    <td>{{i.status}}</td>
+                    {% if i.status == 'P' %}
+                        <td>Pending</td>
+                    {% endif %}
+                    {% if i.status == 'A' %}
+                        <td>Approved</td>
+                    {% endif %}
+                    {% if i.status == 'R' %}
+                        <td>Rejected</td>
+                    {% endif %}
                     
 
                 </tr>
