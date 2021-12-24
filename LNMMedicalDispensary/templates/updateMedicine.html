@@ -92,26 +92,57 @@
               <button class="btn btn-primary">Update</button>
             </div>
           </form> -->
-          <form class="form" method="POST" enctype="multipart/form-data">
+          <form class="form" method="POST" enctype="multipart/form-data" style="display: flex; gap:5px">
             {% csrf_token %}  
 
-            {% for field in form %}
+            <!-- {% for field in form %} -->
             <!-- Input:Text -->
-            <div class="form__field">
-                <label for="formInput#text">{{field.label}}</label>
+            <!-- <div class="form__field" style="padding-bottom: 5px">
+                <label for="formInput#text"; style="margin-right: 10px"><b>{{field.label}}</b></label>
                 {{field}}
             </div>
-            {% endfor %}
-            <input class="btn btn--sub btn--lg  my-md" type="submit" value="Submit" />
+            {% endfor %} -->
+            <div class="form__field" style="padding-bottom: 5px">
+              <label for="formInput#text"; style="margin-right: 10px"><b>Name</b></label>
+              {{form.Name}}
+            </div>
+            <div class="form__field" style="padding-bottom: 5px">
+              <label for="formInput#text"; style="margin-right: 10px"><b>Type</b></label>
+              {{form.Type}}
+            </div>
+            <div class="form__field" style="padding-bottom: 5px">
+              <label for="formInput#text"; style="margin-right: 10px"><b>Quantity</b></label>
+              {{form.Quantity}}
+            </div>
+            <div class="form__field" style="padding-bottom: 5px">
+              <label for="formInput#text"; style="margin-right: 10px"><b>Usage</b></label>
+              {{form.Usage}}
+            </div>
+            <div class="form__field" style="padding-bottom: 5px">
+              <label for="formInput#text"; style="margin-right: 10px"><b>Supplier</b></label>
+              {{form.Supplier}}
+            </div>
+            <div class="form__field" style="padding-bottom: 5px">
+              <label for="formInput#text"; style="margin-right: 10px"><b>Purchase Date</b></label>
+              {{form.PurchaseDate}}
+            </div>
+            <div class="form__field" style="padding-bottom: 5px">
+              <label for="formInput#text"; style="margin-right: 10px"><b>Expiry Date</b></label>
+              {{form.ExpiryDate}}
+            </div>
+              
+              
+          </div>
+            <input class="btn btn-success" type="submit" value="Submit" />
         </form>
         </div>
     
       </div>
       <br><br>
-      <span style="font-size:18px; font-weight:bold;margin-left:150px; text-align:center;display:block;">Medicine Record</span>
+      <span style="font-size:18px; font-weight:bold;text-align:center;display:block;">Medicine Record</span>
       <br>
       <div>
-        <table style="margin-left:60px; ">
+        <table>
             <tr>
                 <th>Mid</th>
                 <th>Name</th>

@@ -74,8 +74,18 @@
           </form> -->
           <form method="POST" action = "">
             {% csrf_token %}
-              {{form}}
-              <input type = "submit" value = "Update">
+              <!-- {{form}}
+              {% for field in form %}
+                <-- Input:Text -->
+
+                <div class="form__field";>
+                    <label for="formInput#text"><b>{{field.label}}</b></label>
+                    {{field}}
+                    <input class="btn btn-info" type="submit" value="Submit" />
+              
+                </div>
+                {% endfor %}
+              <!-- <input type = "submit" value = "Update"> -->
               <!-- return redirect('updateMedicine') -->
           </form>
         </div>

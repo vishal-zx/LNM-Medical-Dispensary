@@ -84,6 +84,14 @@ class IssueMedicineForm(ModelForm):
     class Meta:
         model = MedicineIssued
         fields = '__all__'
+        widgets = {
+            'prescription': forms.TextInput(attrs={
+                'class': "form-control",
+                'style': 'max-width: 500px; height: 70px',
+
+                # 'placeholder': 'Name'
+                }),
+        }
 
 class ChemistForm(ModelForm):
     class Meta:
