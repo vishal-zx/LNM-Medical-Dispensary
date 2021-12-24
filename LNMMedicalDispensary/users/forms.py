@@ -87,7 +87,8 @@ class IssueMedicineForm(ModelForm):
         widgets = {
             'prescription': forms.TextInput(attrs={
                 'class': "form-control",
-                'style': 'max-width: 500px;',
+                'style': 'max-width: 500px; height: 70px',
+
                 # 'placeholder': 'Name'
                 }),
         }
