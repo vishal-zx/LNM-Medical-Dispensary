@@ -97,16 +97,19 @@
                   <input type = "submit">
                   return redirect('updateMedicine')
               </form> -->
-              {% for field in form %}
-            <!-- Input:Text -->
-            <div class="form__field">
-                <label for="formInput#text">{{field.label}}</label>
-                {{field}}
-                <br>
+              <form method="POST" action="">
+                {% csrf_token %}
+                  {% for field in form %}
+                    <!-- Input:Text -->
+                    <div class="form__field">
+                        <label for="formInput#text">{{field.label}}</label>
+                        {{field}}
+                        <br>
                 
-            </div>
-            {% endfor %}
-            <input class="btn btn-success" type="submit" value="Issue" />
+                    </div>
+                  {% endfor %}
+                <input class="btn btn-success" type="submit" value="Issue" />
+              </form>
             </div>
           </div>
         </div>

@@ -69,7 +69,7 @@
                 <div style="font-size:22px; text-align: left; font-weight: bolder;">
                     <form action="{%url 'MedicalCertificate' %}" method='POST'>
                         {% csrf_token %}
-                    <label for="bloodgroups">Doctor:&nbsp;</label>
+                    <label for="bloodgroups">Doctor:&nbsp;&nbsp;&nbsp;</label>
                     <select id="doctor" name="doctor">
                       {% for doctor in doctors %}                   
                              <option value={{doctor.Uid}}>{{doctor.name}}</option>
@@ -77,11 +77,11 @@
                     </select>
                     <br>
                     <br>
-                    <label for="testItems">from :&nbsp;</label>
+                    <label for="testItems">from :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                     <input type="date" id="meeting-time" name="start" value="2021-12-01">
                     <br>
                     <br>
-                    <label for="testItems">To :&nbsp;</label>
+                    <label for="testItems">To :&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
                     <input type="date" id="meeting-time" name="end" value="2021-12-30">
                     <br>
                     <br>
@@ -90,7 +90,7 @@
                     <br>
                     <br>
                     
-                    <div style="margin-left: 80px;"><input type="submit" value="Submit"></div>
+                    <div style="margin-left: 80px;"><input type="submit" class="btn btn-success" style="margin-left:50px" value="Submit"></div>
                 </form>
                 </div>
             </div>
