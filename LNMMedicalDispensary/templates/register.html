@@ -79,6 +79,8 @@
                     Login page
                     {% endif %}
                   </span>
+                  <br>
+                  <br>
                   <form method="post">
                     {% csrf_token %}
                     <div class="form-group first">
@@ -106,11 +108,13 @@
                       {{ form.password2 }}
                     </div>
                     <div class="form-group last mb-4">
-                      <label for="age">Age</label>
+                      <h6>Age</h6>
+                      <label for="age"></label>
                       {{ form.age }}
                     </div>
                     <div class="form-group last mb-4">
-                      <label for="gender">Gender</label>
+                      <h6>Gender</h6>
+                      <label for="gender"></label>
                       {{ form.gender }}
                     </div>
                     <br><br>
