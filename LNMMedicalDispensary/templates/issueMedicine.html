@@ -91,12 +91,22 @@
                   <button class="btn btn-primary" style="margin-left:50px">Issue Medicine</button>
                 </div>
               </form> -->
-              <form method="POST" action = "">
+              <!-- <form method="POST" action = "">
                 {% csrf_token %}
                   {{form.as_ul}}
                   <input type = "submit">
-                  <!-- return redirect('updateMedicine') -->
-              </form>
+                  return redirect('updateMedicine')
+              </form> -->
+              {% for field in form %}
+            <!-- Input:Text -->
+            <div class="form__field">
+                <label for="formInput#text">{{field.label}}</label>
+                {{field}}
+                <br>
+                
+            </div>
+            {% endfor %}
+            <input class="btn btn-success" type="submit" value="Issue" />
             </div>
           </div>
         </div>
