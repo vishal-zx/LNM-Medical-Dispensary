@@ -113,6 +113,12 @@ def MedicalCertificateFunction(request):
 
         return render(request, 'MedicalCertificate.html', context)
 
+def checkAppointmentStatus(request):
+    checkApp = None
+    pat = Patient.objects.get(Uid=request.user.Uid)
+    checkApp = Appointment.objects.filter(Pid=pat)
+    print(checkApp)
+    return render(request, 'checkAppointmentStatus.html', {'checkApp': checkApp})
 
 def checkMedicalCertificateStatus(request):
     MedCertis = None
@@ -264,7 +270,8 @@ def checkAppointment(request):
         if cancel:
 
             ap = Appointment.objects.get(Aid=cancel)
-            ap.delete()
+            ap.isApproved=False
+            ap.save()
         return redirect('checkAppointment')
 
     else:
@@ -276,7 +283,7 @@ def checkAppointment(request):
         for i in appointment:
             if i.Did == doctor:
                 Appointments.insert(sr-1, {'sr': sr, 'Timings': i.Timings,
-                                           'name': Patient.objects.get(Uid=i.Pid.Uid).name, 'mailid': i.mailid, 'Aid': i.Aid})
+                                           'name': Patient.objects.get(Uid=i.Pid.Uid).name,'isApproved': i.isApproved, 'mailid': i.mailid, 'Aid': i.Aid})
                 sr = sr+1
         Appointments.pop()
 

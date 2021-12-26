@@ -30,4 +30,5 @@ urlpatterns = [
     path('updateMedicine/<str:pk>/', views.updateMedicine, name='updateMedicine'),
     path('MedicineRecord/', views.MedicineRecord, name='MedicineRecord'),
     path('issueMedicine/', views.issueMedicine, name='issueMedicine'),
+    path('checkAppointmentStatus/', views.checkAppointmentStatus, name='checkAppointmentStatus'),
 ]

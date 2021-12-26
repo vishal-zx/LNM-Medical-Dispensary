@@ -73,9 +73,9 @@
          </tr>
           {% if Appointments %}
             {% for i in Appointments%}
-            
+            {% if i.isApproved  %}
           <tr>
-            
+           
             <td>{{i.sr}} </td>
             
             <td>{{i.Timings}}</td>
@@ -90,9 +90,10 @@
                   <button  type="submit" class="btn btn-danger" data-dismiss="modal" name="cancel" value={{i.Aid}} >Cancel</button>
                  
                 </form>
-         </td>
+              </td>
          
             </tr>
+            {% endif %}
           <tr>
           {% endfor %}
         
